@@ -40,6 +40,7 @@
             If you see any bugs, software issues, broken links, missing aircraft, incorrect specifications,
             or if you have ideas that could make the site better, please email me. Every correction and
             suggestion helps turn this into a better aviation reference for everyone visiting from TikTok and beyond.
+            If the email button does not open on your device, you can use the support form below instead.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="mailto:jensaviation@gmail.com?subject=The%20Aviation%20Wiki%20Support">Email Jens</a>
@@ -69,6 +70,55 @@
             </p>
           </article>
         </div>
+
+        <section class="detail-panel support-form-panel">
+          <div class="support-form-header">
+            <div>
+              <h3>Send A Support Message</h3>
+              <p>
+                Fill in your name, your email address, and your question or bug report.
+                The message will be sent to the Aviation Wiki support inbox.
+              </p>
+            </div>
+          </div>
+
+          <form class="support-form" action="https://formsubmit.co/jensaviation@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="The Aviation Wiki Support Form">
+            <input type="hidden" name="_template" value="table">
+            <input
+              type="hidden"
+              name="_autoresponse"
+              value="Thanks for contacting The Aviation Wiki. Your message has been received and will be reviewed soon."
+            >
+
+            <label class="support-field">
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Your name" required>
+            </label>
+
+            <label class="support-field">
+              <span>Email Address</span>
+              <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+            </label>
+
+            <label class="support-field support-field-full">
+              <span>Question / Bug</span>
+              <textarea
+                name="question_or_bug"
+                rows="7"
+                placeholder="Describe the bug, missing information, or idea you want to share..."
+                required
+              ></textarea>
+            </label>
+
+            <div class="support-form-actions">
+              <button class="button button-primary" type="submit">Send Support Message</button>
+              <p class="support-form-note">
+                This is the best option for visitors whose browser does not open the normal email link.
+              </p>
+            </div>
+          </form>
+        </section>
 
         <div class="support-grid">
           <article class="detail-panel support-card">
