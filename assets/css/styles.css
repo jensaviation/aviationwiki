@@ -589,8 +589,8 @@ h4 {
 }
 
 .control-deck {
-  position: sticky;
-  top: 96px;
+  position: static;
+  top: auto;
   z-index: 10;
   padding: 24px;
   border: 1px solid var(--line);
@@ -1056,10 +1056,7 @@ h4 {
   grid-column: 1;
 }
 
-.history-item:nth-child(even) .history-node {
-  grid-column: 2;
-}
-
+.history-item:nth-child(even) .history-node,
 .history-item:nth-child(odd) .history-node {
   grid-column: 2;
 }
