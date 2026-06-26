@@ -2,10 +2,10 @@ window.AviationData = (() => {
   const timelineOrder = ["Foundational", "Jet Age", "Digital Age", "Next Horizon"];
 
   const timelineDescriptions = {
-    Foundational: "Early propeller, piston, and pre-digital era aircraft that shaped the first decades of flight.",
-    "Jet Age": "Cold War and early jet-era aircraft that defined global airline and military expansion.",
-    "Digital Age": "Aircraft designed around modern avionics, composites, efficient engines, and networked operations.",
-    "Next Horizon": "Future-facing aircraft programs, development projects, and upcoming aviation directions."
+    Foundational: "early propeller, piston, and pre-digital era aircraft that shaped the first decades of flight",
+    "Jet Age": "cold war and early jet-era aircraft that defined global airline and military expansion",
+    "Digital Age": "aircraft designed around modern avionics, composites, efficient engines, and networked operations",
+    "Next Horizon": "future-facing aircraft programs, development projects, and upcoming aviation directions"
   };
 
   const categoryDescriptions = {
@@ -31,229 +31,291 @@ window.AviationData = (() => {
 
   const technicalProfilesByClass = {
     "Commercial Jet": {
-      dimensions: {
-        Length: "Approx. 30 to 76 m, depending on the variant",
-        Wingspan: "Approx. 28 to 80 m",
-        Height: "Approx. 10 to 24 m"
-      },
-      powerplant: {
-        Engines: "Usually 2 turbofan engines, with some historic 3 or 4 engine designs",
-        "Engine type": "High-bypass turbofan"
-      },
-      performance: {
-        "Cruise speed": "Around Mach 0.74 to Mach 0.86",
-        Range: "Typically 2,000 to 15,000 km",
-        "Service ceiling": "About 35,000 to 43,000 ft"
-      },
-      weights: {
-        MTOW: "Program-dependent; roughly 30,000 to 575,000 kg"
-      },
-      capacity: {
-        Crew: "2 flight crew",
-        Passengers: "Varies by layout from around 50 to 850+"
-      }
+      dimensions: { Length: "Program-dependent mainline airliner dimensions", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Typically Mach 0.74 to Mach 0.86", Range: "Program-dependent short, medium, or long-haul range", "Service ceiling": "Usually around 35,000 to 43,000 ft" },
+      weights: { MTOW: "Program-dependent commercial airliner weight class" },
+      capacity: { Crew: "Normally 2 flight crew", Passengers: "Program-dependent passenger or cargo capacity" }
     },
     "Regional Turboprop": {
-      dimensions: {
-        Length: "Approx. 15 to 33 m",
-        Wingspan: "Approx. 19 to 29 m",
-        Height: "Approx. 5 to 9 m"
-      },
-      powerplant: {
-        Engines: "Usually 2 turboprop engines",
-        "Engine type": "Free-turbine turboprop"
-      },
-      performance: {
-        "Cruise speed": "Roughly 450 to 650 km/h",
-        Range: "Around 1,000 to 2,500 km",
-        "Service ceiling": "About 20,000 to 30,000 ft"
-      },
-      weights: {
-        MTOW: "Typically 6,000 to 30,000 kg"
-      },
-      capacity: {
-        Crew: "2",
-        Passengers: "Usually 15 to 90"
-      }
+      dimensions: { Length: "Regional turboprop size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Typically 450 to 650 km/h", Range: "Program-dependent regional range", "Service ceiling": "Usually 20,000 to 30,000 ft" },
+      weights: { MTOW: "Program-dependent regional transport weight class" },
+      capacity: { Crew: "Usually 2", Passengers: "Program-dependent regional seating" }
     },
     "Business Jet": {
-      dimensions: {
-        Length: "Approx. 12 to 34 m",
-        Wingspan: "Approx. 14 to 32 m",
-        Height: "Approx. 4 to 8 m"
-      },
-      powerplant: {
-        Engines: "Usually 2 turbofan engines",
-        "Engine type": "Low- or high-bypass turbofan"
-      },
-      performance: {
-        "Cruise speed": "Roughly Mach 0.75 to Mach 0.93",
-        Range: "Approx. 2,000 to 14,000 km",
-        "Service ceiling": "Around 41,000 to 51,000 ft"
-      },
-      weights: {
-        MTOW: "Typically 5,000 to 50,000 kg"
-      },
-      capacity: {
-        Crew: "1 or 2 pilots",
-        Passengers: "Usually 4 to 19"
-      }
+      dimensions: { Length: "Business jet size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Typically Mach 0.75 to Mach 0.93", Range: "Program-dependent business aviation range", "Service ceiling": "Usually 41,000 to 51,000 ft" },
+      weights: { MTOW: "Program-dependent business jet weight class" },
+      capacity: { Crew: "Usually 2", Passengers: "Program-dependent executive cabin capacity" }
     },
     "General Aviation": {
-      dimensions: {
-        Length: "Approx. 6 to 18 m",
-        Wingspan: "Approx. 8 to 18 m",
-        Height: "Approx. 2 to 5 m"
-      },
-      powerplant: {
-        Engines: "Usually 1 or 2 piston or turboprop engines",
-        "Engine type": "Piston, turboprop, or light jet depending on the model"
-      },
-      performance: {
-        "Cruise speed": "Roughly 180 to 550 km/h",
-        Range: "Approx. 500 to 3,500 km",
-        "Service ceiling": "Around 10,000 to 35,000 ft"
-      },
-      weights: {
-        MTOW: "Typically 500 to 8,000 kg"
-      },
-      capacity: {
-        Crew: "1 or 2",
-        Passengers: "Usually 1 to 14 total occupants"
-      }
+      dimensions: { Length: "General aviation size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Mission-dependent", Range: "Program-dependent", "Service ceiling": "Program-dependent" },
+      weights: { MTOW: "Program-dependent light aircraft weight class" },
+      capacity: { Crew: "Usually 1 or 2", Passengers: "Program-dependent light-aircraft occupancy" }
     },
     Fighter: {
-      dimensions: {
-        Length: "Approx. 14 to 22 m",
-        Wingspan: "Approx. 8 to 15 m",
-        Height: "Approx. 4 to 6 m"
-      },
-      powerplant: {
-        Engines: "Usually 1 or 2 afterburning turbofan engines",
-        "Engine type": "Low-bypass afterburning turbofan"
-      },
-      performance: {
-        "Max speed": "Often Mach 1.6 to Mach 2.5",
-        Range: "Mission-dependent; roughly 1,000 to 4,000 km ferry",
-        "Service ceiling": "Around 50,000 to 65,000 ft"
-      },
-      weights: {
-        MTOW: "Typically 10,000 to 40,000 kg"
-      },
-      capacity: {
-        Crew: "1 or 2"
-      }
+      dimensions: { Length: "Fighter-class dimensions", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Max speed": "Mission and generation dependent", Range: "Mission-dependent ferry and combat radius", "Service ceiling": "Typically high-performance combat ceiling" },
+      weights: { MTOW: "Program-dependent fighter weight class" },
+      capacity: { Crew: "Usually 1 or 2" }
     },
     "Military Transport": {
-      dimensions: {
-        Length: "Approx. 20 to 84 m",
-        Wingspan: "Approx. 25 to 88 m",
-        Height: "Approx. 8 to 18 m"
-      },
-      powerplant: {
-        Engines: "Usually 2 to 6 turbofan or turboprop engines",
-        "Engine type": "Turbofan or turboprop, mission dependent"
-      },
-      performance: {
-        "Cruise speed": "Approx. 500 to 900 km/h",
-        Range: "Approx. 2,000 to 15,000 km",
-        "Service ceiling": "Around 25,000 to 45,000 ft"
-      },
-      weights: {
-        MTOW: "Typically 20,000 to 640,000 kg"
-      },
-      capacity: {
-        Crew: "Varies by mission",
-        Payload: "Program-dependent"
-      }
+      dimensions: { Length: "Transport aircraft size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Mission-dependent", Range: "Program-dependent transport range", "Service ceiling": "Program-dependent" },
+      weights: { MTOW: "Program-dependent transport weight class" },
+      capacity: { Crew: "Mission dependent", Payload: "Program-dependent payload" }
     },
     Trainer: {
-      dimensions: {
-        Length: "Approx. 7 to 18 m",
-        Wingspan: "Approx. 8 to 12 m",
-        Height: "Approx. 2.5 to 5 m"
-      },
-      powerplant: {
-        Engines: "Piston, turboprop, or small turbofan depending on role",
-        "Engine type": "Training mission dependent"
-      },
-      performance: {
-        "Cruise speed": "Approx. 200 to 700 km/h",
-        Range: "Approx. 700 to 2,500 km",
-        "Service ceiling": "Approx. 10,000 to 45,000 ft"
-      },
-      weights: {
-        MTOW: "Training mission dependent"
-      },
-      capacity: {
-        Crew: "Usually 2"
-      }
+      dimensions: { Length: "Trainer aircraft size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Training mission dependent", Range: "Program-dependent", "Service ceiling": "Program-dependent" },
+      weights: { MTOW: "Training role dependent" },
+      capacity: { Crew: "Usually 2" }
     },
     ISR: {
-      dimensions: {
-        Length: "Approx. 11 to 46 m",
-        Wingspan: "Approx. 13 to 40 m",
-        Height: "Approx. 4 to 13 m"
-      },
-      powerplant: {
-        Engines: "Usually 2 turbofan or turboprop engines",
-        "Engine type": "Mission-specific"
-      },
-      performance: {
-        "Cruise speed": "Mission-dependent",
-        Range: "Long-endurance mission dependent",
-        "Service ceiling": "Program dependent"
-      },
-      weights: {
-        MTOW: "Mission dependent"
-      },
-      capacity: {
-        Crew: "Flight crew plus mission operators"
-      }
+      dimensions: { Length: "Mission-platform dependent", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Mission-dependent", Range: "Long-endurance mission dependent", "Service ceiling": "Program dependent" },
+      weights: { MTOW: "Mission dependent" },
+      capacity: { Crew: "Flight crew plus mission operators" }
     },
     Amphibian: {
-      dimensions: {
-        Length: "Approx. 12 to 32 m",
-        Wingspan: "Approx. 18 to 33 m",
-        Height: "Approx. 5 to 9 m"
-      },
-      powerplant: {
-        Engines: "Usually 2 turbofan, turboprop, or piston engines",
-        "Engine type": "Amphibious mission dependent"
-      },
-      performance: {
-        "Cruise speed": "Typically 200 to 700 km/h",
-        Range: "Approx. 1,000 to 4,000 km"
-      },
-      weights: {
-        MTOW: "Mission dependent"
-      },
-      capacity: {
-        Crew: "Varies"
-      }
+      dimensions: { Length: "Amphibious aircraft size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
+      performance: { "Cruise speed": "Mission-dependent", Range: "Program-dependent" },
+      weights: { MTOW: "Program dependent" },
+      capacity: { Crew: "Mission dependent" }
     },
     Experimental: {
-      dimensions: {
-        Length: "Program dependent",
-        Wingspan: "Program dependent",
-        Height: "Program dependent"
-      },
-      powerplant: {
-        Engines: "Program dependent",
-        "Engine type": "Future or experimental propulsion"
-      },
-      performance: {
-        "Cruise speed": "Program dependent",
-        Range: "Program dependent",
-        "Service ceiling": "Program dependent"
-      },
-      weights: {
-        MTOW: "Program dependent"
-      },
-      capacity: {
-        Crew: "Program dependent"
-      }
+      dimensions: { Length: "Program dependent", Wingspan: "Program dependent", Height: "Program dependent" },
+      performance: { "Cruise speed": "Program dependent", Range: "Program dependent", "Service ceiling": "Program dependent" },
+      weights: { MTOW: "Program dependent" },
+      capacity: { Crew: "Program dependent" }
     }
+  };
+
+  const classDesignFocus = {
+    "Commercial Jet": "airline economics, passenger or cargo efficiency, and reliable high-cycle operations",
+    "Regional Turboprop": "short-haul efficiency, field performance, and operating cost control",
+    "Business Jet": "long range, speed, cabin comfort, and point-to-point executive travel",
+    "General Aviation": "accessibility, utility, training value, and owner-flown practicality",
+    Fighter: "high-energy performance, mission systems, and combat survivability",
+    "Military Transport": "payload flexibility, austere-field access, and mission adaptability",
+    Trainer: "predictable handling, systems learning, and pilot progression",
+    ISR: "sensor endurance, mission-system integration, and persistent situational awareness",
+    Amphibian: "multi-surface access, utility flexibility, and specialized rescue or firefighting roles",
+    Experimental: "new technology, future mission concepts, and developmental learning"
+  };
+
+  const classServiceFocus = {
+    "Commercial Jet": "scheduled passenger service, cargo work, and network connectivity",
+    "Regional Turboprop": "regional airline, commuter, and utility transport work",
+    "Business Jet": "corporate, charter, and premium executive missions",
+    "General Aviation": "training, personal travel, and general utility flying",
+    Fighter: "air defense, strike, and high-performance tactical missions",
+    "Military Transport": "airlift, tanker, special mission, and logistics operations",
+    Trainer: "ab initio, advanced, or lead-in pilot training",
+    ISR: "maritime patrol, airborne early warning, surveillance, or reconnaissance tasks",
+    Amphibian: "water operations, firefighting, search and rescue, and public-service missions",
+    Experimental: "testing, technology demonstration, and future program development"
+  };
+
+  const defaultOperatorNotesByClass = {
+    "Commercial Jet": ["Typical operators include passenger airlines, leasing companies, cargo carriers, and state transport users depending on configuration."],
+    "Regional Turboprop": ["Typical operators include commuter airlines, regional carriers, utility operators, and remote-network services."],
+    "Business Jet": ["Typical operators include corporations, charter firms, fractional providers, and government or special mission users."],
+    "General Aviation": ["Typical operators include private owners, clubs, schools, utility operators, and specialized small-aircraft users."],
+    Fighter: ["Typical operators are national air forces or naval aviation branches, often with role-specific mission packages and training pipelines."],
+    "Military Transport": ["Typical operators include air forces, defense logistics organizations, and special mission units."],
+    Trainer: ["Typical operators include military flying schools, civilian flight academies, and training organizations."],
+    ISR: ["Typical operators include military surveillance units, maritime patrol organizations, and government special mission fleets."],
+    Amphibian: ["Typical operators include firefighting services, public agencies, rescue organizations, and niche utility operators."],
+    Experimental: ["Operator coverage is often limited because the program is developmental, low-volume, or still evolving."]
+  };
+
+  const defaultVariantNotesByClass = {
+    "Commercial Jet": ["This program often has multiple passenger, cargo, and performance-related sub-variants or configuration standards."],
+    "Regional Turboprop": ["Variant coverage usually reflects seat-count changes, cockpit upgrades, or mission-role refinements."],
+    "Business Jet": ["Variant differences usually appear in range packages, cabin upgrades, avionics standards, or later production improvements."],
+    "General Aviation": ["Variant differences often involve avionics generations, engine updates, landing gear options, or cabin refinements."],
+    Fighter: ["Variant differences often involve radar, avionics, engine standard, mission kit, or single-seat versus dual-seat configuration."],
+    "Military Transport": ["Variant differences often include tanker, cargo, surveillance, or special mission sub-types."],
+    Trainer: ["Variant differences often reflect cockpit modernization, military mission kits, or updated propulsion standards."],
+    ISR: ["Variant differences often come from sensor suites, antenna arrangements, and mission-system integration."],
+    Amphibian: ["Variant differences often involve mission equipment, tanking capability, or land/water role optimization."],
+    Experimental: ["Variant and block-level coverage may change significantly as the program evolves."]
+  };
+
+  const engineProfiles = {
+    "airbus-a220": { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "PW1500G", "Engine type": "Geared turbofan" },
+    "airbus-a300": { Engines: "2", "Engine manufacturer": "General Electric / Pratt & Whitney", "Engine model": "CF6-50 / JT9D depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a310": { Engines: "2", "Engine manufacturer": "General Electric / Pratt & Whitney", "Engine model": "CF6-80C2 / JT9D-7R4 depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a319": { Engines: "2", "Engine manufacturer": "CFM International / IAE", "Engine model": "CFM56-5B / V2500 depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a320": { Engines: "2", "Engine manufacturer": "CFM International / IAE", "Engine model": "CFM56-5A/5B / V2500 depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a320neo": { Engines: "2", "Engine manufacturer": "CFM International / Pratt & Whitney", "Engine model": "LEAP-1A / PW1100G-JM depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a321": { Engines: "2", "Engine manufacturer": "CFM International / IAE", "Engine model": "CFM56-5B / V2500 depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a321xlr": { Engines: "2", "Engine manufacturer": "CFM International / Pratt & Whitney", "Engine model": "LEAP-1A / PW1100G-JM depending on configuration", "Engine type": "High-bypass turbofan" },
+    "airbus-a330-300": { Engines: "2", "Engine manufacturer": "Rolls-Royce / General Electric / Pratt & Whitney", "Engine model": "Trent 700 / CF6-80E1 / PW4000 depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a330neo": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent 7000", "Engine type": "High-bypass turbofan" },
+    "airbus-a340-600": { Engines: "4", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent 556", "Engine type": "High-bypass turbofan" },
+    "airbus-a350-900": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent XWB-84", "Engine type": "High-bypass turbofan" },
+    "airbus-a350-1000": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent XWB-97", "Engine type": "High-bypass turbofan" },
+    "airbus-a380": { Engines: "4", "Engine manufacturer": "Engine Alliance / Rolls-Royce", "Engine model": "GP7270 / Trent 900 depending on airline selection", "Engine type": "High-bypass turbofan" },
+    "airbus-belugaxl": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent 700", "Engine type": "High-bypass turbofan" },
+
+    "boeing-707": { Engines: "4", "Engine manufacturer": "Pratt & Whitney", "Engine model": "JT3C / JT3D depending on variant", "Engine type": "Turbojet / low-bypass turbofan" },
+    "boeing-727": { Engines: "3", "Engine manufacturer": "Pratt & Whitney", "Engine model": "JT8D", "Engine type": "Low-bypass turbofan" },
+    "boeing-737-800": { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-7B", "Engine type": "High-bypass turbofan" },
+    "boeing-737-max": { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "LEAP-1B", "Engine type": "High-bypass turbofan" },
+    "boeing-747-400": { Engines: "4", "Engine manufacturer": "Pratt & Whitney / General Electric / Rolls-Royce", "Engine model": "PW4000 / CF6-80C2 / RB211-524 depending on variant", "Engine type": "High-bypass turbofan" },
+    "boeing-747-8f": { Engines: "4", "Engine manufacturer": "General Electric", "Engine model": "GEnx-2B67", "Engine type": "High-bypass turbofan" },
+    "boeing-757-200": { Engines: "2", "Engine manufacturer": "Rolls-Royce / Pratt & Whitney", "Engine model": "RB211-535 / PW2000 depending on variant", "Engine type": "High-bypass turbofan" },
+    "boeing-767-300f": { Engines: "2", "Engine manufacturer": "General Electric / Pratt & Whitney / Rolls-Royce", "Engine model": "CF6-80C2 / PW4000 / RB211-524 depending on operator and airframe", "Engine type": "High-bypass turbofan" },
+    "boeing-777-300er": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "GE90-115B", "Engine type": "High-bypass turbofan" },
+    "boeing-777-9": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "GE9X", "Engine type": "High-bypass turbofan" },
+    "boeing-787-8": { Engines: "2", "Engine manufacturer": "General Electric / Rolls-Royce", "Engine model": "GEnx-1B / Trent 1000 depending on customer selection", "Engine type": "High-bypass turbofan" },
+    "boeing-787-9": { Engines: "2", "Engine manufacturer": "General Electric / Rolls-Royce", "Engine model": "GEnx-1B / Trent 1000 depending on customer selection", "Engine type": "High-bypass turbofan" },
+    "boeing-787-10": { Engines: "2", "Engine manufacturer": "General Electric / Rolls-Royce", "Engine model": "GEnx-1B / Trent 1000 depending on customer selection", "Engine type": "High-bypass turbofan" },
+    "boeing-p8": { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-7B", "Engine type": "High-bypass turbofan" },
+
+    "embraer-bandeirante": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-34", "Engine type": "Turboprop" },
+    "embraer-erj145": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "AE 3007A", "Engine type": "Turbofan" },
+    "embraer-e170": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-8E", "Engine type": "Turbofan" },
+    "embraer-e175": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-8E", "Engine type": "Turbofan" },
+    "embraer-e190": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-10E", "Engine type": "Turbofan" },
+    "embraer-e195-e2": { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "PW1900G series", "Engine type": "Geared turbofan" },
+    "embraer-kc390": { Engines: "2", "Engine manufacturer": "IAE", "Engine model": "V2500-E5", "Engine type": "Turbofan" },
+    "embraer-super-tucano": { Engines: "1", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-68C", "Engine type": "Turboprop" },
+
+    "bombardier-crj200": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-3B1", "Engine type": "Turbofan" },
+    "bombardier-crj900": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-8C5", "Engine type": "Turbofan" },
+    "bombardier-q400": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW150A", "Engine type": "Turboprop" },
+    "bombardier-challenger-3500": { Engines: "2", "Engine manufacturer": "Honeywell", "Engine model": "HTF7350", "Engine type": "Turbofan" },
+    "bombardier-global-7500": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "Passport", "Engine type": "Turbofan" },
+
+    "cessna-152": { Engines: "1", "Engine manufacturer": "Lycoming", "Engine model": "O-235", "Engine type": "Piston flat-four" },
+    "cessna-172": { Engines: "1", "Engine manufacturer": "Lycoming", "Engine model": "IO-360-L2A on current Skyhawk production", "Engine type": "Piston flat-four" },
+    "cessna-182": { Engines: "1", "Engine manufacturer": "Lycoming", "Engine model": "IO-540 / TIO-540 family depending on version", "Engine type": "Piston flat-six" },
+    "cessna-caravan": { Engines: "1", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-114A / PT6A-140 depending on variant", "Engine type": "Turboprop" },
+    "cessna-cj4-gen2": { Engines: "2", "Engine manufacturer": "Williams International", "Engine model": "FJ44-4A", "Engine type": "Turbofan" },
+    "cessna-latitude": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW306D1", "Engine type": "Turbofan" },
+    "cessna-longitude": { Engines: "2", "Engine manufacturer": "Honeywell", "Engine model": "HTF7700L", "Engine type": "Turbofan" },
+
+    "beechcraft-bonanza": { Engines: "1", "Engine manufacturer": "Continental", "Engine model": "IO-550-B", "Engine type": "Piston flat-six" },
+    "beechcraft-baron": { Engines: "2", "Engine manufacturer": "Continental", "Engine model": "IO-550-C", "Engine type": "Piston flat-six" },
+    "beechcraft-king-air-260": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-52", "Engine type": "Turboprop" },
+    "beechcraft-king-air-360": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-60A", "Engine type": "Turboprop" },
+    "beechcraft-t6c": { Engines: "1", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-68", "Engine type": "Turboprop" },
+
+    "piper-j3": { Engines: "1", "Engine manufacturer": "Continental", "Engine model": "A65 series", "Engine type": "Piston flat-four" },
+    "piper-archer-lx": { Engines: "1", "Engine manufacturer": "Lycoming", "Engine model": "IO-360-B4A", "Engine type": "Piston flat-four" },
+    "piper-seminole": { Engines: "2", "Engine manufacturer": "Lycoming", "Engine model": "O-360-E1A6D", "Engine type": "Piston flat-four" },
+    "piper-m350": { Engines: "1", "Engine manufacturer": "Lycoming", "Engine model": "TIO-540-AE2A", "Engine type": "Turbocharged piston flat-six" },
+    "piper-m600-sls": { Engines: "1", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-42A", "Engine type": "Turboprop" },
+    "piper-m700-fury": { Engines: "1", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-52", "Engine type": "Turboprop" },
+
+    "gulfstream-g280": { Engines: "2", "Engine manufacturer": "Honeywell", "Engine model": "HTF7250G", "Engine type": "Turbofan" },
+    "gulfstream-g500": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW814GA", "Engine type": "Turbofan" },
+    "gulfstream-g650er": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "BR725", "Engine type": "Turbofan" },
+    "gulfstream-g700": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Pearl 700", "Engine type": "Turbofan" },
+    "gulfstream-g800": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Pearl 700", "Engine type": "Turbofan" },
+
+    "atr-42-600": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW127M / PW127XT-M depending on production standard", "Engine type": "Turboprop" },
+    "atr-72-600": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW127M / PW127XT-M depending on production standard", "Engine type": "Turboprop" },
+    "atr-evo": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada / future hybrid-assist partners under study", "Engine model": "Future regional turboprop powerplant not yet finalized", "Engine type": "Next-generation turboprop / hybrid-assist concept" },
+
+    "comac-c909": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-10A", "Engine type": "Turbofan" },
+    "comac-c919": { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "LEAP-1C", "Engine type": "High-bypass turbofan" },
+    "comac-c929": { Engines: "2", "Engine manufacturer": "Not yet finalized", "Engine model": "Widebody-class engine selection still program-dependent", "Engine type": "Future high-bypass turbofan" },
+
+    "lockheed-f16v": { Engines: "1", "Engine manufacturer": "Pratt & Whitney / General Electric", "Engine model": "F100-PW-229 or F110-GE-129 depending on operator", "Engine type": "Afterburning turbofan" },
+    "lockheed-f22": { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "F119-PW-100", "Engine type": "Afterburning turbofan" },
+    "lockheed-f35a": { Engines: "1", "Engine manufacturer": "Pratt & Whitney", "Engine model": "F135-PW-100", "Engine type": "Afterburning turbofan" },
+    "lockheed-f35b": { Engines: "1 main engine plus lift system", "Engine manufacturer": "Pratt & Whitney / Rolls-Royce lift system partner", "Engine model": "F135-PW-600 with shaft-driven lift fan system", "Engine type": "STOVL afterburning turbofan arrangement" },
+    "lockheed-f35c": { Engines: "1", "Engine manufacturer": "Pratt & Whitney", "Engine model": "F135-PW-400", "Engine type": "Afterburning turbofan" },
+    "lockheed-c130j": { Engines: "4", "Engine manufacturer": "Rolls-Royce", "Engine model": "AE 2100D3", "Engine type": "Turboprop" },
+
+    "northrop-b2": { Engines: "4", "Engine manufacturer": "General Electric", "Engine model": "F118-GE-100", "Engine type": "Non-afterburning turbofan" },
+    "northrop-b21": { Engines: "Undisclosed", "Engine manufacturer": "Undisclosed", "Engine model": "Undisclosed next-generation strategic bomber powerplant", "Engine type": "Strategic stealth bomber turbofan configuration" },
+    "northrop-e2d": { Engines: "2", "Engine manufacturer": "Rolls-Royce / Allison heritage", "Engine model": "T56-A-427A", "Engine type": "Turboprop" },
+    "northrop-mq4c": { Engines: "1", "Engine manufacturer": "Rolls-Royce", "Engine model": "AE 3007H", "Engine type": "Turbofan" },
+
+    "dassault-mirage2000": { Engines: "1", "Engine manufacturer": "SNECMA", "Engine model": "M53-P2", "Engine type": "Afterburning turbofan" },
+    "dassault-rafale-f4": { Engines: "2", "Engine manufacturer": "Safran", "Engine model": "M88-2", "Engine type": "Afterburning turbofan" },
+    "dassault-falcon-8x": { Engines: "3", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW307D", "Engine type": "Turbofan" },
+    "dassault-falcon-10x": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Pearl 10X", "Engine type": "Turbofan" },
+
+    "saab-gripen-e": { Engines: "1", "Engine manufacturer": "General Electric", "Engine model": "F414G", "Engine type": "Afterburning turbofan" },
+    "saab-globaleye": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "BR710A2-20", "Engine type": "Turbofan" },
+    "saab-340-aew": { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CT7-9B", "Engine type": "Turboprop" },
+
+    "sukhoi-superjet100": { Engines: "2", "Engine manufacturer": "PowerJet", "Engine model": "SaM146", "Engine type": "Turbofan" },
+    "sukhoi-su27": { Engines: "2", "Engine manufacturer": "Saturn / Lyulka lineage", "Engine model": "AL-31F", "Engine type": "Afterburning turbofan" },
+    "sukhoi-su30sm2": { Engines: "2", "Engine manufacturer": "Saturn", "Engine model": "AL-41F-1S / AL-31FP depending on standard", "Engine type": "Afterburning turbofan" },
+    "sukhoi-su35s": { Engines: "2", "Engine manufacturer": "Saturn", "Engine model": "AL-41F1S", "Engine type": "Afterburning turbofan" },
+    "sukhoi-su57": { Engines: "2", "Engine manufacturer": "Saturn", "Engine model": "AL-41F1 currently, future Izdeliye 30 path", "Engine type": "Afterburning turbofan" },
+
+    "antonov-an124": { Engines: "4", "Engine manufacturer": "Ivchenko-Progress / Motor Sich", "Engine model": "D-18T", "Engine type": "High-bypass turbofan" },
+    "antonov-an148": { Engines: "2", "Engine manufacturer": "Ivchenko-Progress / Motor Sich", "Engine model": "D-436-148", "Engine type": "Turbofan" },
+    "antonov-an225": { Engines: "6", "Engine manufacturer": "Ivchenko-Progress / Motor Sich", "Engine model": "D-18T", "Engine type": "High-bypass turbofan" },
+
+    "mdd-dc10": { Engines: "3", "Engine manufacturer": "General Electric / Pratt & Whitney", "Engine model": "CF6 / JT9D depending on variant", "Engine type": "High-bypass turbofan" },
+    "mdd-md11": { Engines: "3", "Engine manufacturer": "General Electric / Pratt & Whitney / Rolls-Royce", "Engine model": "CF6-80C2 / PW4460 / RB211-524 depending on variant", "Engine type": "High-bypass turbofan" },
+    "mdd-md80": { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "JT8D-200 series", "Engine type": "Low-bypass turbofan" },
+    "mdd-md95": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "BR715", "Engine type": "Turbofan" },
+
+    "dhc-twin-otter": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-34 / PT6A-35 depending on series", "Engine type": "Turboprop" },
+    "dhc-dash-8-400": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW150A", "Engine type": "Turboprop" },
+    "dhc-515": { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW123AF", "Engine type": "Turboprop" }
+  };
+
+  const specOverrides = {
+    "airbus-a220": { dimensions: { Length: "35.0 to 38.7 m", Wingspan: "35.1 m", Height: "11.5 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Up to about 6,300 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Up to about 70,900 kg" }, capacity: { Crew: "2", Passengers: "Approx. 100 to 160" } },
+    "airbus-a320": { dimensions: { Length: "37.6 m", Wingspan: "34.1 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 6,100 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Up to about 78,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 150 to 180" } },
+    "airbus-a320neo": { dimensions: { Length: "37.6 m", Wingspan: "35.8 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 6,300 to 6,500 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Up to about 79,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 150 to 190" } },
+    "airbus-a321": { dimensions: { Length: "44.5 m", Wingspan: "34.1 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 5,600 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Up to about 93,500 kg on later variants" }, capacity: { Crew: "2", Passengers: "Typically 185 to 220+" } },
+    "airbus-a321xlr": { dimensions: { Length: "44.5 m", Wingspan: "35.8 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 8,700 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Approx. 101,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 180 to 220" } },
+    "airbus-a330-300": { dimensions: { Length: "63.7 m", Wingspan: "60.3 m", Height: "16.8 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 11,750 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Up to about 242,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 277 to 440" } },
+    "airbus-a330neo": { dimensions: { Length: "63.7 m", Wingspan: "64.0 m", Height: "16.8 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 13,300 km", "Service ceiling": "41,100 ft" }, weights: { MTOW: "Up to about 251,000 kg" }, capacity: { Crew: "2", Passengers: "Typically around 260 to 300+" } },
+    "airbus-a350-900": { dimensions: { Length: "66.8 m", Wingspan: "64.8 m", Height: "17.1 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 15,000 km", "Service ceiling": "43,100 ft" }, weights: { MTOW: "Up to about 283,000 kg" }, capacity: { Crew: "2", Passengers: "Typically around 300 to 350" } },
+    "airbus-a350-1000": { dimensions: { Length: "73.8 m", Wingspan: "64.8 m", Height: "17.1 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 16,100 km", "Service ceiling": "43,100 ft" }, weights: { MTOW: "Up to about 319,000 kg" }, capacity: { Crew: "2", Passengers: "Typically around 350 to 410" } },
+    "airbus-a380": { dimensions: { Length: "72.7 m", Wingspan: "79.8 m", Height: "24.1 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 15,200 km", "Service ceiling": "43,000 ft" }, weights: { MTOW: "Up to about 575,000 kg" }, capacity: { Crew: "2", Passengers: "Typical 500+; certified for much more in dense layout" } },
+    "boeing-737-800": { dimensions: { Length: "39.5 m", Wingspan: "35.8 m", Height: "12.5 m" }, performance: { "Cruise speed": "Mach 0.785", Range: "Approx. 5,400 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Up to about 79,000 kg" }, capacity: { Crew: "2", Passengers: "Typical 162 to 189" } },
+    "boeing-737-max": { dimensions: { Length: "39.5 m", Wingspan: "35.9 m", Height: "12.3 m" }, performance: { "Cruise speed": "Mach 0.79", Range: "Approx. 6,570 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Up to about 82,190 kg" }, capacity: { Crew: "2", Passengers: "Typical 162 to 178, up to 210 in dense layout" } },
+    "boeing-747-400": { dimensions: { Length: "70.7 m", Wingspan: "64.4 m", Height: "19.4 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 13,450 km", "Service ceiling": "45,100 ft" }, weights: { MTOW: "Up to about 396,900 kg" }, capacity: { Crew: "2", Passengers: "Typical around 416 to 524" } },
+    "boeing-747-8f": { dimensions: { Length: "76.3 m", Wingspan: "68.4 m", Height: "19.4 m" }, performance: { "Cruise speed": "Mach 0.855", Range: "Approx. 8,130 km with full payload", "Service ceiling": "43,100 ft" }, weights: { MTOW: "Approx. 447,700 kg" }, capacity: { Crew: "2", Payload: "Approx. 137 t class payload" } },
+    "boeing-757-200": { dimensions: { Length: "47.3 m", Wingspan: "38.0 m", Height: "13.6 m" }, performance: { "Cruise speed": "Mach 0.80", Range: "Approx. 7,200 km", "Service ceiling": "42,000 ft" }, weights: { MTOW: "Up to about 115,700 kg" }, capacity: { Crew: "2", Passengers: "Typical 178 to 239" } },
+    "boeing-767-300f": { dimensions: { Length: "54.9 m", Wingspan: "47.6 m", Height: "15.8 m" }, performance: { "Cruise speed": "Mach 0.80", Range: "Approx. 6,000 km with freight mission profile", "Service ceiling": "43,000 ft" }, weights: { MTOW: "Approx. 186,900 kg" }, capacity: { Crew: "2", Payload: "Approx. 52 to 58 t class" } },
+    "boeing-777-300er": { dimensions: { Length: "73.9 m", Wingspan: "64.8 m", Height: "18.5 m" }, performance: { "Cruise speed": "Mach 0.84", Range: "Approx. 13,650 km", "Service ceiling": "43,100 ft" }, weights: { MTOW: "Approx. 351,500 kg" }, capacity: { Crew: "2", Passengers: "Typical 350 to 396" } },
+    "boeing-777-9": { dimensions: { Length: "76.7 m", Wingspan: "71.8 m unfolded", Height: "19.5 m" }, performance: { "Cruise speed": "Approx. Mach 0.84", Range: "Approx. 13,500 km", "Service ceiling": "43,100 ft" }, weights: { MTOW: "Approx. 351,500+ kg class" }, capacity: { Crew: "2", Passengers: "Typical 400+" } },
+    "boeing-787-8": { dimensions: { Length: "56.7 m", Wingspan: "60.1 m", Height: "17.0 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 13,620 km", "Service ceiling": "43,000 ft" }, weights: { MTOW: "Approx. 227,900 kg" }, capacity: { Crew: "2", Passengers: "Typical 242 to 290" } },
+    "boeing-787-9": { dimensions: { Length: "62.8 m", Wingspan: "60.1 m", Height: "17.0 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 14,100 km", "Service ceiling": "43,000 ft" }, weights: { MTOW: "Approx. 254,000 kg" }, capacity: { Crew: "2", Passengers: "Typical 280 to 320" } },
+    "boeing-787-10": { dimensions: { Length: "68.3 m", Wingspan: "60.1 m", Height: "17.0 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 11,900 km", "Service ceiling": "43,000 ft" }, weights: { MTOW: "Approx. 254,000 kg" }, capacity: { Crew: "2", Passengers: "Typical 318 to 336+" } },
+    "embraer-e175": { dimensions: { Length: "31.7 m", Wingspan: "26.0 m", Height: "9.7 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 3,700 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Approx. 38,790 kg" }, capacity: { Crew: "2", Passengers: "Typically 76 to 88" } },
+    "embraer-e195-e2": { dimensions: { Length: "41.5 m", Wingspan: "35.1 m", Height: "10.9 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 4,800 to 5,300 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Approx. 61,500 kg" }, capacity: { Crew: "2", Passengers: "Typically 120 to 146" } },
+    "embraer-kc390": { dimensions: { Length: "35.2 m", Wingspan: "35.0 m", Height: "11.8 m" }, performance: { "Cruise speed": "Approx. 870 km/h", Range: "Approx. 2,800 km with full payload, farther on lighter missions", "Service ceiling": "36,000 ft" }, weights: { MTOW: "Approx. 87,000 kg" }, capacity: { Crew: "2", Payload: "Approx. 26 t class" } },
+    "bombardier-crj900": { dimensions: { Length: "36.4 m", Wingspan: "24.9 m", Height: "7.5 m" }, performance: { "Cruise speed": "Approx. Mach 0.78", Range: "Approx. 2,900 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Approx. 38,300 kg" }, capacity: { Crew: "2", Passengers: "Typically 76 to 90" } },
+    "bombardier-q400": { dimensions: { Length: "32.8 m", Wingspan: "28.4 m", Height: "8.4 m" }, performance: { "Cruise speed": "Approx. 660 km/h", Range: "Approx. 2,000 km", "Service ceiling": "25,000 ft" }, weights: { MTOW: "Approx. 29,260 kg" }, capacity: { Crew: "2", Passengers: "Typically 68 to 90" } },
+    "bombardier-global-7500": { dimensions: { Length: "33.8 m", Wingspan: "31.8 m", Height: "8.1 m" }, performance: { "Cruise speed": "Up to Mach 0.925", Range: "Approx. 14,260 km", "Service ceiling": "51,000 ft" }, weights: { MTOW: "Approx. 52,100 kg" }, capacity: { Crew: "2 to 4", Passengers: "Typically up to 19" } },
+    "cessna-172": { dimensions: { Length: "8.3 m", Wingspan: "11.0 m", Height: "2.7 m" }, performance: { "Cruise speed": "Approx. 226 km/h", Range: "Approx. 1,180 km", "Service ceiling": "14,000 ft" }, weights: { MTOW: "Approx. 1,157 kg" }, capacity: { Crew: "1", Passengers: "Up to 3 more occupants" } },
+    "cessna-caravan": { dimensions: { Length: "12.7 m", Wingspan: "15.9 m", Height: "4.5 m" }, performance: { "Cruise speed": "Approx. 340 km/h", Range: "Approx. 1,700 km", "Service ceiling": "25,000 ft" }, weights: { MTOW: "Approx. 3,970 kg to 3,995 kg class depending on model" }, capacity: { Crew: "1 or 2", Passengers: "Typically up to 9 to 14 depending on layout and rules" } },
+    "cessna-longitude": { dimensions: { Length: "22.3 m", Wingspan: "21.0 m", Height: "6.2 m" }, performance: { "Cruise speed": "Approx. Mach 0.84", Range: "Approx. 6,500 km", "Service ceiling": "45,000 ft" }, weights: { MTOW: "Approx. 17,900 kg" }, capacity: { Crew: "2", Passengers: "Typically up to 12" } },
+    "gulfstream-g650er": { dimensions: { Length: "30.4 m", Wingspan: "30.4 m", Height: "7.8 m" }, performance: { "Cruise speed": "Up to Mach 0.925", Range: "Approx. 13,900 km", "Service ceiling": "51,000 ft" }, weights: { MTOW: "Approx. 45,200 kg" }, capacity: { Crew: "2 to 4", Passengers: "Typically up to 19" } },
+    "gulfstream-g700": { dimensions: { Length: "33.5 m", Wingspan: "31.4 m", Height: "7.8 m" }, performance: { "Cruise speed": "Approx. Mach 0.90, max Mach 0.935", Range: "Approx. 13,900 km", "Service ceiling": "51,000 ft" }, weights: { MTOW: "Approx. 48,200 kg" }, capacity: { Crew: "2 to 4", Passengers: "Typically up to 19" } },
+    "lockheed-f16v": { dimensions: { Length: "15.0 m", Wingspan: "9.96 m", Height: "4.9 m" }, performance: { "Max speed": "Approx. Mach 2.0", Range: "Ferry range roughly 4,200 km with tanks", "Service ceiling": "50,000+ ft" }, weights: { MTOW: "Approx. 19,000 kg class" }, capacity: { Crew: "1 or 2 depending on configuration" } },
+    "lockheed-f22": { dimensions: { Length: "18.9 m", Wingspan: "13.6 m", Height: "5.1 m" }, performance: { "Max speed": "Approx. Mach 2.0+", Range: "Approx. 3,000 km ferry class", "Service ceiling": "65,000 ft" }, weights: { MTOW: "Approx. 38,000 kg" }, capacity: { Crew: "1" } },
+    "lockheed-f35a": { dimensions: { Length: "15.7 m", Wingspan: "10.7 m", Height: "4.4 m" }, performance: { "Max speed": "Approx. Mach 1.6", Range: "Approx. 2,200 km class", "Service ceiling": "50,000+ ft" }, weights: { MTOW: "Approx. 31,800 kg" }, capacity: { Crew: "1" } },
+    "lockheed-c130j": { dimensions: { Length: "29.8 m", Wingspan: "40.4 m", Height: "11.9 m" }, performance: { "Cruise speed": "Approx. 670 km/h", Range: "Approx. 3,300 km with useful payload", "Service ceiling": "28,000 ft+" }, weights: { MTOW: "Approx. 74,400 kg" }, capacity: { Crew: "Usually 2 to 5 depending on mission", Payload: "Approx. 20 t class" } }
+  };
+
+  const detailNotes = {
+    "airbus-a220": "It is especially important because it gives airlines a genuinely modern aircraft below traditional narrowbody sizes, with noticeably strong comfort and efficiency for its seating bracket.",
+    "airbus-a380": "Its scale, cabin volume, and four-engine architecture make it one of the clearest examples of the hub-and-spoke superjumbo strategy.",
+    "boeing-747-400": "It is one of the aircraft most strongly associated with the golden image of long-haul travel and the classic widebody era.",
+    "boeing-787-9": "The 787-9 is often seen as the commercial sweet spot of the Dreamliner family because it combines very good range with balanced capacity.",
+    "embraer-e175": "The aircraft is especially famous in North American regional flying, where scope clauses and network planning made it commercially influential.",
+    "bombardier-global-7500": "In business aviation, it represents the top end of range, cabin zoning, and flagship-style corporate transport.",
+    "cessna-172": "Its long training history makes it one of the most important pilot-making aircraft ever produced.",
+    "lockheed-f35a": "What makes it unusual is how much of its combat value comes from software, data fusion, and mission networking rather than raw kinematics alone.",
+    "northrop-b2": "Its flying-wing stealth approach makes it one of the most visually and strategically distinctive bombers ever fielded."
   };
 
   const rawManufacturers = [
@@ -578,652 +640,70 @@ window.AviationData = (() => {
     }
   ];
 
-  const aircraftArticles = {
-    "airbus-a220": {
-      overview: "The A220 is Airbus's smallest jetliner family and is optimized for lower-capacity short and medium-haul routes where airlines want mainline comfort with strong fuel efficiency.",
-      design: "It uses a modern aluminum-lithium and composite structure, a clean-sheet wing, and geared turbofan engines to reduce fuel burn and noise.",
-      service: "Airlines use the A220 on regional and thin mainline routes where the economics of a larger single-aisle would be less attractive.",
-      specs: {
-        dimensions: { Length: "35.0 to 38.7 m", Wingspan: "35.1 m", Height: "11.5 m" },
-        powerplant: { Engines: "2", "Engine type": "Pratt & Whitney PW1500G geared turbofan" },
-        performance: { "Cruise speed": "Mach 0.78", Range: "Up to about 6,300 km", "Service ceiling": "41,000 ft" },
-        weights: { MTOW: "Up to about 70,900 kg" },
-        capacity: { Crew: "2", Passengers: "Approx. 100 to 160" }
-      },
-      facts: ["Clean-sheet design for the 100-150 seat market", "Known for a wide cabin cross-section relative to its class"],
-      variants: ["A220-100", "A220-300"]
-    },
-    "airbus-a300": {
-      overview: "The A300 was the first twin-engine widebody airliner and the aircraft that put Airbus on the global airliner map.",
-      design: "It was designed to provide widebody cabin space with fewer engines than the long-haul tri- and quad-jets of its era.",
-      service: "Passenger fleets declined over time, but cargo conversions kept the A300 highly relevant in freight networks.",
-      specs: {
-        dimensions: { Length: "Approx. 54.1 m", Wingspan: "44.8 m", Height: "16.5 m" },
-        powerplant: { Engines: "2", "Engine type": "High-bypass turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.80", Range: "Approx. 4,000 to 7,500 km", "Service ceiling": "39,000 ft" },
-        weights: { MTOW: "Up to about 171,700 kg" },
-        capacity: { Crew: "2 to 3 depending on generation", Passengers: "Typically 250 to 300+" }
-      },
-      facts: ["First twin-engine widebody", "Critical to Airbus's early credibility"],
-      variants: ["A300B2", "A300B4", "A300-600", "A300F"]
-    },
-    "airbus-a320": {
-      overview: "The Airbus A320 is one of the most influential single-aisle airliners ever built and a foundational aircraft of modern airline fleets.",
-      design: "It introduced digital fly-by-wire controls and a two-pilot glass cockpit to the short-haul jet market at large scale.",
-      service: "The A320 family serves everything from high-frequency domestic flying to short transcontinental and leisure operations.",
-      specs: {
-        dimensions: { Length: "37.6 m", Wingspan: "34.1 m", Height: "11.8 m" },
-        powerplant: { Engines: "2", "Engine type": "CFM56 or IAE V2500 turbofan" },
-        performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 6,100 km", "Service ceiling": "39,000 ft" },
-        weights: { MTOW: "Up to about 78,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 150 to 180" }
-      },
-      facts: ["Mass-market fly-by-wire narrowbody", "Created a hugely scalable family platform"],
-      variants: ["A318", "A319", "A320", "A321"]
-    },
-    "airbus-a320neo": {
-      overview: "The A320neo is the re-engined evolution of the classic A320 and is one of the most important airliner upgrades of the 21st century.",
-      design: "It pairs newer engines with aerodynamic refinements such as sharklets to reduce fuel burn and operating cost.",
-      service: "The neo family is widely used by low-cost, network, charter, and leasing operators.",
-      specs: {
-        dimensions: { Length: "37.6 m", Wingspan: "35.8 m", Height: "11.8 m" },
-        powerplant: { Engines: "2", "Engine type": "CFM LEAP-1A or Pratt & Whitney PW1100G-JM" },
-        performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 6,300 to 6,500 km", "Service ceiling": "39,000 ft" },
-        weights: { MTOW: "Up to about 79,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 150 to 190" }
-      },
-      facts: ["One of the most commercially successful re-engining programs ever", "Improved fuel efficiency and lower community noise"],
-      variants: ["A319neo", "A320neo", "A321neo"]
-    },
-    "airbus-a321": {
-      overview: "The A321 is the stretched member of the A320 family and one of the most commercially important narrowbodies in service.",
-      design: "It extends the A320 formula with more fuselage length and capacity, enabling dense trunk routes and longer-range missions.",
-      service: "Airlines use the A321 for domestic high-density routes, leisure markets, and medium-haul flying.",
-      specs: {
-        dimensions: { Length: "44.5 m", Wingspan: "34.1 m", Height: "11.8 m" },
-        powerplant: { Engines: "2", "Engine type": "CFM56 or IAE V2500 turbofan" },
-        performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 5,600 km", "Service ceiling": "39,000 ft" },
-        weights: { MTOW: "Up to about 93,500 kg on later variants" },
-        capacity: { Crew: "2", Passengers: "Typically 185 to 220+" }
-      },
-      facts: ["One of the key narrowbodies in today's airline market", "Strong economics on dense short and medium-haul routes"],
-      variants: ["A321ceo", "A321neo", "A321LR", "A321XLR"]
-    },
-    "airbus-a321xlr": {
-      overview: "The A321XLR extends the A321 family into long-range narrowbody territory, allowing airlines to open thinner long-haul routes.",
-      design: "It adds range through fuel-system changes, structural reinforcement, and optimized operating economics for long narrowbody missions.",
-      service: "The aircraft is aimed at transatlantic and other long, lower-demand routes that previously needed larger jets.",
-      specs: {
-        dimensions: { Length: "44.5 m", Wingspan: "35.8 m", Height: "11.8 m" },
-        powerplant: { Engines: "2", "Engine type": "CFM LEAP-1A or Pratt & Whitney PW1100G-JM" },
-        performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 8,700 km", "Service ceiling": "39,000 ft" },
-        weights: { MTOW: "Approx. 101,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 180 to 220" }
-      },
-      facts: ["Very long range for a single-aisle airliner", "Designed to open city pairs that do not justify a widebody"],
-      variants: ["A321LR", "A321XLR"]
-    },
-    "airbus-a330-300": {
-      overview: "The A330-300 is one of Airbus's most versatile widebodies and a long-running staple of medium and long-haul airline fleets.",
-      design: "It uses a two-engine widebody layout that balances capacity, range, and operating cost.",
-      service: "The type has served network carriers, leisure airlines, freight programs, and military conversion roles.",
-      specs: {
-        dimensions: { Length: "63.7 m", Wingspan: "60.3 m", Height: "16.8 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Trent 700, GE CF6, or Pratt & Whitney PW4000 turbofan" },
-        performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 11,750 km", "Service ceiling": "41,000 ft" },
-        weights: { MTOW: "Up to about 242,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 277 to 440" }
-      },
-      facts: ["One of the classic modern twin-engine widebodies", "Popular in both passenger and freight operations"],
-      variants: ["A330-200", "A330-300", "A330 MRTT", "A330F"]
-    },
-    "airbus-a330neo": {
-      overview: "The A330neo modernizes the A330 with newer engines, aerodynamic refinements, and updated cabin systems.",
-      design: "It combines a proven fuselage with a revised wing and Rolls-Royce Trent 7000 engines for improved economics.",
-      service: "The A330neo targets operators that want a long-haul twin with lower acquisition risk than a clean-sheet design.",
-      specs: {
-        dimensions: { Length: "63.7 m", Wingspan: "64.0 m", Height: "16.8 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Trent 7000 turbofan" },
-        performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 13,300 km", "Service ceiling": "41,100 ft" },
-        weights: { MTOW: "Up to about 251,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typically around 260 to 300+" }
-      },
-      facts: ["Updated A330 generation", "Offers long-haul capability with strong commonality"],
-      variants: ["A330-800neo", "A330-900neo"]
-    },
-    "airbus-a350-900": {
-      overview: "The A350-900 is Airbus's flagship long-haul twin in the mid-to-large segment and one of the most advanced airliners in service.",
-      design: "It uses extensive carbon-fiber composites, a high-aspect-ratio wing, and advanced systems to optimize long-range efficiency.",
-      service: "Airlines use it on premium intercontinental routes and long sectors where fuel burn and cabin comfort both matter.",
-      specs: {
-        dimensions: { Length: "66.8 m", Wingspan: "64.8 m", Height: "17.1 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Trent XWB turbofan" },
-        performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 15,000 km", "Service ceiling": "43,100 ft" },
-        weights: { MTOW: "Up to about 283,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typically around 300 to 350" }
-      },
-      facts: ["Composite long-haul flagship", "Competes directly with large Boeing long-haul twins"],
-      variants: ["A350-900", "A350-900ULR", "A350-1000"]
-    },
-    "airbus-a350-1000": {
-      overview: "The A350-1000 is the larger member of the A350 family and targets high-capacity long-haul missions.",
-      design: "It stretches the A350 concept with more cabin capacity, updated landing gear, and strong long-range efficiency.",
-      service: "The aircraft is positioned for premium long-haul trunk routes where airlines want a large but efficient twin.",
-      specs: {
-        dimensions: { Length: "73.8 m", Wingspan: "64.8 m", Height: "17.1 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Trent XWB-97 turbofan" },
-        performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 16,100 km", "Service ceiling": "43,100 ft" },
-        weights: { MTOW: "Up to about 319,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typically around 350 to 410" }
-      },
-      facts: ["Largest A350 family member", "Built for high-capacity ultra long-haul routes"],
-      variants: ["A350-1000"]
-    },
-    "airbus-a380": {
-      overview: "The A380 is the world's largest full-length double-deck passenger airliner and one of the most iconic aircraft ever built.",
-      design: "It was designed for very high-capacity hub-and-spoke operations with four engines, two full passenger decks, and an enormous wing.",
-      service: "The aircraft is most associated with premium long-haul travel and high-density hub routes.",
-      specs: {
-        dimensions: { Length: "72.7 m", Wingspan: "79.8 m", Height: "24.1 m" },
-        powerplant: { Engines: "4", "Engine type": "Engine Alliance GP7200 or Rolls-Royce Trent 900 turbofan" },
-        performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 15,200 km", "Service ceiling": "43,000 ft" },
-        weights: { MTOW: "Up to about 575,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 500+; certified for much more in dense layout" }
-      },
-      facts: ["Largest passenger airliner built", "A defining symbol of the superjumbo era"],
-      variants: ["A380-800"]
-    },
-    "boeing-707": {
-      overview: "The Boeing 707 was one of the first successful commercial jetliners and a central aircraft in the birth of mass jet travel.",
-      design: "Its swept wing, underwing engines, and long-range capability helped establish the modern jet airliner layout.",
-      service: "The aircraft served airlines, militaries, and governments and also generated important special mission derivatives.",
-      specs: {
-        dimensions: { Length: "Approx. 46.6 m", Wingspan: "Approx. 44.4 m", Height: "Approx. 12.9 m" },
-        powerplant: { Engines: "4", "Engine type": "Turbojet or low-bypass turbofan depending on variant" },
-        performance: { "Cruise speed": "Approx. Mach 0.84", Range: "Approx. 6,000 to 10,000 km", "Service ceiling": "Around 42,000 ft" },
-        weights: { MTOW: "Up to about 151,000 kg" },
-        capacity: { Crew: "3 on early operations", Passengers: "Typically around 140 to 219" }
-      },
-      facts: ["One of the most important early jetliners", "Parent to many military and special mission derivatives"],
-      variants: ["707-120", "707-320", "E-3 Sentry derivative lineage", "KC-135 related family roots"]
-    },
-    "boeing-727": {
-      overview: "The 727 was designed for short and medium-haul routes, secondary airports, and conditions where a versatile trijet made commercial sense.",
-      design: "Its three-engine layout, rear stairs, and good runway performance made it especially adaptable.",
-      service: "The aircraft became a global short-haul icon and remained popular in cargo service long after passenger retirement.",
-      specs: {
-        dimensions: { Length: "Approx. 46.7 m", Wingspan: "Approx. 32.9 m", Height: "Approx. 10.4 m" },
-        powerplant: { Engines: "3", "Engine type": "Pratt & Whitney JT8D low-bypass turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.84", Range: "Approx. 4,000 to 4,500 km", "Service ceiling": "42,000 ft" },
-        weights: { MTOW: "Up to about 95,000 kg" },
-        capacity: { Crew: "3", Passengers: "Typically around 130 to 189" }
-      },
-      facts: ["Classic trijet for domestic and medium-haul use", "Excellent field performance helped it serve smaller airports"],
-      variants: ["727-100", "727-200"]
-    },
-    "boeing-737-800": {
-      overview: "The 737-800 is one of the most common modern airliners and a core aircraft for both low-cost and network carriers.",
-      design: "As part of the Next Generation 737 family, it stretched the 737 platform into a high-volume, highly flexible airline workhorse.",
-      service: "It is used on everything from hour-long sectors to medium-haul international flying.",
-      specs: {
-        dimensions: { Length: "39.5 m", Wingspan: "35.8 m", Height: "12.5 m" },
-        powerplant: { Engines: "2", "Engine type": "CFM56-7B turbofan" },
-        performance: { "Cruise speed": "Mach 0.785", Range: "Approx. 5,400 km", "Service ceiling": "41,000 ft" },
-        weights: { MTOW: "Up to about 79,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 162 to 189" }
-      },
-      facts: ["One of the most widely used airliners ever", "Key model for both low-cost and legacy carriers"],
-      variants: ["737-700", "737-800", "737-900ER"]
-    },
-    "boeing-737-max": {
-      overview: "The 737 MAX 8 updates Boeing's best-known narrowbody line with new engines, aerodynamic tweaks, and revised systems.",
-      design: "It retains family continuity with earlier 737 generations while introducing higher-efficiency powerplants and modernized systems integration.",
-      service: "The MAX 8 targets airlines that want a familiar narrowbody with lower fuel burn on short and medium-haul routes.",
-      specs: {
-        dimensions: { Length: "39.5 m", Wingspan: "35.9 m", Height: "12.3 m" },
-        powerplant: { Engines: "2", "Engine type": "CFM LEAP-1B turbofan" },
-        performance: { "Cruise speed": "Mach 0.79", Range: "Approx. 6,570 km", "Service ceiling": "41,000 ft" },
-        weights: { MTOW: "Up to about 82,190 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 162 to 178, up to 210 in dense layout" }
-      },
-      facts: ["Re-engined successor to the 737NG core models", "Designed to compete directly with the A320neo family"],
-      variants: ["737 MAX 7", "737 MAX 8", "737 MAX 9", "737 MAX 10"]
-    },
-    "boeing-747-400": {
-      overview: "The 747-400 is one of the most famous widebody airliners ever built and a defining symbol of long-haul aviation.",
-      design: "It refined the original 747 with updated engines, a glass cockpit, winglets, and improved range.",
-      service: "The type served major airlines worldwide in passenger and cargo forms and dominated intercontinental travel for years.",
-      specs: {
-        dimensions: { Length: "70.7 m", Wingspan: "64.4 m", Height: "19.4 m" },
-        powerplant: { Engines: "4", "Engine type": "High-bypass turbofan" },
-        performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 13,450 km", "Service ceiling": "45,100 ft" },
-        weights: { MTOW: "Up to about 396,900 kg" },
-        capacity: { Crew: "2", Passengers: "Typical around 416 to 524" }
-      },
-      facts: ["One of the most recognizable aircraft in aviation history", "The benchmark jumbo jet for decades"],
-      variants: ["747-400 passenger", "747-400F", "747-400M", "747-400ER"]
-    },
-    "boeing-747-8f": {
-      overview: "The 747-8 Freighter is the modern cargo-focused evolution of the 747 line and one of the largest freight aircraft in service.",
-      design: "It uses a stretched fuselage, revised wing, and newer engines derived in part from Dreamliner-era technology.",
-      service: "It is optimized for high-volume long-haul freight markets and outsized cargo capability.",
-      specs: {
-        dimensions: { Length: "76.3 m", Wingspan: "68.4 m", Height: "19.4 m" },
-        powerplant: { Engines: "4", "Engine type": "GEnx-2B turbofan" },
-        performance: { "Cruise speed": "Mach 0.855", Range: "Approx. 8,130 km with full payload", "Service ceiling": "43,100 ft" },
-        weights: { MTOW: "Approx. 447,700 kg" },
-        capacity: { Crew: "2", Payload: "Approx. 137 t class payload" }
-      },
-      facts: ["One of the largest dedicated freighters in service", "Carries the final major evolution of the 747 line"],
-      variants: ["747-8F", "747-8 Intercontinental"]
-    },
-    "boeing-757-200": {
-      overview: "The 757-200 is famous for pairing narrowbody economics with unusually strong takeoff performance and useful range.",
-      design: "It was built for medium-haul work but proved capable on hot-and-high operations, high-demand domestic flying, and long thinner sectors.",
-      service: "The type became especially beloved for transcontinental and some transatlantic operations.",
-      specs: {
-        dimensions: { Length: "47.3 m", Wingspan: "38.0 m", Height: "13.6 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce RB211 or Pratt & Whitney PW2000 turbofan" },
-        performance: { "Cruise speed": "Mach 0.80", Range: "Approx. 7,200 km", "Service ceiling": "42,000 ft" },
-        weights: { MTOW: "Up to about 115,700 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 178 to 239" }
-      },
-      facts: ["Known for excellent runway and climb performance", "Still highly valued on niche missions years after production ended"],
-      variants: ["757-200", "757-200F", "757-300"]
-    },
-    "boeing-767-300f": {
-      overview: "The 767 freighter line remains one of the most commercially important mid-size cargo families in global aviation.",
-      design: "It blends widebody cargo volume with twin-engine efficiency and manageable operating cost.",
-      service: "The 767 freighter is especially common in parcel and express networks.",
-      specs: {
-        dimensions: { Length: "54.9 m", Wingspan: "47.6 m", Height: "15.8 m" },
-        powerplant: { Engines: "2", "Engine type": "High-bypass turbofan" },
-        performance: { "Cruise speed": "Mach 0.80", Range: "Approx. 6,000 km with freight mission profile", "Service ceiling": "43,000 ft" },
-        weights: { MTOW: "Approx. 186,900 kg" },
-        capacity: { Crew: "2", Payload: "Approx. 52 to 58 t class" }
-      },
-      facts: ["One of the main express-freight aircraft families", "Has also remained relevant as a base for military derivatives"],
-      variants: ["767-300ER", "767-300F", "KC-46-derived lineage"]
-    },
-    "boeing-777-300er": {
-      overview: "The 777-300ER became a defining long-haul airliner thanks to its combination of size, range, reliability, and twin-engine economics.",
-      design: "It stretched the 777 family into a high-capacity long-haul flagship with powerful GE90 engines and excellent payload-range capability.",
-      service: "Many airlines built their long-haul premium networks around the 777-300ER.",
-      specs: {
-        dimensions: { Length: "73.9 m", Wingspan: "64.8 m", Height: "18.5 m" },
-        powerplant: { Engines: "2", "Engine type": "GE90-115B turbofan" },
-        performance: { "Cruise speed": "Mach 0.84", Range: "Approx. 13,650 km", "Service ceiling": "43,100 ft" },
-        weights: { MTOW: "Approx. 351,500 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 350 to 396" }
-      },
-      facts: ["One of the most commercially influential long-haul aircraft ever", "Known for strong economics on large international routes"],
-      variants: ["777-200ER", "777-300ER", "777F"]
-    },
-    "boeing-777-9": {
-      overview: "The 777-9 is Boeing's next-generation large twinjet aimed at very high-capacity long-haul flying.",
-      design: "It adds a new composite wing with folding tips, updated systems, and new GE9X engines to the 777 architecture.",
-      service: "The aircraft is intended for airlines that want high seat counts with modern long-haul efficiency.",
-      specs: {
-        dimensions: { Length: "76.7 m", Wingspan: "71.8 m unfolded", Height: "19.5 m" },
-        powerplant: { Engines: "2", "Engine type": "GE9X turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.84", Range: "Approx. 13,500 km", "Service ceiling": "43,100 ft" },
-        weights: { MTOW: "Approx. 351,500+ kg class" },
-        capacity: { Crew: "2", Passengers: "Typical 400+" }
-      },
-      facts: ["Folding wingtips are one of its signature features", "Targets the top end of high-capacity twin-engine flying"],
-      variants: ["777-8", "777-9", "777-8F"]
-    },
-    "boeing-787-8": {
-      overview: "The 787-8 launched the Dreamliner family and reshaped long-haul network planning by making thinner long-distance routes more viable.",
-      design: "It uses extensive composites, higher cabin humidity, larger windows, and efficient engines to improve economics and passenger comfort.",
-      service: "The 787-8 is often used on long routes where widebody demand is significant but not enormous.",
-      specs: {
-        dimensions: { Length: "56.7 m", Wingspan: "60.1 m", Height: "17.0 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Trent 1000 or GE GEnx turbofan" },
-        performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 13,620 km", "Service ceiling": "43,000 ft" },
-        weights: { MTOW: "Approx. 227,900 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 242 to 290" }
-      },
-      facts: ["Launched the Dreamliner family", "Known for composite structure and passenger-focused cabin improvements"],
-      variants: ["787-8", "787-9", "787-10"]
-    },
-    "boeing-787-9": {
-      overview: "The 787-9 is one of Boeing's most commercially important current widebodies and a key long-haul fleet type.",
-      design: "It stretches the Dreamliner concept to deliver more capacity while preserving the family's efficient long-range profile.",
-      service: "Airlines use the 787-9 on both premium intercontinental routes and thinner long-haul connections.",
-      specs: {
-        dimensions: { Length: "62.8 m", Wingspan: "60.1 m", Height: "17.0 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Trent 1000 or GE GEnx turbofan" },
-        performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 14,100 km", "Service ceiling": "43,000 ft" },
-        weights: { MTOW: "Approx. 254,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 280 to 320" }
-      },
-      facts: ["The commercial sweet spot of the Dreamliner family", "Widely used for both network and point-to-point long-haul service"],
-      variants: ["787-8", "787-9", "787-10"]
-    },
-    "boeing-787-10": {
-      overview: "The 787-10 is the highest-capacity Dreamliner and is optimized for routes that value seats and efficiency over maximum family range.",
-      design: "It stretches the family further while keeping the same basic airframe philosophy and systems architecture.",
-      service: "The 787-10 is especially attractive on dense regional and long-medium-haul routes.",
-      specs: {
-        dimensions: { Length: "68.3 m", Wingspan: "60.1 m", Height: "17.0 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Trent 1000 or GE GEnx turbofan" },
-        performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 11,900 km", "Service ceiling": "43,000 ft" },
-        weights: { MTOW: "Approx. 254,000 kg" },
-        capacity: { Crew: "2", Passengers: "Typical 318 to 336+" }
-      },
-      facts: ["Largest Dreamliner variant", "Best suited to routes that don't require the longest-range family capability"],
-      variants: ["787-8", "787-9", "787-10"]
-    },
-    "embraer-e175": {
-      overview: "The E175 is one of the most popular regional jets in service and a major driver of Embraer's airline success.",
-      design: "It blends a comfortable cabin, low wing loading, and efficient operations for regional networks.",
-      service: "The aircraft is especially common on high-frequency routes flown by regional partners of major airlines.",
-      specs: {
-        dimensions: { Length: "31.7 m", Wingspan: "26.0 m", Height: "9.7 m" },
-        powerplant: { Engines: "2", "Engine type": "GE CF34-8E turbofan" },
-        performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 3,700 km", "Service ceiling": "41,000 ft" },
-        weights: { MTOW: "Approx. 38,790 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 76 to 88" }
-      },
-      facts: ["One of the most commercially successful regional jets", "Highly popular in North American feeder networks"],
-      variants: ["E170", "E175", "E190", "E195"]
-    },
-    "embraer-e195-e2": {
-      overview: "The E195-E2 is the largest and most advanced member of Embraer's E2 family.",
-      design: "It adds a new wing, newer engines, and updated systems to improve fuel burn, range, and maintenance efficiency.",
-      service: "It sits between classic regional jets and larger narrowbodies, ideal for thinner mainline routes.",
-      specs: {
-        dimensions: { Length: "41.5 m", Wingspan: "35.1 m", Height: "10.9 m" },
-        powerplant: { Engines: "2", "Engine type": "Pratt & Whitney PW1900G geared turbofan" },
-        performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 4,800 to 5,300 km", "Service ceiling": "41,000 ft" },
-        weights: { MTOW: "Approx. 61,500 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 120 to 146" }
-      },
-      facts: ["Largest E2 family member", "Competes at the lower edge of mainline narrowbody capacity"],
-      variants: ["E175-E2", "E190-E2", "E195-E2"]
-    },
-    "embraer-kc390": {
-      overview: "The KC-390 Millennium is Embraer's jet-powered tactical airlift and tanker aircraft.",
-      design: "It uses a swept wing, high-mounted tail, rear cargo ramp, and modern avionics to deliver cargo capability with higher speed than many turboprop competitors.",
-      service: "It is designed for transport, aerial refueling, paratroop operations, medevac, and humanitarian relief.",
-      specs: {
-        dimensions: { Length: "35.2 m", Wingspan: "35.0 m", Height: "11.8 m" },
-        powerplant: { Engines: "2", "Engine type": "IAE V2500-E5 turbofan" },
-        performance: { "Cruise speed": "Approx. 870 km/h", Range: "Approx. 2,800 km with full payload, farther on lighter missions", "Service ceiling": "36,000 ft" },
-        weights: { MTOW: "Approx. 87,000 kg" },
-        capacity: { Crew: "2", Payload: "Approx. 26 t class" }
-      },
-      facts: ["Jet tactical airlifter", "Combines transport and tanker roles in a single platform"],
-      variants: ["KC-390 Millennium"]
-    },
-    "bombardier-crj900": {
-      overview: "The CRJ900 stretched the CRJ concept into a larger regional jet that became extremely common in feeder networks.",
-      design: "It preserves the narrow fuselage and rear-engine layout of the CRJ family while adding more seats and improved economics.",
-      service: "The type became a familiar sight in North American regional airline operations.",
-      specs: {
-        dimensions: { Length: "36.4 m", Wingspan: "24.9 m", Height: "7.5 m" },
-        powerplant: { Engines: "2", "Engine type": "GE CF34-8C turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.78", Range: "Approx. 2,900 km", "Service ceiling": "41,000 ft" },
-        weights: { MTOW: "Approx. 38,300 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 76 to 90" }
-      },
-      facts: ["One of the most familiar regional jets", "Rear-engine layout gives the cabin a distinctive feel"],
-      variants: ["CRJ700", "CRJ900", "CRJ1000"]
-    },
-    "bombardier-q400": {
-      overview: "The Q400 pushed turboprop regional flying toward higher speed without giving up the economics that make turboprops attractive.",
-      design: "It combines a large propeller-driven wing, active noise and vibration management, and a long fuselage for higher capacity.",
-      service: "Operators use the Q400 on regional sectors where fuel burn matters but block time still needs to stay competitive.",
-      specs: {
-        dimensions: { Length: "32.8 m", Wingspan: "28.4 m", Height: "8.4 m" },
-        powerplant: { Engines: "2", "Engine type": "Pratt & Whitney Canada PW150A turboprop" },
-        performance: { "Cruise speed": "Approx. 660 km/h", Range: "Approx. 2,000 km", "Service ceiling": "25,000 ft" },
-        weights: { MTOW: "Approx. 29,260 kg" },
-        capacity: { Crew: "2", Passengers: "Typically 68 to 90" }
-      },
-      facts: ["Fast regional turboprop", "Well known for balancing efficiency and schedule competitiveness"],
-      variants: ["Q400"]
-    },
-    "bombardier-global-7500": {
-      overview: "The Global 7500 sits at the very top of modern business aviation and emphasizes exceptional range and cabin size.",
-      design: "It combines a very large four-zone cabin, advanced wing design, and high-speed cruise capability.",
-      service: "The aircraft is used on premium nonstop intercontinental corporate missions.",
-      specs: {
-        dimensions: { Length: "33.8 m", Wingspan: "31.8 m", Height: "8.1 m" },
-        powerplant: { Engines: "2", "Engine type": "GE Passport turbofan" },
-        performance: { "Cruise speed": "Up to Mach 0.925", Range: "Approx. 14,260 km", "Service ceiling": "51,000 ft" },
-        weights: { MTOW: "Approx. 52,100 kg" },
-        capacity: { Crew: "2 to 4", Passengers: "Typically up to 19" }
-      },
-      facts: ["One of the longest-range business jets in service", "A benchmark aircraft in ultra-long-range corporate travel"],
-      variants: ["Global 7500", "Global 8000 lineage"]
-    },
-    "cessna-172": {
-      overview: "The Cessna 172 Skyhawk is one of the most famous light aircraft ever built and a worldwide training standard.",
-      design: "Its high wing, forgiving handling, and simple operating philosophy made it ideal for training and private ownership.",
-      service: "It is used by flying schools, clubs, personal owners, and utility operators around the world.",
-      specs: {
-        dimensions: { Length: "8.3 m", Wingspan: "11.0 m", Height: "2.7 m" },
-        powerplant: { Engines: "1", "Engine type": "Lycoming piston engine" },
-        performance: { "Cruise speed": "Approx. 226 km/h", Range: "Approx. 1,180 km", "Service ceiling": "14,000 ft" },
-        weights: { MTOW: "Approx. 1,157 kg" },
-        capacity: { Crew: "1", Passengers: "Up to 3 more occupants" }
-      },
-      facts: ["One of the most produced aircraft in history", "A major gateway aircraft for pilot training"],
-      variants: ["172 classic line", "172S Skyhawk"]
-    },
-    "cessna-caravan": {
-      overview: "The Caravan is a famous single-engine turboprop utility aircraft used for everything from bush flying to package freight.",
-      design: "It uses a fixed landing gear, spacious cabin, and tough airframe to support demanding utility missions.",
-      service: "Operators use it for passengers, cargo, skydiving, humanitarian flying, and remote air service.",
-      specs: {
-        dimensions: { Length: "12.7 m", Wingspan: "15.9 m", Height: "4.5 m" },
-        powerplant: { Engines: "1", "Engine type": "Pratt & Whitney Canada PT6A turboprop" },
-        performance: { "Cruise speed": "Approx. 340 km/h", Range: "Approx. 1,700 km", "Service ceiling": "25,000 ft" },
-        weights: { MTOW: "Approx. 3,970 kg to 3,995 kg class depending on model" },
-        capacity: { Crew: "1 or 2", Passengers: "Typically up to 9 to 14 depending on layout and rules" }
-      },
-      facts: ["One of the best-known utility turboprops ever built", "Used heavily in cargo and remote service missions"],
-      variants: ["208 Caravan", "208B Grand Caravan", "EX line"]
-    },
-    "cessna-longitude": {
-      overview: "The Citation Longitude is one of Cessna's most capable business jets, aimed at the super-midsize market.",
-      design: "It pairs a stand-up cabin with long range, modern avionics, and a clean-sheet aerodynamic profile in its class.",
-      service: "The jet is meant for premium coast-to-coast and transcontinental business flying.",
-      specs: {
-        dimensions: { Length: "22.3 m", Wingspan: "21.0 m", Height: "6.2 m" },
-        powerplant: { Engines: "2", "Engine type": "Honeywell HTF7700L turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.84", Range: "Approx. 6,500 km", "Service ceiling": "45,000 ft" },
-        weights: { MTOW: "Approx. 17,900 kg" },
-        capacity: { Crew: "2", Passengers: "Typically up to 12" }
-      },
-      facts: ["Cessna's super-midsize flagship", "Targets long-range business travel with a quieter cabin and modern flight deck"],
-      variants: ["Citation Longitude"]
-    },
-    "gulfstream-g650er": {
-      overview: "The G650ER became a benchmark ultra-long-range business jet and is associated with top-tier global business travel.",
-      design: "It combines a very high-speed cruise, long slender wing, large cabin, and long range in one platform.",
-      service: "Its missions are centered on nonstop intercontinental travel with premium comfort and speed.",
-      specs: {
-        dimensions: { Length: "30.4 m", Wingspan: "30.4 m", Height: "7.8 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce BR725 turbofan" },
-        performance: { "Cruise speed": "Up to Mach 0.925", Range: "Approx. 13,900 km", "Service ceiling": "51,000 ft" },
-        weights: { MTOW: "Approx. 45,200 kg" },
-        capacity: { Crew: "2 to 4", Passengers: "Typically up to 19" }
-      },
-      facts: ["A defining ultra-long-range business jet", "Known for both speed and range leadership"],
-      variants: ["G650", "G650ER"]
-    },
-    "gulfstream-g700": {
-      overview: "The G700 represents Gulfstream's modern flagship philosophy with a very large cabin and exceptional range.",
-      design: "It uses a large-cabin fuselage, new wing architecture, and efficient high-speed engines to maximize premium long-range capability.",
-      service: "The aircraft is aimed at the most demanding business aviation missions in the market.",
-      specs: {
-        dimensions: { Length: "33.5 m", Wingspan: "31.4 m", Height: "7.8 m" },
-        powerplant: { Engines: "2", "Engine type": "Rolls-Royce Pearl 700 turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.90, max Mach 0.935", Range: "Approx. 13,900 km", "Service ceiling": "51,000 ft" },
-        weights: { MTOW: "Approx. 48,200 kg" },
-        capacity: { Crew: "2 to 4", Passengers: "Typically up to 19" }
-      },
-      facts: ["Current flagship-class Gulfstream", "Known for a huge cabin and long-range performance"],
-      variants: ["G700", "G800 family connection"]
-    },
-    "lockheed-f16v": {
-      overview: "The F-16V is the latest major evolution of one of the world's most successful multirole fighters.",
-      design: "It builds on the lightweight F-16 concept with advanced avionics, radar, and systems upgrades.",
-      service: "The platform is still central to many air forces for air defense, multirole strike, and training progression.",
-      specs: {
-        dimensions: { Length: "15.0 m", Wingspan: "9.96 m", Height: "4.9 m" },
-        powerplant: { Engines: "1", "Engine type": "Afterburning turbofan" },
-        performance: { "Max speed": "Approx. Mach 2.0", Range: "Ferry range roughly 4,200 km with tanks", "Service ceiling": "50,000+ ft" },
-        weights: { MTOW: "Approx. 19,000 kg class" },
-        capacity: { Crew: "1 or 2 depending on configuration" }
-      },
-      facts: ["One of the most successful fighters in aviation history", "F-16V adds major avionics modernization"],
-      variants: ["Single-seat and two-seat F-16 variants", "V-standard upgrades"]
-    },
-    "lockheed-f22": {
-      overview: "The F-22 Raptor is a fifth-generation air superiority fighter optimized for stealth, supercruise, and high-end air combat.",
-      design: "It combines low observability, thrust-vectoring performance, and advanced sensor integration.",
-      service: "The aircraft is focused on securing air dominance in contested environments.",
-      specs: {
-        dimensions: { Length: "18.9 m", Wingspan: "13.6 m", Height: "5.1 m" },
-        powerplant: { Engines: "2", "Engine type": "Pratt & Whitney F119 afterburning turbofan" },
-        performance: { "Max speed": "Approx. Mach 2.0+", Range: "Approx. 3,000 km ferry class", "Service ceiling": "65,000 ft" },
-        weights: { MTOW: "Approx. 38,000 kg" },
-        capacity: { Crew: "1" }
-      },
-      facts: ["Stealth air-dominance specialist", "Known for supercruise and thrust-vector agility"],
-      variants: ["F-22A"]
-    },
-    "lockheed-f35a": {
-      overview: "The F-35A is the conventional-takeoff member of the Joint Strike Fighter family and one of the most complex combat aircraft in service.",
-      design: "It centers on stealth shaping, sensor fusion, software-driven capability, and multi-role mission flexibility.",
-      service: "The aircraft is used by allied air forces for strike, air defense, and data-rich networked missions.",
-      specs: {
-        dimensions: { Length: "15.7 m", Wingspan: "10.7 m", Height: "4.4 m" },
-        powerplant: { Engines: "1", "Engine type": "Pratt & Whitney F135 afterburning turbofan" },
-        performance: { "Max speed": "Approx. Mach 1.6", Range: "Approx. 2,200 km class", "Service ceiling": "50,000+ ft" },
-        weights: { MTOW: "Approx. 31,800 kg" },
-        capacity: { Crew: "1" }
-      },
-      facts: ["Centers on sensor fusion as much as raw performance", "The most widely exported fifth-generation fighter family"],
-      variants: ["F-35A", "F-35B", "F-35C"]
-    },
-    "lockheed-c130j": {
-      overview: "The C-130J Super Hercules is the modernized version of one of the most versatile tactical airlifters ever built.",
-      design: "It updates the Hercules concept with new turboprops, six-bladed propellers, digital avionics, and improved performance.",
-      service: "The aircraft supports transport, tanker, special operations, medevac, firefighting, and humanitarian missions.",
-      specs: {
-        dimensions: { Length: "29.8 m", Wingspan: "40.4 m", Height: "11.9 m" },
-        powerplant: { Engines: "4", "Engine type": "Rolls-Royce AE 2100D3 turboprop" },
-        performance: { "Cruise speed": "Approx. 670 km/h", Range: "Approx. 3,300 km with useful payload", "Service ceiling": "28,000 ft+" },
-        weights: { MTOW: "Approx. 74,400 kg" },
-        capacity: { Crew: "Usually 2 to 5 depending on mission", Payload: "Approx. 20 t class" }
-      },
-      facts: ["One of the most versatile military aircraft families ever", "Used for far more than standard cargo airlift"],
-      variants: ["C-130J-30", "KC-130J", "MC-130J", "AC-130J"]
-    },
-    "northrop-b2": {
-      overview: "The B-2 Spirit is a flying-wing stealth bomber built for long-range penetration and strategic strike.",
-      design: "Its tailless flying wing reduces radar signature and supports long-duration missions with large internal payload volume.",
-      service: "The B-2 is designed for strategic missions in highly defended airspace.",
-      specs: {
-        dimensions: { Length: "21.0 m", Wingspan: "52.4 m", Height: "5.2 m" },
-        powerplant: { Engines: "4", "Engine type": "General Electric F118 turbofan" },
-        performance: { "Cruise speed": "High subsonic", Range: "Intercontinental with refueling support", "Service ceiling": "50,000 ft class" },
-        weights: { MTOW: "Approx. 170,600 kg" },
-        capacity: { Crew: "2", Payload: "Internal strategic weapons load" }
-      },
-      facts: ["One of the most distinctive aircraft ever built", "Flying-wing design optimized for low observability"],
-      variants: ["B-2 Spirit"]
-    },
-    "northrop-b21": {
-      overview: "The B-21 Raider is the next-generation American stealth bomber intended to succeed aging strategic strike platforms.",
-      design: "It follows a flying-wing stealth approach with a stronger emphasis on adaptability, digital sustainment, and future mission growth.",
-      service: "The aircraft is intended for long-range strike in contested environments over decades of future service.",
-      specs: {
-        dimensions: { Length: "Not fully public", Wingspan: "Not fully public", Height: "Not fully public" },
-        powerplant: { Engines: "Undisclosed", "Engine type": "Stealth bomber turbofan configuration" },
-        performance: { "Cruise speed": "Undisclosed high-subsonic class", Range: "Long-range strategic mission", "Service ceiling": "Undisclosed" },
-        weights: { MTOW: "Undisclosed" },
-        capacity: { Crew: "Expected 2", Payload: "Strategic internal load" }
-      },
-      facts: ["Future strategic stealth bomber", "Aims for maintainability and long-term growth as well as stealth"],
-      variants: ["B-21 Raider"]
-    },
-    "dassault-rafale-f4": {
-      overview: "The Rafale is Dassault's omnirole fighter, designed to cover air-to-air, strike, reconnaissance, and naval missions in one family.",
-      design: "It combines a delta-canard layout with advanced sensors, data links, and continuous software modernization.",
-      service: "It is used as both a land-based and carrier-capable fighter.",
-      specs: {
-        dimensions: { Length: "15.3 m", Wingspan: "10.9 m", Height: "5.3 m" },
-        powerplant: { Engines: "2", "Engine type": "Safran M88 afterburning turbofan" },
-        performance: { "Max speed": "Approx. Mach 1.8", Range: "Ferry range around 3,700 km class", "Service ceiling": "50,000+ ft" },
-        weights: { MTOW: "Approx. 24,500 kg" },
-        capacity: { Crew: "1 or 2 depending on version" }
-      },
-      facts: ["True multi-role design with strong naval integration", "F4 standard is a major software and systems step"],
-      variants: ["Rafale C", "Rafale B", "Rafale M", "F4 standard"]
-    },
-    "dassault-falcon-8x": {
-      overview: "The Falcon 8X is Dassault's long-range tri-jet business aircraft with strong runway flexibility and premium comfort.",
-      design: "It combines a long-range swept wing with three engines and a highly customizable intercontinental cabin.",
-      service: "It is used for premium long-range corporate missions and specialized government transport.",
-      specs: {
-        dimensions: { Length: "24.5 m", Wingspan: "26.2 m", Height: "7.9 m" },
-        powerplant: { Engines: "3", "Engine type": "Pratt & Whitney Canada PW307D turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.90", Range: "Approx. 11,900 km", "Service ceiling": "51,000 ft" },
-        weights: { MTOW: "Approx. 33,100 kg" },
-        capacity: { Crew: "2 to 3", Passengers: "Typically up to 16" }
-      },
-      facts: ["Tri-jet business jet", "Known for long range and airport flexibility"],
-      variants: ["Falcon 7X", "Falcon 8X", "Falcon 10X lineage"]
-    },
-    "mdd-dc10": {
-      overview: "The DC-10 was one of the best-known widebody trijets of the classic long-haul airline era.",
-      design: "Its trijet layout balanced long-range needs, airport compatibility, and then-current engine and certification realities.",
-      service: "The aircraft served airlines, freighter operators, military users, and tanker derivatives.",
-      specs: {
-        dimensions: { Length: "Approx. 55.5 m", Wingspan: "Approx. 50.4 m", Height: "Approx. 17.7 m" },
-        powerplant: { Engines: "3", "Engine type": "High-bypass turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.84", Range: "Approx. 6,000 to 10,000+ km depending on series", "Service ceiling": "42,000 ft" },
-        weights: { MTOW: "Up to about 263,000 kg class" },
-        capacity: { Crew: "3 on early generations", Passengers: "Typically around 250 to 380" }
-      },
-      facts: ["One of the defining classic trijets", "Later became an important tanker and freighter platform"],
-      variants: ["DC-10-10", "DC-10-30", "MD-10 conversion line", "KC-10 derivative"]
-    },
-    "mdd-md11": {
-      overview: "The MD-11 was the final major commercial trijet and is especially remembered today in cargo service.",
-      design: "It refined the DC-10 concept with updated aerodynamics, a glass cockpit, and more range.",
-      service: "Passenger service declined earlier than hoped, but freight operators kept the type highly visible for years.",
-      specs: {
-        dimensions: { Length: "61.2 m", Wingspan: "51.7 m", Height: "17.6 m" },
-        powerplant: { Engines: "3", "Engine type": "High-bypass turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.86", Range: "Approx. 12,000+ km passenger mission class", "Service ceiling": "43,000 ft" },
-        weights: { MTOW: "Approx. 286,000 kg class" },
-        capacity: { Crew: "2", Passengers: "Typical 285 to 410" }
-      },
-      facts: ["The last major commercial trijet", "Highly visible in cargo operations after passenger retirement"],
-      variants: ["MD-11", "MD-11F", "MD-11C"]
-    },
-    "mdd-md80": {
-      overview: "The MD-80 family was one of the most familiar short-haul jets of the late 20th century.",
-      design: "It retained the rear-engine T-tail philosophy of earlier Douglas narrowbodies while improving range, efficiency, and capacity.",
-      service: "The aircraft became a domestic fleet backbone for several major airlines.",
-      specs: {
-        dimensions: { Length: "Approx. 45.1 m", Wingspan: "32.9 m", Height: "9.1 m" },
-        powerplant: { Engines: "2", "Engine type": "Pratt & Whitney JT8D turbofan" },
-        performance: { "Cruise speed": "Approx. Mach 0.76", Range: "Approx. 2,900 to 4,600 km depending on series", "Service ceiling": "37,000 ft" },
-        weights: { MTOW: "Up to about 72,500 kg class" },
-        capacity: { Crew: "2", Passengers: "Typically 130 to 172" }
-      },
-      facts: ["A major domestic workhorse in the United States and elsewhere", "Known for its rear-engine narrowbody profile"],
-      variants: ["MD-81", "MD-82", "MD-83", "MD-88", "MD-90 lineage"]
+  function mergeSpecs(baseSpecs, overrideSpecs, powerplantSpecs) {
+    const merged = {};
+    ["dimensions", "powerplant", "performance", "weights", "capacity"].forEach((group) => {
+      const value =
+        group === "powerplant"
+          ? powerplantSpecs
+          : {
+              ...(baseSpecs[group] || {}),
+              ...((overrideSpecs && overrideSpecs[group]) || {})
+            };
+
+      if (value && Object.keys(value).length > 0) {
+        merged[group] = value;
+      }
+    });
+    return merged;
+  }
+
+  function buildPowerplantSummary(aircraft) {
+    const engine = engineProfiles[aircraft.id];
+    if (!engine) {
+      return {
+        Engines: "Program dependent",
+        "Engine manufacturer": "Program dependent",
+        "Engine model": "Program dependent",
+        "Engine type": "Program dependent"
+      };
     }
-  };
+    return engine;
+  }
+
+  function buildFallbackDetail(aircraft, manufacturer) {
+    const engine = buildPowerplantSummary(aircraft);
+    const classProfile = technicalProfilesByClass[aircraft.class] || technicalProfilesByClass.Experimental;
+    const specOverride = specOverrides[aircraft.id] || {};
+    const powerplantLine = `${engine["Engine manufacturer"]} ${engine["Engine model"]} (${engine["Engine type"]})`;
+    const extraNote = detailNotes[aircraft.id] ? ` ${detailNotes[aircraft.id]}` : "";
+
+    return {
+      overview: `${aircraft.overview} The ${aircraft.name} is a ${aircraft.type.toLowerCase()} developed by ${manufacturer.name} and placed in the ${aircraft.class.toLowerCase()} category of the wiki. It first flew in ${aircraft.firstFlight} and is grouped in the ${aircraft.timeline.toLowerCase()} because it fits into ${timelineDescriptions[aircraft.timeline]}.${extraNote}`,
+      design: `From a technical point of view, ${aircraft.name} is powered by ${powerplantLine}. That powerplant choice supports ${classDesignFocus[aircraft.class] || "its intended mission profile"}. In manufacturer terms, the program also reflects ${manufacturer.name}'s wider focus on ${manufacturer.aircraftFocus.join(", ")} and shows how the company approached this part of the market or mission set.`,
+      service: `${aircraft.name} is listed here as a ${aircraft.programState.toLowerCase()}. In operational terms, aircraft in this category are normally associated with ${classServiceFocus[aircraft.class] || "specialized aviation work"}. Within ${manufacturer.name}'s catalog, it stands out as a ${aircraft.type.toLowerCase()} that helps explain the manufacturer's role inside ${manufacturer.category.toLowerCase()}.`,
+      specs: mergeSpecs(classProfile, specOverride, buildPowerplantSummary(aircraft)),
+      facts: [
+        `Manufacturer: ${manufacturer.name}`,
+        `Country or region: ${manufacturer.country}`,
+        `First flight: ${aircraft.firstFlight}`,
+        `Aircraft class: ${aircraft.class}`,
+        `Program state: ${aircraft.programState}`,
+        `Engine manufacturer: ${engine["Engine manufacturer"]}`,
+        `Engine model: ${engine["Engine model"]}`
+      ],
+      variants: defaultVariantNotesByClass[aircraft.class] || ["Variant coverage can be expanded as the wiki grows."],
+      notableOperators: defaultOperatorNotesByClass[aircraft.class] || ["Operator examples can be added program-by-program."]
+    };
+  }
+
+  const manufacturers = rawManufacturers.map((manufacturer) => ({
+    ...manufacturer,
+    aircraft: manufacturer.aircraft.map((aircraft) => ({
+      ...aircraft,
+      detail: buildFallbackDetail(aircraft, manufacturer)
+    }))
+  }));
 
   const historyMilestones = [
     { year: "1783", era: "Lighter-Than-Air Dawn", title: "Montgolfier Balloon Flight", summary: "Human aviation begins with the first crewed hot-air balloon ascents.", highlight: "The dream of flight becomes visible." },
@@ -1239,60 +719,6 @@ window.AviationData = (() => {
     { title: "Autonomous Assistance", tag: "Software Layer", summary: "Flight decks will likely gain more predictive assistance before full autonomy becomes realistic." },
     { title: "Regional Electrification", tag: "Short-Haul Labs", summary: "Training and short-hop aircraft are likely to be early proving grounds for electric propulsion." }
   ];
-
-  function mergeSpecs(baseSpecs, overrideSpecs) {
-    const merged = {};
-    ["dimensions", "powerplant", "performance", "weights", "capacity"].forEach((group) => {
-      if (baseSpecs[group] || (overrideSpecs && overrideSpecs[group])) {
-        merged[group] = {
-          ...(baseSpecs[group] || {}),
-          ...((overrideSpecs && overrideSpecs[group]) || {})
-        };
-      }
-    });
-    return merged;
-  }
-
-  function buildFallbackArticle(aircraft, manufacturer) {
-    const classProfile = technicalProfilesByClass[aircraft.class] || technicalProfilesByClass.Experimental;
-    return {
-      overview: `${aircraft.name} is featured here as a ${aircraft.type.toLowerCase()} from ${manufacturer.name}. This page surfaces the main role, design context, and technical profile for quick comparison across the aviation wiki.`,
-      design: `${manufacturer.name} positions this aircraft within the ${aircraft.class.toLowerCase()} space. The program is associated with the ${aircraft.timeline.toLowerCase()} and reflects the company's approach to mission, efficiency, and systems integration.`,
-      service: `In service terms, ${aircraft.name} fits the ${aircraft.programState.toLowerCase()} phase of the aviation catalog. Operators and exact mission details can vary by version, but the aircraft sits clearly inside the ${aircraft.class.toLowerCase()} category.`,
-      specs: classProfile,
-      facts: [
-        `Manufacturer: ${manufacturer.name}`,
-        `Aircraft class: ${aircraft.class}`,
-        `Timeline band: ${aircraft.timeline}`,
-        `Program state: ${aircraft.programState}`
-      ],
-      variants: ["Variant details can be expanded further for this program."],
-      notableOperators: ["Operator examples can be added program-by-program as the wiki grows."]
-    };
-  }
-
-  function enrichAircraft(aircraft, manufacturer) {
-    const fallback = buildFallbackArticle(aircraft, manufacturer);
-    const override = aircraftArticles[aircraft.id] || {};
-
-    return {
-      ...aircraft,
-      detail: {
-        overview: override.overview || fallback.overview,
-        design: override.design || fallback.design,
-        service: override.service || fallback.service,
-        specs: mergeSpecs(fallback.specs, override.specs || {}),
-        facts: override.facts || fallback.facts,
-        variants: override.variants || fallback.variants,
-        notableOperators: override.notableOperators || fallback.notableOperators
-      }
-    };
-  }
-
-  const manufacturers = rawManufacturers.map((manufacturer) => ({
-    ...manufacturer,
-    aircraft: manufacturer.aircraft.map((aircraft) => enrichAircraft(aircraft, manufacturer))
-  }));
 
   const allAircraft = manufacturers.flatMap((manufacturer) =>
     manufacturer.aircraft.map((aircraft) => ({
