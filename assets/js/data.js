@@ -51,6 +51,76 @@ window.AviationData = (() => {
           overview: "Originally developed as the C Series, the A220 covers the 100 to 150 seat market with efficient engines and a modern cabin."
         },
         {
+          id: "airbus-a300",
+          name: "A300",
+          firstFlight: "1972",
+          timeline: "Jet Age",
+          type: "Widebody airliner",
+          class: "Commercial Jet",
+          programState: "Historic icon",
+          overview: "The A300 was the world's first twin-engine widebody airliner and launched Airbus into the mainline market."
+        },
+        {
+          id: "airbus-a310",
+          name: "A310",
+          firstFlight: "1982",
+          timeline: "Jet Age",
+          type: "Widebody airliner",
+          class: "Commercial Jet",
+          programState: "Legacy icon",
+          overview: "The A310 shortened the A300 concept into a medium-to-long-haul widebody used by airlines, cargo operators, and governments."
+        },
+        {
+          id: "airbus-a318",
+          name: "A318",
+          firstFlight: "2002",
+          timeline: "Digital Age",
+          type: "Short narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Legacy program",
+          overview: "The A318 was the smallest A320-family variant and served niche airline and special mission roles."
+        },
+        {
+          id: "airbus-a319",
+          name: "A319",
+          firstFlight: "1995",
+          timeline: "Digital Age",
+          type: "Narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Long-running program",
+          overview: "The A319 became popular with airlines needing a slightly smaller A320-family aircraft with common crew and systems."
+        },
+        {
+          id: "airbus-a320",
+          name: "A320",
+          firstFlight: "1987",
+          timeline: "Jet Age",
+          type: "Narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Historic best-seller",
+          overview: "The A320 changed short-haul airline design with digital fly-by-wire controls and a highly scalable single-aisle platform."
+        },
+        {
+          id: "airbus-a320neo",
+          name: "A320neo",
+          firstFlight: "2014",
+          timeline: "Digital Age",
+          type: "Re-engined narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Current program",
+          overview: "The A320neo modernized Airbus's best-known family with more efficient engines and lower operating costs."
+        },
+        {
+          id: "airbus-a321",
+          name: "A321",
+          firstFlight: "1993",
+          timeline: "Jet Age",
+          type: "Stretched narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Core family program",
+          overview: "The A321 became one of the most commercially important single-aisle aircraft by combining capacity with strong economics."
+        },
+        {
           id: "airbus-a321xlr",
           name: "A321XLR",
           firstFlight: "2022",
@@ -61,6 +131,46 @@ window.AviationData = (() => {
           overview: "The A321XLR extends narrowbody reach into transatlantic and thin long-haul missions that used to require larger widebodies."
         },
         {
+          id: "airbus-a330-300",
+          name: "A330-300",
+          firstFlight: "1992",
+          timeline: "Jet Age",
+          type: "Widebody airliner",
+          class: "Commercial Jet",
+          programState: "Long-running program",
+          overview: "The A330-300 has been a flexible widebody for medium and long-haul operations, cargo conversion, and high-density routes."
+        },
+        {
+          id: "airbus-a330neo",
+          name: "A330-900neo",
+          firstFlight: "2017",
+          timeline: "Digital Age",
+          type: "Updated widebody airliner",
+          class: "Commercial Jet",
+          programState: "Current program",
+          overview: "The A330neo refreshes a familiar widebody platform with newer engines, aerodynamic improvements, and better fuel efficiency."
+        },
+        {
+          id: "airbus-a340-600",
+          name: "A340-600",
+          firstFlight: "2001",
+          timeline: "Digital Age",
+          type: "Long-range four-engine airliner",
+          class: "Commercial Jet",
+          programState: "Legacy icon",
+          overview: "The A340-600 represented Airbus's long-haul four-engine era before very large twinjets took over much of that market."
+        },
+        {
+          id: "airbus-a350-900",
+          name: "A350-900",
+          firstFlight: "2013",
+          timeline: "Digital Age",
+          type: "Widebody airliner",
+          class: "Commercial Jet",
+          programState: "Current program",
+          overview: "The A350-900 blends composites, advanced systems, and long-range economics into one of Airbus's flagship aircraft."
+        },
+        {
           id: "airbus-a350-1000",
           name: "A350-1000",
           firstFlight: "2016",
@@ -68,7 +178,27 @@ window.AviationData = (() => {
           type: "Widebody airliner",
           class: "Commercial Jet",
           programState: "Current program",
-          overview: "Airbus built the A350 family around composite structure, efficient engines, and long-range airline economics."
+          overview: "The stretched A350-1000 serves high-capacity long-haul missions with strong range and efficiency."
+        },
+        {
+          id: "airbus-a380",
+          name: "A380",
+          firstFlight: "2005",
+          timeline: "Digital Age",
+          type: "Very large airliner",
+          class: "Commercial Jet",
+          programState: "Modern icon",
+          overview: "The A380 became aviation's best-known double-deck passenger jet and a symbol of the hub-and-spoke era."
+        },
+        {
+          id: "airbus-belugaxl",
+          name: "BelugaXL",
+          firstFlight: "2018",
+          timeline: "Digital Age",
+          type: "Oversize cargo transport",
+          class: "Commercial Jet",
+          programState: "Specialized fleet",
+          overview: "The BelugaXL is Airbus's unmistakable internal logistics aircraft, built to carry large fuselage and wing sections between factories."
         }
       ]
     },
@@ -83,14 +213,114 @@ window.AviationData = (() => {
       summary: "Boeing spans early aviation history through the modern jetliner era and remains one of the defining names in global aerospace.",
       aircraft: [
         {
-          id: "boeing-737-max",
-          name: "737 MAX",
-          firstFlight: "2016",
+          id: "boeing-707",
+          name: "707",
+          firstFlight: "1957",
+          timeline: "Jet Age",
+          type: "Early jet airliner",
+          class: "Commercial Jet",
+          programState: "Historic icon",
+          overview: "The 707 helped turn jet travel into a practical global airline model and established Boeing as a jetliner giant."
+        },
+        {
+          id: "boeing-727",
+          name: "727",
+          firstFlight: "1963",
+          timeline: "Jet Age",
+          type: "Trijet narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Historic icon",
+          overview: "The 727 became one of the most recognizable short-to-medium-haul jets of the classic airliner era."
+        },
+        {
+          id: "boeing-737-800",
+          name: "737-800",
+          firstFlight: "1997",
           timeline: "Digital Age",
           type: "Narrowbody airliner",
           class: "Commercial Jet",
+          programState: "Global airline staple",
+          overview: "The 737-800 became one of the most widely used airline aircraft in the world thanks to its size and route flexibility."
+        },
+        {
+          id: "boeing-737-max",
+          name: "737 MAX 8",
+          firstFlight: "2016",
+          timeline: "Digital Age",
+          type: "Updated narrowbody airliner",
+          class: "Commercial Jet",
           programState: "Current program",
           overview: "The 737 MAX continues Boeing's long-running narrowbody line with updated engines and revised systems."
+        },
+        {
+          id: "boeing-747-400",
+          name: "747-400",
+          firstFlight: "1988",
+          timeline: "Jet Age",
+          type: "Widebody jumbo jet",
+          class: "Commercial Jet",
+          programState: "Historic icon",
+          overview: "The 747-400 became one of the most famous long-haul aircraft ever built and defined the image of intercontinental travel."
+        },
+        {
+          id: "boeing-747-8f",
+          name: "747-8 Freighter",
+          firstFlight: "2010",
+          timeline: "Digital Age",
+          type: "Widebody cargo aircraft",
+          class: "Commercial Jet",
+          programState: "Cargo flagship",
+          overview: "The 747-8F carried Boeing's jumbo concept into the modern cargo world with updated aerodynamics and higher efficiency."
+        },
+        {
+          id: "boeing-757-200",
+          name: "757-200",
+          firstFlight: "1982",
+          timeline: "Jet Age",
+          type: "Medium-range narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Legacy icon",
+          overview: "The 757 combined strong runway performance and useful range, earning a loyal following among airlines and passengers."
+        },
+        {
+          id: "boeing-767-300f",
+          name: "767-300 Freighter",
+          firstFlight: "1995 freighter line",
+          timeline: "Digital Age",
+          type: "Widebody cargo aircraft",
+          class: "Commercial Jet",
+          programState: "Current cargo line",
+          overview: "The 767 freighter remains highly relevant in cargo networks and has become one of the most important mid-size freight aircraft."
+        },
+        {
+          id: "boeing-777-300er",
+          name: "777-300ER",
+          firstFlight: "2003",
+          timeline: "Digital Age",
+          type: "Long-range widebody airliner",
+          class: "Commercial Jet",
+          programState: "Long-haul icon",
+          overview: "The 777-300ER dominated premium long-haul airline planning for years with range, payload, and twin-engine efficiency."
+        },
+        {
+          id: "boeing-777-9",
+          name: "777-9",
+          firstFlight: "2020",
+          timeline: "Next Horizon",
+          type: "Next-generation widebody airliner",
+          class: "Commercial Jet",
+          programState: "Advanced development",
+          overview: "The 777-9 represents the next step in Boeing's large twinjet strategy, blending folding wingtips and updated long-range efficiency."
+        },
+        {
+          id: "boeing-787-8",
+          name: "787-8 Dreamliner",
+          firstFlight: "2009",
+          timeline: "Digital Age",
+          type: "Widebody airliner",
+          class: "Commercial Jet",
+          programState: "Current program",
+          overview: "The 787-8 launched Boeing's composite long-haul family and helped normalize thinner point-to-point long-distance routes."
         },
         {
           id: "boeing-787-9",
@@ -100,59 +330,119 @@ window.AviationData = (() => {
           type: "Widebody airliner",
           class: "Commercial Jet",
           programState: "Current program",
-          overview: "The 787 family pushed composite airliner construction into the mainstream and reshaped long-haul route planning."
+          overview: "The 787-9 became one of Boeing's most important widebodies by pairing long range with strong airline economics."
         },
         {
-          id: "boeing-777-9",
-          name: "777-9",
-          firstFlight: "2020",
-          timeline: "Next Horizon",
-          type: "Widebody airliner",
+          id: "boeing-787-10",
+          name: "787-10 Dreamliner",
+          firstFlight: "2017",
+          timeline: "Digital Age",
+          type: "Stretched widebody airliner",
           class: "Commercial Jet",
-          programState: "Advanced development",
-          overview: "The 777-9 represents the next step in Boeing's large twinjet strategy, blending folding wingtips and updated long-range efficiency."
+          programState: "Current program",
+          overview: "The 787-10 stretches the Dreamliner concept toward higher capacity while staying focused on efficient medium and long-haul work."
+        },
+        {
+          id: "boeing-p8",
+          name: "P-8 Poseidon",
+          firstFlight: "2009",
+          timeline: "Digital Age",
+          type: "Maritime patrol aircraft",
+          class: "ISR",
+          programState: "Current military derivative",
+          overview: "The P-8 shows how Boeing's commercial jet platforms can be adapted into advanced defense and surveillance roles."
         }
       ]
     },
     {
-      id: "atr",
-      name: "ATR",
-      country: "France / Italy",
-      founded: "1981",
+      id: "embraer",
+      name: "Embraer",
+      country: "Brazil",
+      founded: "1969",
       status: "Active",
       category: "Regional & Utility",
-      aircraftFocus: ["Regional Turboprop", "Short-haul", "Commuter"],
-      summary: "ATR focuses on fuel-efficient regional turboprops tailored for short sectors, small airports, and airline connectivity.",
+      aircraftFocus: ["Commercial Jet", "Regional jet", "Military Transport"],
+      summary: "Embraer blends regional jet leadership with business aviation and defense programs, giving it one of the broadest portfolios in aerospace.",
       aircraft: [
         {
-          id: "atr-42-600",
-          name: "ATR 42-600",
-          firstFlight: "2010",
-          timeline: "Digital Age",
-          type: "Regional turboprop",
+          id: "embraer-bandeirante",
+          name: "EMB 110 Bandeirante",
+          firstFlight: "1968",
+          timeline: "Jet Age",
+          type: "Twin turboprop regional aircraft",
           class: "Regional Turboprop",
-          programState: "Current program",
-          overview: "The ATR 42-600 is designed for lower-demand routes, flexible passenger layouts, and strong short-runway utility."
+          programState: "Historic regional aircraft",
+          overview: "The Bandeirante helped establish Embraer and became an early regional workhorse."
         },
         {
-          id: "atr-72-600",
-          name: "ATR 72-600",
-          firstFlight: "2009",
+          id: "embraer-erj145",
+          name: "ERJ 145",
+          firstFlight: "1995",
           timeline: "Digital Age",
-          type: "Regional turboprop",
-          class: "Regional Turboprop",
-          programState: "Current program",
-          overview: "ATR's 72-seat flagship is a workhorse on regional networks where low fuel burn and field performance matter most."
+          type: "Regional jet",
+          class: "Commercial Jet",
+          programState: "Historic regional jet",
+          overview: "The ERJ 145 became one of the best-known 50-seat regional jets and a familiar sight worldwide."
         },
         {
-          id: "atr-evo",
-          name: "ATR EVO",
-          firstFlight: "2030s",
-          timeline: "Next Horizon",
-          type: "Next-generation regional turboprop",
-          class: "Experimental",
-          programState: "Future direction",
-          overview: "ATR EVO represents the company's future-facing path toward hybridized systems, lower emissions, and updated regional operations."
+          id: "embraer-e170",
+          name: "E170",
+          firstFlight: "2002",
+          timeline: "Digital Age",
+          type: "Regional jet",
+          class: "Commercial Jet",
+          programState: "E-Jet family program",
+          overview: "The E170 launched the first-generation E-Jet family with a comfortable cabin and efficient short-haul performance."
+        },
+        {
+          id: "embraer-e175",
+          name: "E175",
+          firstFlight: "2003",
+          timeline: "Digital Age",
+          type: "Regional jet",
+          class: "Commercial Jet",
+          programState: "Current program",
+          overview: "The E175 became a staple of regional airline fleets thanks to its cabin comfort, economics, and network flexibility."
+        },
+        {
+          id: "embraer-e190",
+          name: "E190",
+          firstFlight: "2004",
+          timeline: "Digital Age",
+          type: "Small mainline jet",
+          class: "Commercial Jet",
+          programState: "Current family line",
+          overview: "The E190 moved Embraer further upmarket into mainline routes that needed less capacity than larger narrowbodies."
+        },
+        {
+          id: "embraer-e195-e2",
+          name: "E195-E2",
+          firstFlight: "2017",
+          timeline: "Digital Age",
+          type: "Regional jet / small mainline jet",
+          class: "Commercial Jet",
+          programState: "Current program",
+          overview: "The E2 generation modernized Embraer's commercial family with new wings, engines, and improved operating efficiency."
+        },
+        {
+          id: "embraer-kc390",
+          name: "KC-390 Millennium",
+          firstFlight: "2015",
+          timeline: "Digital Age",
+          type: "Tactical transport / tanker",
+          class: "Military Transport",
+          programState: "Current program",
+          overview: "The KC-390 extends Embraer into defense airlift with jet speed, multi-role flexibility, and cargo handling capability."
+        },
+        {
+          id: "embraer-super-tucano",
+          name: "A-29 Super Tucano",
+          firstFlight: "1999",
+          timeline: "Digital Age",
+          type: "Turboprop light attack and trainer",
+          class: "Trainer",
+          programState: "Current program",
+          overview: "The Super Tucano is one of Embraer's most successful military aircraft, widely used for training and light attack missions."
         }
       ]
     },
@@ -199,86 +489,44 @@ window.AviationData = (() => {
       ]
     },
     {
-      id: "embraer",
-      name: "Embraer",
-      country: "Brazil",
-      founded: "1969",
+      id: "atr",
+      name: "ATR",
+      country: "France / Italy",
+      founded: "1981",
       status: "Active",
       category: "Regional & Utility",
-      aircraftFocus: ["Commercial Jet", "Regional jet", "Military Transport"],
-      summary: "Embraer blends regional jet leadership with business aviation and defense programs, giving it one of the broadest portfolios in aerospace.",
+      aircraftFocus: ["Regional Turboprop", "Short-haul", "Commuter"],
+      summary: "ATR focuses on fuel-efficient regional turboprops tailored for short sectors, small airports, and airline connectivity.",
       aircraft: [
         {
-          id: "embraer-e175",
-          name: "E175",
-          firstFlight: "2003",
-          timeline: "Digital Age",
-          type: "Regional jet",
-          class: "Commercial Jet",
-          programState: "Current program",
-          overview: "The E175 became a staple of regional airline fleets thanks to its cabin comfort, economics, and network flexibility."
-        },
-        {
-          id: "embraer-e195-e2",
-          name: "E195-E2",
-          firstFlight: "2017",
-          timeline: "Digital Age",
-          type: "Regional jet / small mainline jet",
-          class: "Commercial Jet",
-          programState: "Current program",
-          overview: "The E2 generation modernized Embraer's commercial family with new wings, engines, and improved operating efficiency."
-        },
-        {
-          id: "embraer-kc390",
-          name: "KC-390 Millennium",
-          firstFlight: "2015",
-          timeline: "Digital Age",
-          type: "Tactical transport / tanker",
-          class: "Military Transport",
-          programState: "Current program",
-          overview: "The KC-390 extends Embraer into defense airlift with jet speed, multi-role flexibility, and cargo handling capability."
-        }
-      ]
-    },
-    {
-      id: "dehavilland-canada",
-      name: "De Havilland Canada",
-      country: "Canada",
-      founded: "1928",
-      status: "Active",
-      category: "Regional & Utility",
-      aircraftFocus: ["Regional Turboprop", "STOL utility", "Firefighting"],
-      summary: "De Havilland Canada is famous for rugged utility aircraft and regional turboprops designed for demanding environments.",
-      aircraft: [
-        {
-          id: "dhc-twin-otter",
-          name: "DHC-6 Twin Otter",
-          firstFlight: "1965",
-          timeline: "Jet Age",
-          type: "STOL utility aircraft",
-          class: "General Aviation",
-          programState: "Current program",
-          overview: "The Twin Otter is valued for short takeoff performance, remote operations, and dependable service on land, skis, or floats."
-        },
-        {
-          id: "dhc-dash-8-400",
-          name: "Dash 8-400",
-          firstFlight: "1998",
+          id: "atr-42-600",
+          name: "ATR 42-600",
+          firstFlight: "2010",
           timeline: "Digital Age",
           type: "Regional turboprop",
           class: "Regional Turboprop",
           programState: "Current program",
-          overview: "The Dash 8-400 pairs turboprop efficiency with higher speed, making it a versatile regional platform."
+          overview: "The ATR 42-600 is designed for lower-demand routes, flexible passenger layouts, and strong short-runway utility."
         },
         {
-          id: "dhc-515",
-          name: "DHC-515 Firefighter",
-          firstFlight: "Future",
+          id: "atr-72-600",
+          name: "ATR 72-600",
+          firstFlight: "2009",
+          timeline: "Digital Age",
+          type: "Regional turboprop",
+          class: "Regional Turboprop",
+          programState: "Current program",
+          overview: "ATR's 72-seat flagship is a workhorse on regional networks where low fuel burn and field performance matter most."
+        },
+        {
+          id: "atr-evo",
+          name: "ATR EVO",
+          firstFlight: "2030s",
           timeline: "Next Horizon",
-          type: "Amphibious aerial firefighter",
+          type: "Next-generation regional turboprop",
           class: "Experimental",
           programState: "Future direction",
-          overview: "The DHC-515 aims to modernize the aerial scooper role for wildfire response and public-service aviation."
+          overview: "ATR EVO represents the company's future-facing path toward hybridized systems, lower emissions, and updated regional operations."
         }
       ]
     },
@@ -293,6 +541,16 @@ window.AviationData = (() => {
       summary: "Bombardier evolved from regional airliners into a business-jet specialist known for long-range cabins and premium corporate aircraft.",
       aircraft: [
         {
+          id: "bombardier-crj200",
+          name: "CRJ200",
+          firstFlight: "1991",
+          timeline: "Digital Age",
+          type: "Regional jet",
+          class: "Commercial Jet",
+          programState: "Historic regional jet",
+          overview: "The CRJ200 became one of the classic small regional jets and was central to high-frequency feeder flying."
+        },
+        {
           id: "bombardier-crj900",
           name: "CRJ900",
           firstFlight: "2001",
@@ -303,14 +561,24 @@ window.AviationData = (() => {
           overview: "The CRJ900 became one of the best-known regional jet variants, helping shape high-frequency short-haul networks."
         },
         {
-          id: "bombardier-challenger-650",
-          name: "Challenger 650",
-          firstFlight: "2015",
+          id: "bombardier-q400",
+          name: "Dash 8 Q400",
+          firstFlight: "1998",
           timeline: "Digital Age",
-          type: "Large-cabin business jet",
+          type: "Regional turboprop",
+          class: "Regional Turboprop",
+          programState: "Historic family member",
+          overview: "The Q400 offered turboprop efficiency with higher speed and remains a highly recognizable regional aircraft."
+        },
+        {
+          id: "bombardier-challenger-3500",
+          name: "Challenger 3500",
+          firstFlight: "2021 generation",
+          timeline: "Next Horizon",
+          type: "Super-midsize business jet",
           class: "Business Jet",
-          programState: "Current program",
-          overview: "The Challenger 650 emphasizes cabin comfort, dispatch reliability, and a strong transcontinental mission profile."
+          programState: "Current generation",
+          overview: "The Challenger 3500 keeps Bombardier highly visible in the super-midsize corporate market."
         },
         {
           id: "bombardier-global-7500",
@@ -335,6 +603,16 @@ window.AviationData = (() => {
       summary: "Cessna is one of the most recognized general aviation names, spanning primary trainers, utility aircraft, and business jets.",
       aircraft: [
         {
+          id: "cessna-152",
+          name: "152",
+          firstFlight: "1977",
+          timeline: "Jet Age",
+          type: "Primary trainer",
+          class: "Trainer",
+          programState: "Historic training icon",
+          overview: "The Cessna 152 trained huge numbers of pilots and remains one of the most familiar light trainers ever built."
+        },
+        {
           id: "cessna-172",
           name: "172 Skyhawk",
           firstFlight: "1955",
@@ -345,6 +623,16 @@ window.AviationData = (() => {
           overview: "The Skyhawk became a worldwide standard for pilot training thanks to its approachable handling and huge support network."
         },
         {
+          id: "cessna-182",
+          name: "182 Skylane",
+          firstFlight: "1956",
+          timeline: "Jet Age",
+          type: "Touring piston single",
+          class: "General Aviation",
+          programState: "Long-running aircraft",
+          overview: "The Skylane is a classic Cessna step-up aircraft for owners who want more load, speed, and traveling flexibility."
+        },
+        {
           id: "cessna-caravan",
           name: "208 Caravan",
           firstFlight: "1982",
@@ -353,6 +641,26 @@ window.AviationData = (() => {
           class: "General Aviation",
           programState: "Current program",
           overview: "The Caravan is a versatile single-engine turboprop used for passengers, cargo, bush operations, and special missions."
+        },
+        {
+          id: "cessna-cj4-gen2",
+          name: "Citation CJ4 Gen2",
+          firstFlight: "2009 lineage",
+          timeline: "Digital Age",
+          type: "Light business jet",
+          class: "Business Jet",
+          programState: "Current program",
+          overview: "The CJ4 line keeps Cessna strong in owner-flown and corporate light-jet operations."
+        },
+        {
+          id: "cessna-latitude",
+          name: "Citation Latitude",
+          firstFlight: "2014",
+          timeline: "Digital Age",
+          type: "Midsize business jet",
+          class: "Business Jet",
+          programState: "Current program",
+          overview: "The Citation Latitude helped Cessna move further into the midsize business jet market with a stand-up cabin."
         },
         {
           id: "cessna-longitude",
@@ -387,6 +695,26 @@ window.AviationData = (() => {
           overview: "The Bonanza is one of general aviation's longest-running nameplates, known for speed, range, and owner-flown utility."
         },
         {
+          id: "beechcraft-baron",
+          name: "Baron G58",
+          firstFlight: "1969 lineage",
+          timeline: "Jet Age",
+          type: "Twin-engine piston aircraft",
+          class: "General Aviation",
+          programState: "Current program",
+          overview: "The Baron remains a famous piston twin for training, travel, and utility operations."
+        },
+        {
+          id: "beechcraft-king-air-260",
+          name: "King Air 260",
+          firstFlight: "2020 generation",
+          timeline: "Next Horizon",
+          type: "Twin turboprop",
+          class: "General Aviation",
+          programState: "Current generation",
+          overview: "The King Air 260 keeps Beechcraft visible in high-end turboprop travel and utility operations."
+        },
+        {
           id: "beechcraft-king-air-360",
           name: "King Air 360",
           firstFlight: "2020",
@@ -419,6 +747,16 @@ window.AviationData = (() => {
       summary: "Piper is a foundational general aviation brand with training aircraft, touring singles, and modern personal transport models.",
       aircraft: [
         {
+          id: "piper-j3",
+          name: "J-3 Cub",
+          firstFlight: "1938",
+          timeline: "Foundational",
+          type: "Classic light aircraft",
+          class: "General Aviation",
+          programState: "Historic icon",
+          overview: "The J-3 Cub became one of aviation's most famous grassroots airplanes and helped define personal flying."
+        },
+        {
           id: "piper-archer-lx",
           name: "Archer LX",
           firstFlight: "1960s lineage",
@@ -427,6 +765,26 @@ window.AviationData = (() => {
           class: "General Aviation",
           programState: "Current program",
           overview: "The Archer remains a favorite at flight schools and clubs for straightforward handling and dependable cross-country capability."
+        },
+        {
+          id: "piper-seminole",
+          name: "Seminole",
+          firstFlight: "1978",
+          timeline: "Jet Age",
+          type: "Twin-engine trainer",
+          class: "Trainer",
+          programState: "Current program",
+          overview: "The Seminole is a famous multi-engine training aircraft used by many flight schools around the world."
+        },
+        {
+          id: "piper-m350",
+          name: "M350",
+          firstFlight: "Current lineage",
+          timeline: "Digital Age",
+          type: "Pressurized piston single",
+          class: "General Aviation",
+          programState: "Current program",
+          overview: "The M350 keeps the high-performance pressurized personal aircraft concept alive in Piper's lineup."
         },
         {
           id: "piper-m600-sls",
@@ -493,48 +851,6 @@ window.AviationData = (() => {
       ]
     },
     {
-      id: "diamond",
-      name: "Diamond Aircraft",
-      country: "Austria",
-      founded: "1981",
-      status: "Active",
-      category: "Business & General Aviation",
-      aircraftFocus: ["Trainer", "Composite piston", "Hybrid-electric"],
-      summary: "Diamond Aircraft is known for efficient composite trainers and research into lower-emission propulsion paths.",
-      aircraft: [
-        {
-          id: "diamond-da40-ng",
-          name: "DA40 NG",
-          firstFlight: "2002 lineage",
-          timeline: "Digital Age",
-          type: "Training / touring single",
-          class: "Trainer",
-          programState: "Current program",
-          overview: "The DA40 NG is widely used for modern flight training thanks to its visibility, composite structure, and operating efficiency."
-        },
-        {
-          id: "diamond-da62",
-          name: "DA62",
-          firstFlight: "2012",
-          timeline: "Digital Age",
-          type: "Twin-engine touring aircraft",
-          class: "General Aviation",
-          programState: "Current program",
-          overview: "The DA62 combines sleek aerodynamics, a glass cockpit, and efficient powerplants in a premium piston twin layout."
-        },
-        {
-          id: "diamond-eda40",
-          name: "eDA40",
-          firstFlight: "Future",
-          timeline: "Next Horizon",
-          type: "Electric trainer",
-          class: "Experimental",
-          programState: "Future direction",
-          overview: "The eDA40 signals Diamond's push toward electric primary training and a lower-noise, lower-emission operating model."
-        }
-      ]
-    },
-    {
       id: "gulfstream",
       name: "Gulfstream",
       country: "United States",
@@ -553,6 +869,26 @@ window.AviationData = (() => {
           class: "Business Jet",
           programState: "Current program",
           overview: "The G280 balances runway performance, cabin refinement, and transcontinental reach in the super-midsize segment."
+        },
+        {
+          id: "gulfstream-g500",
+          name: "G500",
+          firstFlight: "2015",
+          timeline: "Digital Age",
+          type: "Long-range business jet",
+          class: "Business Jet",
+          programState: "Current program",
+          overview: "The G500 helped introduce Gulfstream's newer symmetric flight deck and a fresh large-cabin generation."
+        },
+        {
+          id: "gulfstream-g650er",
+          name: "G650ER",
+          firstFlight: "2014 variant",
+          timeline: "Digital Age",
+          type: "Ultra-long-range business jet",
+          class: "Business Jet",
+          programState: "Flagship icon",
+          overview: "The G650ER became one of the defining ultra-long-range business jets of the modern era."
         },
         {
           id: "gulfstream-g700",
@@ -619,48 +955,6 @@ window.AviationData = (() => {
       ]
     },
     {
-      id: "daher",
-      name: "Daher",
-      country: "France",
-      founded: "1863",
-      status: "Active",
-      category: "Business & General Aviation",
-      aircraftFocus: ["General Aviation", "Utility turboprop", "Backcountry"],
-      summary: "Daher combines the fast TBM line with the rugged Kodiak family, covering both executive speed and adventurous utility flying.",
-      aircraft: [
-        {
-          id: "daher-tbm-960",
-          name: "TBM 960",
-          firstFlight: "2022 variant",
-          timeline: "Next Horizon",
-          type: "High-speed personal turboprop",
-          class: "General Aviation",
-          programState: "Current generation",
-          overview: "The TBM 960 is designed for owner-flown speed, advanced avionics, and efficient point-to-point travel."
-        },
-        {
-          id: "daher-kodiak-100",
-          name: "Kodiak 100",
-          firstFlight: "2004",
-          timeline: "Digital Age",
-          type: "Backcountry utility turboprop",
-          class: "General Aviation",
-          programState: "Current program",
-          overview: "The Kodiak 100 focuses on rugged short-field capability for cargo, charter, humanitarian, and expedition flying."
-        },
-        {
-          id: "daher-kodiak-900",
-          name: "Kodiak 900",
-          firstFlight: "2022",
-          timeline: "Next Horizon",
-          type: "Utility turboprop",
-          class: "General Aviation",
-          programState: "Current generation",
-          overview: "The Kodiak 900 stretches the Kodiak concept toward more speed and capacity while keeping its practical utility roots."
-        }
-      ]
-    },
-    {
       id: "lockheed-martin",
       name: "Lockheed Martin",
       country: "United States",
@@ -681,6 +975,16 @@ window.AviationData = (() => {
           overview: "The F-16 remains one of the most widespread fighters globally, with the V-standard bringing modern sensors and avionics."
         },
         {
+          id: "lockheed-f22",
+          name: "F-22 Raptor",
+          firstFlight: "1997",
+          timeline: "Digital Age",
+          type: "Stealth air superiority fighter",
+          class: "Fighter",
+          programState: "Modern icon",
+          overview: "The F-22 became a benchmark stealth fighter focused on air dominance, speed, and supercruise."
+        },
+        {
           id: "lockheed-f35a",
           name: "F-35A Lightning II",
           firstFlight: "2006",
@@ -689,6 +993,26 @@ window.AviationData = (() => {
           class: "Fighter",
           programState: "Current program",
           overview: "The F-35 centers on sensor fusion, stealth, and shared mission systems across allied air forces."
+        },
+        {
+          id: "lockheed-f35b",
+          name: "F-35B Lightning II",
+          firstFlight: "2008",
+          timeline: "Digital Age",
+          type: "STOVL stealth fighter",
+          class: "Fighter",
+          programState: "Current program",
+          overview: "The F-35B adds short takeoff and vertical landing flexibility to the Joint Strike Fighter family."
+        },
+        {
+          id: "lockheed-f35c",
+          name: "F-35C Lightning II",
+          firstFlight: "2010",
+          timeline: "Digital Age",
+          type: "Carrier-based stealth fighter",
+          class: "Fighter",
+          programState: "Current program",
+          overview: "The F-35C adapts the family to catapult-launch carrier operations with larger wings and navalized structure."
         },
         {
           id: "lockheed-c130j",
@@ -712,6 +1036,16 @@ window.AviationData = (() => {
       aircraftFocus: ["Stealth bomber", "ISR", "Carrier support"],
       summary: "Northrop Grumman is heavily associated with stealth design, airborne surveillance, and large high-end defense systems.",
       aircraft: [
+        {
+          id: "northrop-b2",
+          name: "B-2 Spirit",
+          firstFlight: "1989",
+          timeline: "Jet Age",
+          type: "Stealth bomber",
+          class: "Military Transport",
+          programState: "Strategic icon",
+          overview: "The B-2 became one of the most visually distinctive aircraft ever built and a symbol of stealth bomber design."
+        },
         {
           id: "northrop-b21",
           name: "B-21 Raider",
@@ -754,6 +1088,16 @@ window.AviationData = (() => {
       aircraftFocus: ["Fighter", "Business Jet", "Special mission"],
       summary: "Dassault pairs combat-aircraft heritage with a high-end Falcon business-jet family, making it unusually balanced across civil and military sectors.",
       aircraft: [
+        {
+          id: "dassault-mirage2000",
+          name: "Mirage 2000",
+          firstFlight: "1978",
+          timeline: "Jet Age",
+          type: "Multirole fighter",
+          class: "Fighter",
+          programState: "Classic fighter line",
+          overview: "The Mirage 2000 became one of Dassault's most recognizable export fighters and a signature delta-wing aircraft."
+        },
         {
           id: "dassault-rafale-f4",
           name: "Rafale F4",
@@ -839,6 +1183,26 @@ window.AviationData = (() => {
       summary: "Sukhoi is associated with powerful high-performance fighters that have been central to Russian tactical aviation and exports.",
       aircraft: [
         {
+          id: "sukhoi-superjet100",
+          name: "Superjet 100",
+          firstFlight: "2008",
+          timeline: "Digital Age",
+          type: "Regional jet",
+          class: "Commercial Jet",
+          programState: "Civil program",
+          overview: "The Superjet 100 gave Sukhoi a civilian regional-jet presence beyond its fighter legacy."
+        },
+        {
+          id: "sukhoi-su27",
+          name: "Su-27",
+          firstFlight: "1977",
+          timeline: "Jet Age",
+          type: "Air superiority fighter",
+          class: "Fighter",
+          programState: "Historic icon",
+          overview: "The Su-27 established the Flanker family and became one of the most famous Soviet fighter designs."
+        },
+        {
           id: "sukhoi-su30sm2",
           name: "Su-30SM2",
           firstFlight: "1990s lineage",
@@ -913,254 +1277,96 @@ window.AviationData = (() => {
       ]
     },
     {
-      id: "ilyushin",
-      name: "Ilyushin",
-      country: "Russia",
-      founded: "1933",
-      status: "Active",
-      category: "Regional & Utility",
-      aircraftFocus: ["Military Transport", "Airliner", "Utility transport"],
-      summary: "Ilyushin has long been associated with transports and airliners designed for resilience, payload, and broad state-service use.",
+      id: "mcdonnell-douglas",
+      name: "McDonnell Douglas",
+      country: "United States",
+      founded: "1967",
+      status: "Historic",
+      category: "Commercial Airliner",
+      aircraftFocus: ["Commercial Jet", "Trijet", "Military aircraft"],
+      summary: "McDonnell Douglas produced some of the most famous late-20th-century airliners and military jets before merging into Boeing.",
       aircraft: [
         {
-          id: "ilyushin-il76md90a",
-          name: "Il-76MD-90A",
-          firstFlight: "2012 variant",
-          timeline: "Digital Age",
-          type: "Strategic airlifter",
-          class: "Military Transport",
-          programState: "Current program",
-          overview: "The updated Il-76MD-90A continues a long-running heavy transport family with new engines and revised systems."
-        },
-        {
-          id: "ilyushin-il96-400m",
-          name: "Il-96-400M",
-          firstFlight: "2020s",
-          timeline: "Next Horizon",
-          type: "Widebody airliner",
-          class: "Commercial Jet",
-          programState: "Current generation",
-          overview: "The Il-96-400M revisits Ilyushin's long-range airliner line with modernization aimed at sustained state and specialized roles."
-        },
-        {
-          id: "ilyushin-il114-300",
-          name: "Il-114-300",
-          firstFlight: "2020s",
-          timeline: "Next Horizon",
-          type: "Regional turboprop",
-          class: "Regional Turboprop",
-          programState: "Current generation",
-          overview: "The Il-114-300 is positioned as a short-haul turboprop for regional connectivity and austere operating environments."
-        }
-      ]
-    },
-    {
-      id: "tupolev",
-      name: "Tupolev",
-      country: "Russia",
-      founded: "1922",
-      status: "Active",
-      category: "Military & Defense",
-      aircraftFocus: ["Airliner", "Strategic bomber", "Special mission"],
-      summary: "Tupolev spans civil jets and strategic bombers, making it one of the most historically consequential Soviet and Russian design bureaus.",
-      aircraft: [
-        {
-          id: "tupolev-tu204",
-          name: "Tu-204",
-          firstFlight: "1989",
+          id: "mdd-dc10",
+          name: "DC-10",
+          firstFlight: "1970",
           timeline: "Jet Age",
-          type: "Narrowbody airliner",
+          type: "Widebody trijet airliner",
           class: "Commercial Jet",
-          programState: "Legacy line",
-          overview: "The Tu-204 was designed as a modern twinjet successor to older Soviet medium-haul aircraft families."
+          programState: "Historic icon",
+          overview: "The DC-10 became one of the signature trijets of long-haul travel and cargo flying."
         },
         {
-          id: "tupolev-tu214",
-          name: "Tu-214",
-          firstFlight: "1996",
+          id: "mdd-md11",
+          name: "MD-11",
+          firstFlight: "1990",
           timeline: "Digital Age",
-          type: "Narrowbody airliner / special mission platform",
+          type: "Widebody trijet airliner and freighter",
           class: "Commercial Jet",
-          programState: "Current line",
-          overview: "The Tu-214 has served as both a civil airliner and the basis for government and special mission configurations."
+          programState: "Cargo icon",
+          overview: "The MD-11 found a second life in cargo networks and remains a memorable final major trijet."
         },
         {
-          id: "tupolev-tu160m",
-          name: "Tu-160M",
-          firstFlight: "1981 lineage",
+          id: "mdd-md80",
+          name: "MD-80",
+          firstFlight: "1979",
           timeline: "Jet Age",
-          type: "Supersonic strategic bomber",
-          class: "Military Transport",
-          programState: "Current strategic line",
-          overview: "The Tu-160M continues one of the fastest and most dramatic bomber designs ever fielded."
-        }
-      ]
-    },
-    {
-      id: "hal",
-      name: "Hindustan Aeronautics Limited",
-      country: "India",
-      founded: "1940",
-      status: "Active",
-      category: "Military & Defense",
-      aircraftFocus: ["Fighter", "Trainer", "Utility transport"],
-      summary: "HAL is central to India's indigenous aerospace ecosystem, building fighters, trainers, and utility aircraft for national programs.",
-      aircraft: [
-        {
-          id: "hal-tejas-mk1a",
-          name: "Tejas Mk1A",
-          firstFlight: "2001 lineage",
-          timeline: "Digital Age",
-          type: "Light combat aircraft",
-          class: "Fighter",
-          programState: "Current program",
-          overview: "The Tejas program represents India's effort to field a domestic light fighter with modern avionics and multirole capability."
+          type: "Rear-engined narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Historic airline staple",
+          overview: "The MD-80 family was a short-haul workhorse and a familiar sound and shape at airports for decades."
         },
         {
-          id: "hal-htt40",
-          name: "HTT-40",
-          firstFlight: "2016",
-          timeline: "Digital Age",
-          type: "Basic trainer",
-          class: "Trainer",
-          programState: "Current program",
-          overview: "The HTT-40 is part of HAL's drive to support indigenous pilot training with a locally developed platform."
-        },
-        {
-          id: "hal-do228",
-          name: "Do-228",
-          firstFlight: "1981 lineage",
-          timeline: "Jet Age",
-          type: "Utility transport",
-          class: "Military Transport",
-          programState: "Current mission line",
-          overview: "Built in India for multiple roles, the Do-228 remains useful for transport, patrol, and light logistics tasks."
-        }
-      ]
-    },
-    {
-      id: "chengdu",
-      name: "Chengdu Aircraft Corporation",
-      country: "China",
-      founded: "1958",
-      status: "Active",
-      category: "Military & Defense",
-      aircraftFocus: ["Fighter", "Stealth fighter", "Export fighter"],
-      summary: "Chengdu has become one of China's flagship fighter manufacturers, moving from lightweight combat aircraft to stealth designs.",
-      aircraft: [
-        {
-          id: "chengdu-j10c",
-          name: "J-10C",
-          firstFlight: "1998 lineage",
-          timeline: "Digital Age",
-          type: "Multirole fighter",
-          class: "Fighter",
-          programState: "Current program",
-          overview: "The J-10C is an evolved lightweight fighter with updated sensors, weapons, and multirole flexibility."
-        },
-        {
-          id: "chengdu-j20",
-          name: "J-20",
-          firstFlight: "2011",
-          timeline: "Next Horizon",
-          type: "Stealth fighter",
-          class: "Fighter",
-          programState: "Current generation",
-          overview: "The J-20 marks Chengdu's transition into long-range stealth fighter design with a distinct configuration and mission profile."
-        },
-        {
-          id: "chengdu-jf17",
-          name: "JF-17 Block III",
-          firstFlight: "2003 lineage",
-          timeline: "Digital Age",
-          type: "Export multirole fighter",
-          class: "Fighter",
-          programState: "Current program",
-          overview: "The JF-17 family reflects Chengdu's role in affordable fighter solutions aimed at export and cooperative development."
-        }
-      ]
-    },
-    {
-      id: "shenyang",
-      name: "Shenyang Aircraft Corporation",
-      country: "China",
-      founded: "1951",
-      status: "Active",
-      category: "Military & Defense",
-      aircraftFocus: ["Fighter", "Carrier fighter", "Stealth fighter"],
-      summary: "Shenyang has built major Chinese fighter families across carrier operations, strike roles, and newer low-observable concepts.",
-      aircraft: [
-        {
-          id: "shenyang-j15",
-          name: "J-15",
-          firstFlight: "2009",
-          timeline: "Digital Age",
-          type: "Carrier-based fighter",
-          class: "Fighter",
-          programState: "Current program",
-          overview: "The J-15 gives Shenyang a navalized fighter role with carrier launch and recovery capability."
-        },
-        {
-          id: "shenyang-j16",
-          name: "J-16",
-          firstFlight: "2011",
-          timeline: "Digital Age",
-          type: "Strike fighter",
-          class: "Fighter",
-          programState: "Current program",
-          overview: "The J-16 expands the heavy fighter concept into an advanced strike and electronic warfare-capable platform."
-        },
-        {
-          id: "shenyang-j35",
-          name: "J-35",
-          firstFlight: "2020s",
-          timeline: "Next Horizon",
-          type: "Stealth fighter",
-          class: "Fighter",
-          programState: "Current generation",
-          overview: "The J-35 represents Shenyang's move into carrier-capable stealth fighter design and future air combat concepts."
-        }
-      ]
-    },
-    {
-      id: "beriev",
-      name: "Beriev",
-      country: "Russia",
-      founded: "1934",
-      status: "Active",
-      category: "Special Mission & Amphibious",
-      aircraftFocus: ["Amphibian", "Firefighting", "Special mission"],
-      summary: "Beriev is uniquely associated with amphibious aircraft and special mission designs built around water operations and national service roles.",
-      aircraft: [
-        {
-          id: "beriev-be200",
-          name: "Be-200 Altair",
+          id: "mdd-md95",
+          name: "MD-95 / Boeing 717",
           firstFlight: "1998",
           timeline: "Digital Age",
-          type: "Amphibious firefighting aircraft",
-          class: "Amphibian",
-          programState: "Current program",
-          overview: "The Be-200 can scoop water from lakes or seas and shift quickly between firefighting, rescue, and transport missions."
-        },
+          type: "Short-haul narrowbody airliner",
+          class: "Commercial Jet",
+          programState: "Transition aircraft",
+          overview: "The MD-95 evolved into the Boeing 717 and bridged McDonnell Douglas history into the Boeing era."
+        }
+      ]
+    },
+    {
+      id: "dehavilland-canada",
+      name: "De Havilland Canada",
+      country: "Canada",
+      founded: "1928",
+      status: "Active",
+      category: "Regional & Utility",
+      aircraftFocus: ["Regional Turboprop", "STOL utility", "Firefighting"],
+      summary: "De Havilland Canada is famous for rugged utility aircraft and regional turboprops designed for demanding environments.",
+      aircraft: [
         {
-          id: "beriev-a50u",
-          name: "A-50U",
-          firstFlight: "1980s lineage",
+          id: "dhc-twin-otter",
+          name: "DHC-6 Twin Otter",
+          firstFlight: "1965",
           timeline: "Jet Age",
-          type: "Airborne early warning aircraft",
-          class: "ISR",
-          programState: "Current mission line",
-          overview: "The A-50U shows Beriev's parallel role in modifying large aircraft into airborne command and surveillance platforms."
+          type: "STOL utility aircraft",
+          class: "General Aviation",
+          programState: "Current program",
+          overview: "The Twin Otter is valued for short takeoff performance, remote operations, and dependable service on land, skis, or floats."
         },
         {
-          id: "beriev-be103",
-          name: "Be-103",
-          firstFlight: "1997",
+          id: "dhc-dash-8-400",
+          name: "Dash 8-400",
+          firstFlight: "1998",
           timeline: "Digital Age",
-          type: "Light amphibian",
-          class: "Amphibian",
-          programState: "Specialized program",
-          overview: "The Be-103 demonstrates Beriev's interest in smaller amphibious utility flying alongside its larger mission aircraft."
+          type: "Regional turboprop",
+          class: "Regional Turboprop",
+          programState: "Current program",
+          overview: "The Dash 8-400 pairs turboprop efficiency with higher speed, making it a versatile regional platform."
+        },
+        {
+          id: "dhc-515",
+          name: "DHC-515 Firefighter",
+          firstFlight: "Future",
+          timeline: "Next Horizon",
+          type: "Amphibious aerial firefighter",
+          class: "Experimental",
+          programState: "Future direction",
+          overview: "The DHC-515 aims to modernize the aerial scooper role for wildfire response and public-service aviation."
         }
       ]
     }
@@ -1348,4 +1554,35 @@ window.AviationData = (() => {
     getUniqueAircraftClasses,
     groupAircraftByTimeline
   };
+})();
+
+(() => {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const styleId = "aviation-wiki-layout-fixes";
+
+  function applyLayoutFixes() {
+    if (document.getElementById(styleId)) {
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = `
+      .control-deck {
+        position: static !important;
+        top: auto !important;
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyLayoutFixes, { once: true });
+  } else {
+    applyLayoutFixes();
+  }
 })();
