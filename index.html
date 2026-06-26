@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Aviation Wiki</title>
+  <meta
+    name="description"
+    content="The Aviation Wiki is an animated aircraft manufacturer explorer with aircraft timelines, categories, and linked detail pages."
+  >
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body class="page page-home">
+  <div class="sky-layer sky-layer-one"></div>
+  <div class="sky-layer sky-layer-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">AW</span>
+      <span class="brand-copy">
+        <strong>The Aviation Wiki</strong>
+        <small>Aircraft timelines, makers, and eras</small>
+      </span>
+    </a>
+
+    <nav class="topnav">
+      <a href="#explorer">Manufacturers</a>
+      <a href="history.html">Aviation History</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero hero-home">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">Global Fixed-Wing Knowledge Hub</p>
+        <h1>The Aviation Wiki</h1>
+        <p class="hero-text">
+          Explore aircraft manufacturers by mission, aircraft class, and era.
+          Dive from a fast-moving overview into dedicated manufacturer and aircraft pages,
+          then scroll through a cinematic timeline of aviation history.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#explorer">Open The Explorer</a>
+          <a class="button button-secondary" href="history.html">See Aviation History</a>
+        </div>
+
+        <div class="stats-grid" id="hero-stats"></div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="radar-card">
+          <div class="radar-ring radar-ring-large"></div>
+          <div class="radar-ring radar-ring-medium"></div>
+          <div class="radar-ring radar-ring-small"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-core"></div>
+        </div>
+
+        <div class="floating-panel floating-panel-top">
+          <span class="panel-label">Scope</span>
+          <strong>Manufacturers, aircraft, and eras</strong>
+          <small>Interactive cards with filtered timelines</small>
+        </div>
+
+        <div class="floating-panel floating-panel-bottom">
+          <span class="panel-label">Flow</span>
+          <strong>Overview → Maker → Aircraft</strong>
+          <small>Every level links to deeper context</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview-band reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Flight Deck Overview</p>
+        <h2>Browse The Catalog From Multiple Angles</h2>
+      </div>
+      <div class="overview-grid" id="overview-grid"></div>
+    </section>
+
+    <section class="control-deck reveal" id="explorer">
+      <div class="section-heading">
+        <p class="eyebrow">Mission Control</p>
+        <h2>Filter The Aviation Wiki</h2>
+        <p>
+          Jump straight to a manufacturer, narrow by manufacturer type, or focus on aircraft
+          classes and timeline bands.
+        </p>
+      </div>
+
+      <div class="control-grid">
+        <label class="control-field">
+          <span>Search</span>
+          <input id="search-input" type="search" placeholder="Search manufacturers, countries, or aircraft">
+        </label>
+
+        <label class="control-field">
+          <span>Jump To Manufacturer</span>
+          <select id="manufacturer-jump">
+            <option value="">Choose a manufacturer page</option>
+          </select>
+        </label>
+
+        <label class="control-field">
+          <span>Manufacturer Type</span>
+          <select id="category-filter">
+            <option value="">All manufacturer types</option>
+          </select>
+        </label>
+
+        <label class="control-field">
+          <span>Aircraft Type</span>
+          <select id="aircraft-type-filter">
+            <option value="">All aircraft classes</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="timeline-filter-bar">
+        <span class="timeline-filter-title">Timeline</span>
+        <div class="timeline-filter-buttons" id="timeline-filter-buttons"></div>
+      </div>
+
+      <div class="active-filters" id="active-filters"></div>
+    </section>
+
+    <section class="pulse-section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Category Pulse</p>
+        <h2>Manufacturer Families At A Glance</h2>
+      </div>
+      <div class="pulse-grid" id="pulse-grid"></div>
+    </section>
+
+    <section class="manufacturer-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Manufacturer Atlas</p>
+        <h2>Timeline-Driven Manufacturer Cards</h2>
+        <p>
+          Each card groups aircraft by era and links onward to manufacturer and aircraft detail pages.
+        </p>
+      </div>
+
+      <div class="results-line reveal">
+        <strong id="results-count">0</strong>
+        <span>manufacturers currently visible</span>
+      </div>
+
+      <div class="manufacturer-grid" id="manufacturer-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>The Aviation Wiki is built as a multi-page static HTML, CSS, and JavaScript experience.</p>
+    <div class="footer-links">
+      <a href="index.html">Explorer</a>
+      <a href="history.html">History Timeline</a>
+    </div>
+  </footer>
+</body>
+</html>
