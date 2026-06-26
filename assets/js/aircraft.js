@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.AviationData;
   const root = document.getElementById("aircraft-detail-root");
+
+  if (!root || !data) {
+    return;
+  }
+
   const params = new URLSearchParams(window.location.search);
   const aircraft = data.getAircraftById(params.get("id"));
 
@@ -17,10 +22,39 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.18 }
+      { threshold: 0.16 }
     );
 
     document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
+  }
+
+  function renderBulletList(items, className = "bullet-list") {
+    if (!items || items.length === 0) {
+      return "<p>Additional details can be expanded here as the wiki grows.</p>";
+    }
+
+    return `
+      <ul class="${className}">
+        ${items.map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+    `;
+  }
+
+  function renderSpecGroup(title, specObject) {
+    if (!specObject || Object.keys(specObject).length === 0) {
+      return "";
+    }
+
+    return `
+      <article class="aircraft-card">
+        <h3>${title}</h3>
+        <ul class="detail-list">
+          ${Object.entries(specObject)
+            .map(([label, value]) => `<li><strong>${label}:</strong> ${value}</li>`)
+            .join("")}
+        </ul>
+      </article>
+    `;
   }
 
   function renderNotFound() {
@@ -28,10 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <section class="message-card reveal">
         <p class="eyebrow">Aircraft Missing</p>
         <h2>This Aircraft Entry Was Not Found</h2>
-        <p>Return to the explorer and open an aircraft from one of the manufacturer cards.</p>
+        <p>Open an aircraft page from one of the manufacturer cards to load a valid entry.</p>
         <a class="button button-primary" href="index.html">Back To The Explorer</a>
       </section>
     `;
+
     initRevealAnimations();
   }
 
@@ -41,37 +76,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const manufacturer = data.getManufacturerById(aircraft.manufacturerId);
-  const relatedAircraft = manufacturer.aircraft
-    .filter((item) => item.id !== aircraft.id)
-    .slice(0, 3);
+  const detail = aircraft.detail || {};
+  const specs = detail.specs || {};
+  const relatedAircraft = manufacturer
+    ? manufacturer.aircraft.filter((item) => item.id !== aircraft.id).slice(0, 3)
+    : [];
 
   document.title = `${aircraft.name} | The Aviation Wiki`;
 
   root.innerHTML = `
     <section class="detail-hero">
       <div class="detail-hero-panel reveal">
-        <p class="eyebrow">Aircraft Profile</p>
+        <p class="eyebrow">Aircraft Dossier</p>
         <div class="detail-header">
           <div class="detail-copy">
             <div class="meta-row">
               <span class="timeline-chip ${timelineClassName(aircraft.timeline)}">${aircraft.timeline}</span>
               <span class="program-state">${aircraft.programState}</span>
+              <span class="meta-chip">${aircraft.class}</span>
             </div>
             <h1>${aircraft.name}</h1>
-            <p>${aircraft.overview}</p>
+            <p>${detail.overview || aircraft.overview}</p>
           </div>
 
           <div class="timeline-legend">
-            <span class="badge">${aircraft.class}</span>
+            <span class="badge">${manufacturer ? manufacturer.name : "Manufacturer"}</span>
             <span class="meta-chip">${aircraft.type}</span>
           </div>
         </div>
 
         <div class="detail-grid">
-          <article class="detail-panel">
-            <h3>Manufacturer</h3>
-            <p>${manufacturer.name}</p>
-          </article>
           <article class="detail-panel">
             <h3>First Flight</h3>
             <p>${aircraft.firstFlight}</p>
@@ -80,10 +114,14 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3>Program State</h3>
             <p>${aircraft.programState}</p>
           </article>
+          <article class="detail-panel">
+            <h3>Manufacturer</h3>
+            <p>${manufacturer ? manufacturer.name : aircraft.manufacturerName || "Unknown"}</p>
+          </article>
         </div>
 
         <div class="hero-actions">
-          <a class="button button-primary" href="manufacturer.html?id=${manufacturer.id}">Open Manufacturer</a>
+          ${manufacturer ? `<a class="button button-primary" href="manufacturer.html?id=${manufacturer.id}">Open Manufacturer</a>` : ""}
           <a class="button button-secondary" href="index.html">Back To Explorer</a>
         </div>
       </div>
@@ -93,59 +131,61 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="detail-layout">
         <aside class="detail-sidebar">
           <article class="detail-panel reveal">
-            <h3>Aircraft Class</h3>
+            <h3>Technical Snapshot</h3>
+            <div class="tag-row">
+              <span class="tag">${aircraft.class}</span>
+              <span class="tag">${aircraft.timeline}</span>
+              <span class="tag">${manufacturer ? manufacturer.country : aircraft.manufacturerCountry || "Unknown origin"}</span>
+            </div>
             <p>${data.classDescriptions[aircraft.class] || "This aircraft fits a specialized role within the aviation landscape."}</p>
           </article>
 
           <article class="detail-panel reveal">
-            <h3>Manufacturer Context</h3>
-            <p>${manufacturer.summary}</p>
-            <div class="tag-row">
-              ${manufacturer.aircraftFocus.map((focus) => `<span class="tag">${focus}</span>`).join("")}
-            </div>
+            <h3>Program Facts</h3>
+            ${renderBulletList(detail.facts, "detail-list")}
           </article>
 
           <article class="detail-panel reveal">
-            <h3>Timeline Band</h3>
-            <p>${data.timelineDescriptions[aircraft.timeline]}</p>
+            <h3>Operators / Usage</h3>
+            ${renderBulletList(detail.notableOperators, "detail-list")}
           </article>
         </aside>
 
         <div class="detail-main">
           <article class="detail-panel reveal">
-            <h3>Why This Aircraft Matters</h3>
-            <p>
-              ${aircraft.name} sits inside the ${manufacturer.name} story as a
-              ${aircraft.type.toLowerCase()} shaped by the ${aircraft.timeline.toLowerCase()}.
-              It reflects how the manufacturer approaches performance, mission design, and market needs.
-            </p>
+            <h3>Overview</h3>
+            <p>${detail.overview || aircraft.overview}</p>
           </article>
 
           <article class="detail-panel reveal">
-            <h3>Quick Readout</h3>
-            <div class="aircraft-grid">
-              <article class="aircraft-card">
-                <h3>Role</h3>
-                <p>${aircraft.type}</p>
-              </article>
-              <article class="aircraft-card">
-                <h3>Mission Family</h3>
-                <p>${aircraft.class}</p>
-              </article>
-              <article class="aircraft-card">
-                <h3>Maker</h3>
-                <p>${manufacturer.name}</p>
-              </article>
-              <article class="aircraft-card">
-                <h3>Era Signal</h3>
-                <p>${aircraft.timeline}</p>
-              </article>
-            </div>
+            <h3>Design And Development</h3>
+            <p>${detail.design || "Design notes can be expanded further here."}</p>
+          </article>
+
+          <article class="detail-panel reveal">
+            <h3>Operations And Legacy</h3>
+            <p>${detail.service || "Operational history can be expanded further here."}</p>
           </article>
 
           <section class="detail-panel reveal">
-            <h3>More From ${manufacturer.name}</h3>
-            <p>Use these links to continue along the same manufacturer's lineup.</p>
+            <h3>Technical Specifications</h3>
+            <p>These grouped fields give each aircraft page a more encyclopedia-style technical profile.</p>
+            <div class="aircraft-grid">
+              ${renderSpecGroup("Dimensions", specs.dimensions)}
+              ${renderSpecGroup("Powerplant", specs.powerplant)}
+              ${renderSpecGroup("Performance", specs.performance)}
+              ${renderSpecGroup("Weights", specs.weights)}
+              ${renderSpecGroup("Capacity", specs.capacity)}
+            </div>
+          </section>
+
+          <section class="detail-panel reveal">
+            <h3>Variants And Family Notes</h3>
+            ${renderBulletList(detail.variants)}
+          </section>
+
+          <section class="detail-panel reveal">
+            <h3>More From ${manufacturer ? manufacturer.name : "This Manufacturer"}</h3>
             <div class="related-grid">
               ${relatedAircraft
                 .map(
