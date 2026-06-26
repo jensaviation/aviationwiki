@@ -61,38 +61,101 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(step);
   }
 
+  function buildFilterHref(filters = {}, hash = "#explorer") {
+    const params = new URLSearchParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) {
+        params.set(key, value);
+      }
+    });
+
+    const query = params.toString();
+    return `index.html${query ? `?${query}` : ""}${hash}`;
+  }
+
+  function hydrateStateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category") || "";
+    const aircraftClass = params.get("aircraftClass") || "";
+    const timeline = params.get("timeline") || "";
+    const query = (params.get("query") || "").trim();
+
+    state.category = data.getUniqueCategories().includes(category) ? category : "";
+    state.aircraftClass = data.getUniqueAircraftClasses().includes(aircraftClass) ? aircraftClass : "";
+    state.timeline = data.timelineOrder.includes(timeline) ? timeline : "";
+    state.query = query;
+
+    searchInput.value = state.query;
+    categoryFilter.value = state.category;
+    aircraftTypeFilter.value = state.aircraftClass;
+  }
+
+  function syncUrlWithState() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams();
+
+    if (state.query) {
+      params.set("query", state.query);
+    }
+
+    if (state.category) {
+      params.set("category", state.category);
+    }
+
+    if (state.aircraftClass) {
+      params.set("aircraftClass", state.aircraftClass);
+    }
+
+    if (state.timeline) {
+      params.set("timeline", state.timeline);
+    }
+
+    url.search = params.toString();
+    window.history.replaceState({}, "", url);
+  }
+
   function renderHeroStats() {
     const stats = [
       {
         label: "Manufacturers",
         value: data.manufacturers.length,
-        note: "Global fixed-wing makers"
+        note: "Global fixed-wing makers",
+        href: "#manufacturer-overview",
+        hint: "Open manufacturer overview"
       },
       {
         label: "Aircraft Programs",
         value: data.allAircraft.length,
-        note: "Linked to their detail pages"
+        note: "Linked to their detail pages",
+        href: "#manufacturer-overview",
+        hint: "See linked aircraft cards"
       },
       {
         label: "Manufacturer Types",
         value: data.getUniqueCategories().length,
-        note: "Commercial to amphibious"
+        note: "Commercial to amphibious",
+        href: "#category-overview",
+        hint: "Jump to category overview"
       },
       {
         label: "Timeline Bands",
         value: data.timelineOrder.length,
-        note: "From foundational to future"
+        note: "From foundational to future",
+        href: "#timeline-overview",
+        hint: "Browse timeline overview"
       }
     ];
 
     heroStats.innerHTML = stats
       .map(
         (stat) => `
-          <article class="stat-card reveal">
+          <a class="stat-card card-link reveal" href="${stat.href}">
             <span class="stat-label">${stat.label}</span>
             <span class="stat-value" data-count="${stat.value}">0</span>
             <div class="stat-note">${stat.note}</div>
-          </article>
+            <span class="card-link-hint">${stat.hint}</span>
+          </a>
         `
       )
       .join("");
@@ -108,12 +171,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const count = data.allAircraft.filter((aircraft) => aircraft.timeline === timeline).length;
 
         return `
-          <article class="overview-card reveal">
+          <a class="overview-card card-link reveal" href="${buildFilterHref({ timeline }, "#explorer")}">
             <span class="timeline-chip ${timelineClassName(timeline)}">${timeline}</span>
             <strong class="count">${count}</strong>
             <h3>${timeline}</h3>
             <p>${data.timelineDescriptions[timeline]}</p>
-          </article>
+            <span class="card-link-hint">Open ${timeline} overview</span>
+          </a>
         `;
       })
       .join("");
@@ -125,11 +189,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const count = data.manufacturers.filter((manufacturer) => manufacturer.category === category).length;
 
         return `
-          <article class="pulse-card reveal">
+          <a class="pulse-card card-link reveal" href="${buildFilterHref({ category }, "#explorer")}">
             <span class="badge">${category}</span>
             <strong>${count}</strong>
             <p>${data.categoryDescriptions[category]}</p>
-          </article>
+            <span class="card-link-hint">Open filtered overview</span>
+          </a>
         `;
       })
       .join("");
@@ -382,6 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function render() {
+    syncUrlWithState();
     renderActiveFilters();
     updateTimelineButtons();
     renderManufacturers();
@@ -424,5 +490,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderOverview();
   renderPulseCards();
   populateFilters();
+  hydrateStateFromUrl();
   render();
 });

@@ -706,18 +706,29 @@ window.AviationData = (() => {
   }));
 
   const historyMilestones = [
-    { year: "1783", era: "Lighter-Than-Air Dawn", title: "Montgolfier Balloon Flight", summary: "Human aviation begins with the first crewed hot-air balloon ascents.", highlight: "The dream of flight becomes visible." },
-    { year: "1903", era: "Powered Flight", title: "Wright Flyer Takes Off", summary: "The Wright brothers combine propulsion and control into the first sustained powered flight.", highlight: "Flight becomes steerable, not just possible." },
-    { year: "1939", era: "Jet Era Begins", title: "First Turbojet Aircraft Flies", summary: "Jet propulsion opens a new performance envelope in aviation.", highlight: "A new speed and altitude ceiling appears." },
-    { year: "1952", era: "Jetliners For The Public", title: "The Jet Airliner Arrives", summary: "Commercial aviation begins compressing global travel times at scale.", highlight: "Distance starts to feel smaller." },
-    { year: "2020s", era: "Sustainable Transition", title: "Hydrogen, SAF, Electric, And New Layouts", summary: "The industry turns toward emissions reduction and new energy systems.", highlight: "Future aviation is also an energy story." }
+    { id: "montgolfier-balloon", year: "1783", era: "Lighter-Than-Air Dawn", visual: "balloon", title: "Montgolfier Balloon Flight", summary: "Human aviation begins with the first crewed hot-air balloon ascents over France.", highlight: "The dream of flight becomes visible for the first time." },
+    { id: "cayley-glider", year: "1799", era: "Lift And Control Theory", visual: "glider", title: "Cayley Sketches The Modern Airplane Layout", summary: "Sir George Cayley separates lift, propulsion, and control into a recognizable fixed-wing concept.", highlight: "The airplane starts becoming an engineering idea instead of a fantasy." },
+    { id: "wright-flyer", year: "1903", era: "Powered Flight", visual: "biplane", title: "Wright Flyer Takes Off", summary: "The Wright brothers combine propulsion and control into the first sustained powered flight.", highlight: "Flight becomes steerable, not just possible." },
+    { id: "bleriot-channel", year: "1909", era: "Pioneer Breakthrough", visual: "monoplane", title: "Bleriot Crosses The English Channel", summary: "Louis Bleriot proves aircraft can cover meaningful water crossings and public imagination races ahead.", highlight: "Aircraft begin to look like tools for real travel and prestige." },
+    { id: "scheduled-airline", year: "1914", era: "Commercial Routes Begin", visual: "airliner", title: "Scheduled Passenger Airline Service Starts", summary: "The St. Petersburg-Tampa route shows that aircraft can be used for repeatable public transport, even if the industry is still young.", highlight: "Aviation starts moving from demonstration to service." },
+    { id: "alcock-brown", year: "1919", era: "Long-Range Ambition", visual: "monoplane", title: "First Nonstop Atlantic Crossing", summary: "Alcock and Brown complete the first nonstop transatlantic flight, expanding the idea of global range.", highlight: "Air routes begin stretching beyond local and regional imagination." },
+    { id: "dc3-service", year: "1935", era: "Airline Reliability", visual: "airliner", title: "Douglas DC-3 Changes Airline Economics", summary: "The DC-3 helps make passenger air travel commercially dependable with better speed, comfort, and operating logic.", highlight: "The airline business model starts becoming sustainable." },
+    { id: "heinkel-he178", year: "1939", era: "Jet Era Begins", visual: "jet", title: "First Turbojet Aircraft Flies", summary: "The Heinkel He 178 opens a new performance envelope and points aviation toward jet propulsion.", highlight: "A new speed and altitude ceiling appears." },
+    { id: "bell-x1", year: "1947", era: "Supersonic Research", visual: "jet", title: "Bell X-1 Breaks The Sound Barrier", summary: "Rocket-powered research proves controlled supersonic flight is achievable and measurable.", highlight: "The boundaries of aerodynamic design move again." },
+    { id: "comet-service", year: "1952", era: "Jetliners For The Public", visual: "airliner", title: "The Jet Airliner Arrives", summary: "Commercial aviation begins compressing global travel times at scale as jetliners enter passenger service.", highlight: "Distance starts to feel smaller." },
+    { id: "widebody-era", year: "1969", era: "Mass Long-Haul Travel", visual: "airliner", title: "Widebody Airliners Redefine Capacity", summary: "Large long-haul aircraft change airport planning, airline networks, and the scale of international travel.", highlight: "Aviation becomes truly mass global infrastructure." },
+    { id: "airbus-a320", year: "1987", era: "Digital Flight Decks", visual: "digital", title: "Fly-By-Wire Moves Into Mainstream Airliners", summary: "The Airbus A320 family pushes digital flight-control thinking into everyday airline operations.", highlight: "Software becomes part of how large aircraft feel and fly." },
+    { id: "composite-era", year: "2009", era: "Composite Efficiency", visual: "digital", title: "Composite-Led Long-Haul Aircraft Mature", summary: "Programs like the 787 and A350 era emphasize lighter structures, new cabins, and fuel-burn improvement.", highlight: "Materials science becomes a frontline part of performance." },
+    { id: "sustainable-transition", year: "2020s", era: "Sustainable Transition", visual: "future", title: "Hydrogen, SAF, Electric, And New Layouts", summary: "The industry turns toward emissions reduction, lower-energy operations, and new airframe concepts.", highlight: "Future aviation is also an energy and infrastructure story." }
   ];
 
   const futureSignals = [
     { title: "Hydrogen Airframes", tag: "Energy Shift", summary: "Expect more work around cryogenic storage, redesigned fuselages, and new airport support systems." },
     { title: "Blended Wing Bodies", tag: "Layout Rethink", summary: "Wide lifting bodies could improve efficiency, but they challenge cabin layout and airport compatibility." },
     { title: "Autonomous Assistance", tag: "Software Layer", summary: "Flight decks will likely gain more predictive assistance before full autonomy becomes realistic." },
-    { title: "Regional Electrification", tag: "Short-Haul Labs", summary: "Training and short-hop aircraft are likely to be early proving grounds for electric propulsion." }
+    { title: "Regional Electrification", tag: "Short-Haul Labs", summary: "Training and short-hop aircraft are likely to be early proving grounds for electric propulsion." },
+    { title: "Sustainable Aviation Fuel Scaling", tag: "Fleet Bridge", summary: "SAF is likely to remain one of the fastest ways to lower emissions while waiting for larger airframe changes." },
+    { title: "Smarter Manufacturing", tag: "Production Flow", summary: "Digital twins, automation, and cleaner factories may become as important as the aircraft themselves." }
   ];
 
   const allAircraft = manufacturers.flatMap((manufacturer) =>
