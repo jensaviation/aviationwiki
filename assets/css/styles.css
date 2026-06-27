@@ -129,10 +129,10 @@ main,
 }
 
 .topbar {
-  position: sticky;
-  top: 18px;
+  position: relative;
+  top: 0;
   width: min(calc(100% - 32px), var(--max-width));
-  margin: 20px auto 0;
+  margin: 20px auto 8px;
   padding: 16px 22px;
   display: flex;
   align-items: center;
@@ -235,7 +235,7 @@ section {
   grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
   gap: 40px;
   align-items: center;
-  padding: 82px 0 38px;
+  padding: 40px 0 38px;
 }
 
 .hero-home {
@@ -1425,7 +1425,8 @@ h4 {
 @media (max-width: 880px) {
   .topbar {
     border-radius: 26px;
-    padding: 16px 18px;
+    padding: 14px 16px;
+    gap: 14px;
   }
 
   .topbar,
@@ -1435,6 +1436,21 @@ h4 {
 
   .topbar {
     flex-direction: column;
+  }
+
+  .topnav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .topnav a {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+
+  .hero {
+    padding-top: 24px;
   }
 
   .control-deck {
@@ -1505,7 +1521,7 @@ h4 {
   }
 
   .hero {
-    padding-top: 42px;
+    padding-top: 18px;
   }
 
   h1 {
@@ -1518,6 +1534,10 @@ h4 {
 
   .hero-visual {
     min-height: auto;
+  }
+
+  .brand-copy small {
+    display: none;
   }
 
   .site-footer {
