@@ -175,13 +175,19 @@ window.AviationData = (() => {
     "airbus-a220": { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "PW1500G", "Engine type": "Geared turbofan" },
     "airbus-a300": { Engines: "2", "Engine manufacturer": "General Electric / Pratt & Whitney", "Engine model": "CF6-50 / JT9D depending on variant", "Engine type": "High-bypass turbofan" },
     "airbus-a310": { Engines: "2", "Engine manufacturer": "General Electric / Pratt & Whitney", "Engine model": "CF6-80C2 / JT9D-7R4 depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a318": { Engines: "2", "Engine manufacturer": "CFM International / Pratt & Whitney", "Engine model": "CFM56-5B / PW6000 depending on variant", "Engine type": "High-bypass turbofan" },
     "airbus-a319": { Engines: "2", "Engine manufacturer": "CFM International / IAE", "Engine model": "CFM56-5B / V2500 depending on variant", "Engine type": "High-bypass turbofan" },
     "airbus-a320": { Engines: "2", "Engine manufacturer": "CFM International / IAE", "Engine model": "CFM56-5A/5B / V2500 depending on variant", "Engine type": "High-bypass turbofan" },
     "airbus-a320neo": { Engines: "2", "Engine manufacturer": "CFM International / Pratt & Whitney", "Engine model": "LEAP-1A / PW1100G-JM depending on variant", "Engine type": "High-bypass turbofan" },
     "airbus-a321": { Engines: "2", "Engine manufacturer": "CFM International / IAE", "Engine model": "CFM56-5B / V2500 depending on variant", "Engine type": "High-bypass turbofan" },
     "airbus-a321xlr": { Engines: "2", "Engine manufacturer": "CFM International / Pratt & Whitney", "Engine model": "LEAP-1A / PW1100G-JM depending on configuration", "Engine type": "High-bypass turbofan" },
+    "airbus-a330-200": { Engines: "2", "Engine manufacturer": "Rolls-Royce / General Electric / Pratt & Whitney", "Engine model": "Trent 700 / CF6-80E1 / PW4000 depending on variant", "Engine type": "High-bypass turbofan" },
     "airbus-a330-300": { Engines: "2", "Engine manufacturer": "Rolls-Royce / General Electric / Pratt & Whitney", "Engine model": "Trent 700 / CF6-80E1 / PW4000 depending on variant", "Engine type": "High-bypass turbofan" },
+    "airbus-a330-800": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent 7000", "Engine type": "High-bypass turbofan" },
     "airbus-a330neo": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent 7000", "Engine type": "High-bypass turbofan" },
+    "airbus-a340-200": { Engines: "4", "Engine manufacturer": "CFM International", "Engine model": "CFM56-5C", "Engine type": "High-bypass turbofan" },
+    "airbus-a340-300": { Engines: "4", "Engine manufacturer": "CFM International", "Engine model": "CFM56-5C", "Engine type": "High-bypass turbofan" },
+    "airbus-a340-500": { Engines: "4", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent 553", "Engine type": "High-bypass turbofan" },
     "airbus-a340-600": { Engines: "4", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent 556", "Engine type": "High-bypass turbofan" },
     "airbus-a350-900": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent XWB-84", "Engine type": "High-bypass turbofan" },
     "airbus-a350-1000": { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "Trent XWB-97", "Engine type": "High-bypass turbofan" },
@@ -296,12 +302,18 @@ window.AviationData = (() => {
 
   const specOverrides = {
     "airbus-a220": { dimensions: { Length: "35.0 to 38.7 m", Wingspan: "35.1 m", Height: "11.5 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Up to about 6,300 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Up to about 70,900 kg" }, capacity: { Crew: "2", Passengers: "Approx. 100 to 160" } },
+    "airbus-a318": { dimensions: { Length: "31.4 m", Wingspan: "34.1 m", Height: "12.6 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 5,750 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Up to about 68,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 107 to 132" } },
     "airbus-a320": { dimensions: { Length: "37.6 m", Wingspan: "34.1 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 6,100 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Up to about 78,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 150 to 180" } },
     "airbus-a320neo": { dimensions: { Length: "37.6 m", Wingspan: "35.8 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 6,300 to 6,500 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Up to about 79,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 150 to 190" } },
     "airbus-a321": { dimensions: { Length: "44.5 m", Wingspan: "34.1 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 5,600 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Up to about 93,500 kg on later variants" }, capacity: { Crew: "2", Passengers: "Typically 185 to 220+" } },
     "airbus-a321xlr": { dimensions: { Length: "44.5 m", Wingspan: "35.8 m", Height: "11.8 m" }, performance: { "Cruise speed": "Mach 0.78", Range: "Approx. 8,700 km", "Service ceiling": "39,000 ft" }, weights: { MTOW: "Approx. 101,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 180 to 220" } },
+    "airbus-a330-200": { dimensions: { Length: "58.8 m", Wingspan: "60.3 m", Height: "17.4 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 13,450 km", "Service ceiling": "41,100 ft" }, weights: { MTOW: "Up to about 242,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 210 to 260" } },
     "airbus-a330-300": { dimensions: { Length: "63.7 m", Wingspan: "60.3 m", Height: "16.8 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 11,750 km", "Service ceiling": "41,000 ft" }, weights: { MTOW: "Up to about 242,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 277 to 440" } },
+    "airbus-a330-800": { dimensions: { Length: "58.8 m", Wingspan: "64.0 m", Height: "17.4 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 15,100 km", "Service ceiling": "41,100 ft" }, weights: { MTOW: "Up to about 251,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 220 to 260" } },
     "airbus-a330neo": { dimensions: { Length: "63.7 m", Wingspan: "64.0 m", Height: "16.8 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 13,300 km", "Service ceiling": "41,100 ft" }, weights: { MTOW: "Up to about 251,000 kg" }, capacity: { Crew: "2", Passengers: "Typically around 260 to 300+" } },
+    "airbus-a340-200": { dimensions: { Length: "59.4 m", Wingspan: "60.3 m", Height: "16.8 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 13,800 km", "Service ceiling": "41,100 ft" }, weights: { MTOW: "Up to about 275,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 240 to 280" } },
+    "airbus-a340-300": { dimensions: { Length: "63.7 m", Wingspan: "60.3 m", Height: "16.9 m" }, performance: { "Cruise speed": "Mach 0.82", Range: "Approx. 13,500 km", "Service ceiling": "41,100 ft" }, weights: { MTOW: "Up to about 276,500 kg" }, capacity: { Crew: "2", Passengers: "Typically 277 to 295" } },
+    "airbus-a340-500": { dimensions: { Length: "67.9 m", Wingspan: "63.5 m", Height: "17.3 m" }, performance: { "Cruise speed": "Mach 0.83", Range: "Approx. 16,670 km", "Service ceiling": "41,100 ft" }, weights: { MTOW: "Up to about 380,000 kg" }, capacity: { Crew: "2", Passengers: "Typically 270 to 310" } },
     "airbus-a350-900": { dimensions: { Length: "66.8 m", Wingspan: "64.8 m", Height: "17.1 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 15,000 km", "Service ceiling": "43,100 ft" }, weights: { MTOW: "Up to about 283,000 kg" }, capacity: { Crew: "2", Passengers: "Typically around 300 to 350" } },
     "airbus-a350-1000": { dimensions: { Length: "73.8 m", Wingspan: "64.8 m", Height: "17.1 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 16,100 km", "Service ceiling": "43,100 ft" }, weights: { MTOW: "Up to about 319,000 kg" }, capacity: { Crew: "2", Passengers: "Typically around 350 to 410" } },
     "airbus-a380": { dimensions: { Length: "72.7 m", Wingspan: "79.8 m", Height: "24.1 m" }, performance: { "Cruise speed": "Mach 0.85", Range: "Approx. 15,200 km", "Service ceiling": "43,000 ft" }, weights: { MTOW: "Up to about 575,000 kg" }, capacity: { Crew: "2", Passengers: "Typical 500+; certified for much more in dense layout" } },
@@ -429,13 +441,19 @@ window.AviationData = (() => {
         { id: "airbus-a220", name: "A220", firstFlight: "2013", timeline: "Digital Age", type: "Narrowbody airliner", class: "Commercial Jet", programState: "Current program", overview: "Originally developed as the C Series, the A220 covers the 100 to 150 seat market with efficient engines and a modern cabin." },
         { id: "airbus-a300", name: "A300", firstFlight: "1972", timeline: "Jet Age", type: "Widebody airliner", class: "Commercial Jet", programState: "Historic icon", overview: "The A300 was the world's first twin-engine widebody airliner and launched Airbus into the mainline market." },
         { id: "airbus-a310", name: "A310", firstFlight: "1982", timeline: "Jet Age", type: "Widebody airliner", class: "Commercial Jet", programState: "Legacy icon", overview: "The A310 shortened the A300 concept into a medium-to-long-haul widebody used by airlines, cargo operators, and governments." },
+        { id: "airbus-a318", name: "A318", firstFlight: "2002", timeline: "Digital Age", type: "Shortened narrowbody airliner", class: "Commercial Jet", programState: "Legacy family member", overview: "The A318 is the shortest A320-family member, designed for lower-demand routes while retaining the family's common cockpit and systems." },
         { id: "airbus-a319", name: "A319", firstFlight: "1995", timeline: "Digital Age", type: "Narrowbody airliner", class: "Commercial Jet", programState: "Long-running program", overview: "The A319 became popular with airlines needing a slightly smaller A320-family aircraft with common crew and systems." },
         { id: "airbus-a320", name: "A320", firstFlight: "1987", timeline: "Jet Age", type: "Narrowbody airliner", class: "Commercial Jet", programState: "Historic best-seller", overview: "The A320 changed short-haul airline design with digital fly-by-wire controls and a highly scalable single-aisle platform." },
         { id: "airbus-a320neo", name: "A320neo", firstFlight: "2014", timeline: "Digital Age", type: "Re-engined narrowbody airliner", class: "Commercial Jet", programState: "Current program", overview: "The A320neo modernized Airbus's best-known family with more efficient engines and lower operating costs." },
         { id: "airbus-a321", name: "A321", firstFlight: "1993", timeline: "Jet Age", type: "Stretched narrowbody airliner", class: "Commercial Jet", programState: "Core family program", overview: "The A321 became one of the most commercially important single-aisle aircraft by combining capacity with strong economics." },
         { id: "airbus-a321xlr", name: "A321XLR", firstFlight: "2022", timeline: "Digital Age", type: "Long-range narrowbody airliner", class: "Commercial Jet", programState: "Current program", overview: "The A321XLR extends narrowbody reach into transatlantic and thin long-haul missions that used to require larger widebodies." },
+        { id: "airbus-a330-200", name: "A330-200", firstFlight: "1997", timeline: "Digital Age", type: "Long-range widebody airliner", class: "Commercial Jet", programState: "Long-running program", overview: "The shorter A330-200 combines long range with flexible passenger, cargo, tanker, and government transport applications." },
         { id: "airbus-a330-300", name: "A330-300", firstFlight: "1992", timeline: "Jet Age", type: "Widebody airliner", class: "Commercial Jet", programState: "Long-running program", overview: "The A330-300 has been a flexible widebody for medium and long-haul operations, cargo conversion, and high-density routes." },
+        { id: "airbus-a330-800", name: "A330-800neo", firstFlight: "2018", timeline: "Digital Age", type: "Updated long-range widebody airliner", class: "Commercial Jet", programState: "Current program", overview: "The A330-800neo is the shorter, longer-range member of the A330neo family, pairing the established airframe with Trent 7000 engines." },
         { id: "airbus-a330neo", name: "A330-900neo", firstFlight: "2017", timeline: "Digital Age", type: "Updated widebody airliner", class: "Commercial Jet", programState: "Current program", overview: "The A330neo refreshes a familiar widebody platform with newer engines, aerodynamic improvements, and better fuel efficiency." },
+        { id: "airbus-a340-200", name: "A340-200", firstFlight: "1992", timeline: "Jet Age", type: "Long-range four-engine airliner", class: "Commercial Jet", programState: "Legacy family member", overview: "The A340-200 introduced long-range four-engine capability in the family's shorter fuselage and served airlines and governments on intercontinental missions." },
+        { id: "airbus-a340-300", name: "A340-300", firstFlight: "1991", timeline: "Jet Age", type: "Long-range four-engine airliner", class: "Commercial Jet", programState: "Legacy icon", overview: "The A340-300 became the best-known early member of the family and connected long-haul city pairs before large twinjets became dominant." },
+        { id: "airbus-a340-500", name: "A340-500", firstFlight: "2002", timeline: "Digital Age", type: "Ultra-long-range four-engine airliner", class: "Commercial Jet", programState: "Legacy range specialist", overview: "The A340-500 was designed for ultra-long-range service and briefly operated some of the world's longest nonstop airline routes." },
         { id: "airbus-a340-600", name: "A340-600", firstFlight: "2001", timeline: "Digital Age", type: "Long-range four-engine airliner", class: "Commercial Jet", programState: "Legacy icon", overview: "The A340-600 represented Airbus's long-haul four-engine era before very large twinjets took over much of that market." },
         { id: "airbus-a350-900", name: "A350-900", firstFlight: "2013", timeline: "Digital Age", type: "Widebody airliner", class: "Commercial Jet", programState: "Current program", overview: "The A350-900 blends composites, advanced systems, and long-range economics into one of Airbus's flagship aircraft." },
         { id: "airbus-a350-1000", name: "A350-1000", firstFlight: "2016", timeline: "Digital Age", type: "Widebody airliner", class: "Commercial Jet", programState: "Current program", overview: "The stretched A350-1000 serves high-capacity long-haul missions with strong range and efficiency." },
@@ -847,6 +865,102 @@ window.AviationData = (() => {
     }))
   );
 
+  const aircraftFamilyLabels = {
+    "airbus-a220": "A220 Family",
+    "airbus-a300": "A300 Family",
+    "airbus-a310": "A310 Family",
+    "airbus-a318": "A320 Family",
+    "airbus-a319": "A320 Family",
+    "airbus-a320": "A320 Family",
+    "airbus-a320neo": "A320 Family",
+    "airbus-a321": "A320 Family",
+    "airbus-a321xlr": "A320 Family",
+    "airbus-a330-200": "A330 Family",
+    "airbus-a330-300": "A330 Family",
+    "airbus-a330-800": "A330 Family",
+    "airbus-a330neo": "A330 Family",
+    "airbus-a340-200": "A340 Family",
+    "airbus-a340-300": "A340 Family",
+    "airbus-a340-500": "A340 Family",
+    "airbus-a340-600": "A340 Family",
+    "airbus-a350-900": "A350 Family",
+    "airbus-a350-1000": "A350 Family",
+    "airbus-a380": "A380 Family",
+    "boeing-737-800": "737 Family",
+    "boeing-737-max": "737 Family",
+    "boeing-747-400": "747 Family",
+    "boeing-747-8f": "747 Family",
+    "boeing-777-300er": "777 Family",
+    "boeing-777-9": "777 Family",
+    "boeing-787-8": "787 Dreamliner Family",
+    "boeing-787-9": "787 Dreamliner Family",
+    "boeing-787-10": "787 Dreamliner Family",
+    "embraer-e170": "E-Jet Family",
+    "embraer-e175": "E-Jet Family",
+    "embraer-e190": "E-Jet Family",
+    "embraer-e195-e2": "E-Jet Family",
+    "bombardier-crj200": "CRJ Family",
+    "bombardier-crj900": "CRJ Family",
+    "cessna-cj4-gen2": "Citation Family",
+    "cessna-latitude": "Citation Family",
+    "cessna-longitude": "Citation Family",
+    "beechcraft-king-air-260": "King Air Family",
+    "beechcraft-king-air-360": "King Air Family",
+    "piper-m350": "M-Class Family",
+    "piper-m600-sls": "M-Class Family",
+    "piper-m700-fury": "M-Class Family",
+    "gulfstream-g500": "Large-Cabin Gulfstream Family",
+    "gulfstream-g650er": "Large-Cabin Gulfstream Family",
+    "gulfstream-g700": "Large-Cabin Gulfstream Family",
+    "gulfstream-g800": "Large-Cabin Gulfstream Family",
+    "atr-42-600": "ATR Turboprop Family",
+    "atr-72-600": "ATR Turboprop Family",
+    "atr-evo": "ATR Turboprop Family",
+    "lockheed-f35a": "F-35 Lightning II Family",
+    "lockheed-f35b": "F-35 Lightning II Family",
+    "lockheed-f35c": "F-35 Lightning II Family",
+    "northrop-b2": "Stealth Bomber Family",
+    "northrop-b21": "Stealth Bomber Family",
+    "dassault-falcon-8x": "Falcon Family",
+    "dassault-falcon-10x": "Falcon Family",
+    "sukhoi-su27": "Flanker Family",
+    "sukhoi-su30sm2": "Flanker Family",
+    "sukhoi-su35s": "Flanker Family",
+    "mdd-dc10": "Widebody Trijet Family",
+    "mdd-md11": "Widebody Trijet Family",
+    "mdd-md80": "MD Narrowbody Family",
+    "mdd-md95": "MD Narrowbody Family"
+  };
+
+  function familyId(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  }
+
+  function getAircraftFamilies(manufacturerOrId) {
+    const manufacturer = typeof manufacturerOrId === "string"
+      ? getManufacturerById(manufacturerOrId)
+      : manufacturerOrId;
+
+    if (!manufacturer) return [];
+
+    const families = new Map();
+    manufacturer.aircraft.forEach((aircraft) => {
+      const name = aircraftFamilyLabels[aircraft.id] || aircraft.name;
+      if (!families.has(name)) {
+        families.set(name, { id: familyId(name), name, aircraft: [] });
+      }
+      families.get(name).aircraft.push(aircraft);
+    });
+
+    return [...families.values()].map((family) => ({
+      ...family,
+      classes: [...new Set(family.aircraft.map((aircraft) => aircraft.class))],
+      description: family.aircraft.length > 1
+        ? `Choose the exact ${family.name.replace(/ Family$/, "")} model you want to explore.`
+        : family.aircraft[0].overview
+    }));
+  }
+
   function getManufacturerById(id) {
     return manufacturers.find((manufacturer) => manufacturer.id === id) || null;
   }
@@ -888,6 +1002,7 @@ window.AviationData = (() => {
     getAircraftById,
     getUniqueCategories,
     getUniqueAircraftClasses,
+    getAircraftFamilies,
     groupAircraftByTimeline
   };
 })();

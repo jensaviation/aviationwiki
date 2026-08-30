@@ -1644,3 +1644,375 @@ h4 {
     grid-row: auto;
   }
 }
+
+/* Manufacturer family catalogue */
+.manufacturer-hero .detail-header {
+  align-items: stretch;
+  gap: 28px;
+}
+
+.manufacturer-hero .detail-copy {
+  flex: 1 1 680px;
+}
+
+.manufacturer-stat-card {
+  min-width: 220px;
+  padding: 24px;
+  border: 1px solid rgba(95, 216, 255, 0.32);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, #071d2d, #0b3045);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 18px 40px rgba(5, 27, 43, 0.16);
+}
+
+.manufacturer-stat-card strong {
+  font-family: var(--display-font);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  color: var(--accent);
+}
+
+.manufacturer-stat-card span {
+  margin-top: 10px;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.manufacturer-stat-card small {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.manufacturer-facts {
+  margin-top: 28px;
+}
+
+.manufacturer-facts .detail-panel {
+  padding: 20px;
+  box-shadow: none;
+}
+
+.manufacturer-facts h2 {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.manufacturer-facts p {
+  margin: 0;
+  color: var(--text);
+  font-weight: 750;
+}
+
+.manufacturer-catalog {
+  scroll-margin-top: 22px;
+}
+
+.catalog-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 26px;
+}
+
+.catalog-intro h2,
+.related-manufacturers-panel h2 {
+  margin: 0 0 10px;
+}
+
+.catalog-intro p,
+.related-manufacturers-panel > div > p {
+  margin: 0;
+}
+
+.family-jump-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.family-jump-list a {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.family-jump-list a:hover,
+.family-jump-list a:focus-visible {
+  border-color: var(--accent-strong);
+  background: var(--accent-cool);
+  transform: translateY(-1px);
+}
+
+.family-list {
+  display: grid;
+  gap: 14px;
+}
+
+.aircraft-family {
+  scroll-margin-top: 18px;
+  overflow: clip;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 34px rgba(14, 41, 59, 0.055);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.aircraft-family:hover,
+.aircraft-family[open] {
+  border-color: rgba(8, 122, 165, 0.3);
+  box-shadow: 0 20px 46px rgba(14, 41, 59, 0.1);
+}
+
+.aircraft-family[open] {
+  transform: translateY(-1px);
+}
+
+.family-summary {
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.family-summary::-webkit-details-marker {
+  display: none;
+}
+
+.family-summary-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.family-kicker {
+  color: var(--accent-strong);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.family-summary-copy strong {
+  font-family: var(--display-font);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.15;
+}
+
+.family-summary-copy > span:last-child {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.family-summary-meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.family-count {
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: var(--accent-cool);
+  color: #075f81;
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.family-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #082334;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.family-toggle::before {
+  content: "+";
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.aircraft-family[open] .family-toggle::before {
+  content: "−";
+}
+
+.family-content {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(231, 248, 255, 0.35), rgba(255, 255, 255, 0));
+}
+
+.family-content-heading {
+  padding: 22px 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+}
+
+.family-content-heading h2 {
+  margin: 0;
+}
+
+.family-variants-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.family-variant-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.96);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.family-variant-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.family-variant-heading h3 {
+  margin: 8px 0 0;
+  font-size: 1.55rem;
+}
+
+.variant-type {
+  margin: -7px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.variant-quick-specs {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid rgba(95, 216, 255, 0.2);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #071d2d;
+  color: #fff;
+}
+
+.variant-quick-specs div {
+  min-width: 0;
+  padding: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.variant-quick-specs div:last-child {
+  border-right: 0;
+}
+
+.variant-quick-specs dt {
+  color: #86a7b9;
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.variant-quick-specs dd {
+  margin: 4px 0 0;
+  font-size: 0.86rem;
+  font-weight: 750;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.family-variant-card > p:not(.variant-type) {
+  margin: 0;
+  color: var(--muted);
+  flex: 1;
+}
+
+.button-compact {
+  padding: 9px 13px;
+  font-size: 0.78rem;
+}
+
+.related-manufacturers-panel {
+  display: grid;
+  gap: 22px;
+}
+
+@media (max-width: 920px) {
+  .catalog-intro,
+  .family-variants-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .family-jump-list {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .manufacturer-stat-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .family-summary,
+  .family-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .family-summary {
+    align-items: flex-start;
+  }
+
+  .family-summary-meta {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .family-content-heading,
+  .family-variant-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .variant-quick-specs {
+    grid-template-columns: 1fr;
+  }
+
+  .variant-quick-specs div {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .variant-quick-specs div:last-child {
+    border-bottom: 0;
+  }
+}

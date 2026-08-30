@@ -5,23 +5,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const manufacturer = data.getManufacturerById(params.get("id"));
 
-  function timelineClassName(timeline) {
-    return `timeline-${timeline.toLowerCase().replace(/\s+/g, "-")}`;
-  }
-
   function initRevealAnimations() {
+    const nodes = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) {
+      nodes.forEach((node) => node.classList.add("is-visible"));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.18 }
+      { threshold: 0.12 }
     );
 
-    document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
+    nodes.forEach((node) => observer.observe(node));
   }
 
   function renderNotFound() {
@@ -31,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     root.innerHTML = `
       <section class="message-card reveal">
         <p class="eyebrow">Manufacturer Missing</p>
-        <h2>This Manufacturer Was Not Found</h2>
+        <h1>This Manufacturer Was Not Found</h1>
         <p>Pick a manufacturer from the explorer to open a valid detail page.</p>
         <a class="button button-primary" href="index.html">Back To The Explorer</a>
       </section>
@@ -44,185 +47,173 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const families = data.getAircraftFamilies(manufacturer);
   const pagePath = `manufacturer.html?id=${encodeURIComponent(manufacturer.id)}`;
-  const pageDescription = `${manufacturer.name} aircraft guide with company history, country, aircraft families, first-flight timeline, technical profiles, and official sources.`;
+  const pageDescription = `Explore every ${manufacturer.name} aircraft family and choose a specific model to see dimensions, performance, engines, capacity, and sources.`;
+  const relatedManufacturers = data.manufacturers
+    .filter((item) => item.id !== manufacturer.id && item.category === manufacturer.category)
+    .slice(0, 3);
+
   if (site) {
-    site.setMetadata({ title: `${manufacturer.name} Aircraft: Models & History`, description: pageDescription, path: pagePath });
+    site.setMetadata({ title: `${manufacturer.name} Aircraft Families & Models`, description: pageDescription, path: pagePath });
     site.setStructuredData("manufacturer-schema", {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      name: `${manufacturer.name} aircraft`,
+      name: `${manufacturer.name} aircraft families and models`,
       description: pageDescription,
       url: site.absoluteUrl(pagePath),
       breadcrumb: site.breadcrumbSchema([{ name: "Home", path: "index.html" }, { name: manufacturer.name, path: pagePath }]),
-      mainEntity: { "@type": "Organization", name: manufacturer.name, foundingDate: manufacturer.founded, areaServed: manufacturer.country, url: manufacturer.source ? manufacturer.source.url : undefined }
+      about: {
+        "@type": "Organization",
+        name: manufacturer.name,
+        foundingDate: manufacturer.founded,
+        areaServed: manufacturer.country,
+        url: manufacturer.source ? manufacturer.source.url : undefined
+      },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: manufacturer.aircraft.length,
+        itemListElement: manufacturer.aircraft.map((aircraft, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: aircraft.name,
+          url: site.absoluteUrl(`aircraft.html?id=${aircraft.id}`)
+        }))
+      }
     });
   }
 
-  const timelineGroups = data.groupAircraftByTimeline(manufacturer.aircraft);
-  const relatedManufacturers = data.manufacturers
-    .filter(
-      (item) => item.id !== manufacturer.id && item.category === manufacturer.category
-    )
-    .slice(0, 3);
+  function quickSpec(aircraft, label) {
+    return aircraft.detail && aircraft.detail.specs && aircraft.detail.specs.dimensions
+      ? aircraft.detail.specs.dimensions[label] || "Not listed"
+      : "Not listed";
+  }
+
+  function renderVariantCard(aircraft) {
+    return `
+      <article class="family-variant-card">
+        <div class="family-variant-heading">
+          <div>
+            <span class="program-state">${aircraft.programState}</span>
+            <h3>${aircraft.name}</h3>
+          </div>
+          <span class="meta-chip">First flight ${aircraft.firstFlight}</span>
+        </div>
+        <p class="variant-type">${aircraft.type}</p>
+        <dl class="variant-quick-specs" aria-label="${aircraft.name} dimensions">
+          <div><dt>Length</dt><dd>${quickSpec(aircraft, "Length")}</dd></div>
+          <div><dt>Wingspan</dt><dd>${quickSpec(aircraft, "Wingspan")}</dd></div>
+          <div><dt>Height</dt><dd>${quickSpec(aircraft, "Height")}</dd></div>
+        </dl>
+        <p>${aircraft.overview}</p>
+        <div class="card-actions">
+          <a class="button button-primary button-compact" href="aircraft.html?id=${aircraft.id}">View ${aircraft.name} specifications</a>
+          <a class="detail-link" href="type.html?id=${encodeURIComponent(aircraft.class)}">${aircraft.class}</a>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderFamily(family) {
+    const modelLabel = `${family.aircraft.length} model${family.aircraft.length === 1 ? "" : "s"}`;
+    return `
+      <details class="aircraft-family reveal" id="family-${family.id}">
+        <summary class="family-summary">
+          <span class="family-summary-copy">
+            <span class="family-kicker">Aircraft family</span>
+            <strong>${family.name}</strong>
+            <span>${family.description}</span>
+          </span>
+          <span class="family-summary-meta">
+            <span class="family-count">${modelLabel}</span>
+            <span class="family-toggle" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="family-content">
+          <div class="family-content-heading">
+            <div>
+              <p class="eyebrow">Choose A Model</p>
+              <h2>${family.name}</h2>
+            </div>
+            <div class="tag-row">
+              ${family.classes.map((item) => `<span class="tag">${item}</span>`).join("")}
+            </div>
+          </div>
+          <div class="family-variants-grid">
+            ${family.aircraft.map(renderVariantCard).join("")}
+          </div>
+        </div>
+      </details>
+    `;
+  }
 
   root.innerHTML = `
-    <section class="detail-hero">
+    <section class="detail-hero manufacturer-hero">
       ${site ? site.breadcrumbMarkup([{ name: "Home", path: "index.html" }, { name: manufacturer.name, path: pagePath }]) : ""}
       <div class="detail-hero-panel reveal">
-        <p class="eyebrow">Manufacturer Dossier</p>
         <div class="detail-header">
           <div class="detail-copy">
+            <p class="eyebrow">Manufacturer Guide</p>
             <div class="meta-row">
               <span class="badge">${manufacturer.category}</span>
               <span class="status-chip">${manufacturer.status}</span>
             </div>
-            <h1>${manufacturer.name}</h1>
+            <h1>${manufacturer.name} Aircraft</h1>
             <p>${manufacturer.summary}</p>
           </div>
-
-          <div class="timeline-legend">
-            ${data.timelineOrder
-              .map(
-                (timeline) => `
-                  <span class="timeline-chip ${timelineClassName(timeline)}">${timeline}</span>
-                `
-              )
-              .join("")}
+          <div class="manufacturer-stat-card" aria-label="Catalogue size">
+            <strong>${families.length}</strong>
+            <span>aircraft families</span>
+            <small>${manufacturer.aircraft.length} individual model${manufacturer.aircraft.length === 1 ? "" : "s"}</small>
           </div>
         </div>
 
-        <div class="detail-grid">
-          <article class="detail-panel">
-            <h3>Country</h3>
-            <p>${manufacturer.country}</p>
-          </article>
-          <article class="detail-panel">
-            <h3>Founded</h3>
-            <p>${manufacturer.founded}</p>
-          </article>
-          <article class="detail-panel">
-            <h3>Featured Programs</h3>
-            <p>${manufacturer.aircraft.length} aircraft in this overview</p>
-          </article>
-        </div>
-
-        <div class="tag-row">
-          ${manufacturer.aircraftFocus.map((focus) => `<span class="tag">${focus}</span>`).join("")}
+        <div class="detail-grid manufacturer-facts">
+          <article class="detail-panel"><h2>Country or region</h2><p>${manufacturer.country}</p></article>
+          <article class="detail-panel"><h2>Founded</h2><p>${manufacturer.founded}</p></article>
+          <article class="detail-panel"><h2>Aircraft focus</h2><p>${manufacturer.aircraftFocus.join(" · ")}</p></article>
         </div>
 
         <div class="hero-actions">
-          <a class="button button-primary" href="index.html">Back To Explorer</a>
-          <a class="button button-secondary" href="history.html">Open History Timeline</a>
+          <a class="button button-primary" href="#aircraft-families">Browse aircraft families</a>
+          ${manufacturer.source ? `<a class="button button-secondary" href="${manufacturer.source.url}" target="_blank" rel="noopener noreferrer">Official ${manufacturer.name} source <span aria-hidden="true">↗</span></a>` : ""}
         </div>
       </div>
     </section>
 
+    <section class="detail-section-shell detail-section manufacturer-catalog" id="aircraft-families">
+      <div class="catalog-intro reveal">
+        <div>
+          <p class="eyebrow">All Aircraft In One Place</p>
+          <h2>${manufacturer.name} aircraft families and models</h2>
+          <p>Select a family, then choose the exact aircraft you want. Dimensions are shown in each model card before you open the full technical page.</p>
+        </div>
+        <nav class="family-jump-list" aria-label="Jump to an aircraft family">
+          ${families.map((family) => `<a href="#family-${family.id}">${family.name}</a>`).join("")}
+        </nav>
+      </div>
+
+      <div class="family-list">
+        ${families.map(renderFamily).join("")}
+      </div>
+    </section>
+
     <section class="detail-section-shell detail-section">
-      <div class="detail-layout">
-        <aside class="detail-sidebar">
-          <article class="detail-panel reveal">
-            <h3>Profile</h3>
-            <p>${data.categoryDescriptions[manufacturer.category]}</p>
-            ${manufacturer.source ? `<a class="detail-link source-link" href="${manufacturer.source.url}" target="_blank" rel="noopener noreferrer">Official ${manufacturer.name} source <span aria-hidden="true">↗</span></a>` : ""}
-          </article>
-
-          <article class="detail-panel reveal">
-            <h3>Aircraft Classes</h3>
-            <div class="tag-row">
-              ${[...new Set(manufacturer.aircraft.map((aircraft) => aircraft.class))]
-                .map((item) => `<span class="tag">${item}</span>`)
-                .join("")}
-            </div>
-          </article>
-
-          <article class="detail-panel reveal">
-            <h3>Timeline Mix</h3>
-            <div class="timeline-stack">
-              ${timelineGroups
-                .map(
-                  (group) => `
-                    <div class="timeline-cluster">
-                      <div class="timeline-heading">
-                        <h4>${group.timeline}</h4>
-                        <span class="timeline-chip ${timelineClassName(group.timeline)}">${group.aircraft.length}</span>
-                      </div>
-                      <p>${group.description}</p>
-                    </div>
-                  `
-                )
-                .join("")}
-            </div>
-          </article>
-        </aside>
-
-        <div class="detail-main">
-          <article class="detail-panel reveal">
-            <h3>Signature Aircraft Timeline</h3>
-            <p>
-              This lineup groups the featured aircraft by era so you can read the manufacturer's
-              design evolution from legacy programs into current and future directions.
-            </p>
-          </article>
-
-          ${timelineGroups
-            .map(
-              (group) => `
-                <section class="detail-panel reveal">
-                  <div class="timeline-heading">
-                    <h3>${group.timeline}</h3>
-                    <span class="timeline-chip ${timelineClassName(group.timeline)}">${group.aircraft.length} program${group.aircraft.length === 1 ? "" : "s"}</span>
-                  </div>
-                  <p>${group.description}</p>
-
-                  <div class="aircraft-grid">
-                    ${group.aircraft
-                      .map(
-                        (aircraft) => `
-                          <article class="aircraft-card">
-                            <div class="aircraft-card-top">
-                              <span class="program-state">${aircraft.programState}</span>
-                              <span class="meta-chip">${aircraft.firstFlight}</span>
-                            </div>
-                            <h3>${aircraft.name}</h3>
-                            <div class="meta-row">
-                              <span class="meta-chip">${aircraft.type}</span>
-                              <a class="meta-chip" href="type.html?id=${encodeURIComponent(aircraft.class)}">${aircraft.class}</a>
-                            </div>
-                            <p>${aircraft.overview}</p>
-                            <div class="card-actions">
-                              <a class="detail-link" href="aircraft.html?id=${aircraft.id}">Aircraft Page</a>
-                            </div>
-                          </article>
-                        `
-                      )
-                      .join("")}
-                  </div>
-                </section>
-              `
-            )
-            .join("")}
-
-          <section class="detail-panel reveal">
-            <h3>Related Manufacturers</h3>
-            <p>Explore nearby manufacturers in the same category for a broader comparison.</p>
-            <div class="related-grid">
-              ${relatedManufacturers
-                .map(
-                  (item) => `
-                    <article class="related-card">
-                      <span class="badge">${item.category}</span>
-                      <h3>${item.name}</h3>
-                      <p>${item.summary}</p>
-                      <div class="card-actions">
-                        <a class="detail-link" href="manufacturer.html?id=${item.id}">Open Manufacturer</a>
-                      </div>
-                    </article>
-                  `
-                )
-                .join("")}
-            </div>
-          </section>
+      <div class="detail-panel reveal related-manufacturers-panel">
+        <div>
+          <p class="eyebrow">Keep Exploring</p>
+          <h2>Related manufacturers</h2>
+          <p>Compare aircraft from other manufacturers in the same broad category.</p>
+        </div>
+        <div class="related-grid">
+          ${relatedManufacturers.map((item) => `
+            <article class="related-card">
+              <span class="badge">${item.category}</span>
+              <h3>${item.name}</h3>
+              <p>${item.summary}</p>
+              <div class="card-actions"><a class="detail-link" href="manufacturer.html?id=${item.id}">Explore ${item.name}</a></div>
+            </article>
+          `).join("")}
         </div>
       </div>
     </section>

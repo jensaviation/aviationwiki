@@ -211,6 +211,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a318</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a319</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -241,13 +247,43 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a330-200</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a330-300</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a330-800</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a330neo</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a340-200</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a340-300</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jensaviation.github.io/aviationwiki/aircraft.html?id=airbus-a340-500</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
