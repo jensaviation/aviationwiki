@@ -146,14 +146,30 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
 
-        <dl class="quick-spec-grid" aria-label="${aircraft.name} quick specifications">
-          <div><dt>Length</dt><dd>${specValue(specs, "dimensions", "Length")}</dd></div>
-          <div><dt>Wingspan</dt><dd>${specValue(specs, "dimensions", "Wingspan")}</dd></div>
-          <div><dt>Height</dt><dd>${specValue(specs, "dimensions", "Height")}</dd></div>
-          <div><dt>Range</dt><dd>${specValue(specs, "performance", "Range", "Mission dependent")}</dd></div>
-          <div><dt>Capacity / payload</dt><dd>${specValue(specs, "capacity", "Passengers", specValue(specs, "capacity", "Payload", "Mission dependent"))}</dd></div>
-          <div><dt>Maximum takeoff weight</dt><dd>${specValue(specs, "weights", "MTOW", "Varies by model")}</dd></div>
-        </dl>
+        <section class="technical-specifications-prominent" aria-labelledby="technical-specifications-heading">
+          <div class="spec-section-heading">
+            <p class="eyebrow">At a glance</p>
+            <h2 id="technical-specifications-heading">Technical Specifications</h2>
+            <p>Dimensions are specific to this aircraft or the named representative variant. Family and concept values are labelled clearly.</p>
+          </div>
+
+          <dl class="quick-spec-grid" aria-label="${aircraft.name} quick specifications">
+            <div><dt>Length</dt><dd>${specValue(specs, "dimensions", "Length")}</dd></div>
+            <div><dt>Wingspan</dt><dd>${specValue(specs, "dimensions", "Wingspan")}</dd></div>
+            <div><dt>Height</dt><dd>${specValue(specs, "dimensions", "Height")}</dd></div>
+            <div><dt>Range</dt><dd>${specValue(specs, "performance", "Range", "Mission dependent")}</dd></div>
+            <div><dt>Capacity / payload</dt><dd>${specValue(specs, "capacity", "Passengers", specValue(specs, "capacity", "Payload", "Mission dependent"))}</dd></div>
+            <div><dt>Maximum takeoff weight</dt><dd>${specValue(specs, "weights", "MTOW", "Varies by model")}</dd></div>
+          </dl>
+
+          <div class="aircraft-grid full-specification-grid">
+            ${renderSpecGroup("Dimensions", specs.dimensions)}
+            ${renderSpecGroup("Powerplant", specs.powerplant)}
+            ${renderSpecGroup("Performance", specs.performance)}
+            ${renderSpecGroup("Weights", specs.weights)}
+            ${renderSpecGroup("Capacity", specs.capacity)}
+          </div>
+        </section>
 
         <div class="detail-grid">
           <article class="detail-panel">
@@ -240,18 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3>Operations And Legacy</h3>
             <p>${detail.service || "Operational history can be expanded further here."}</p>
           </article>
-
-          <section class="detail-panel reveal">
-            <h3>Technical Specifications</h3>
-            <p>This section collects the aircraft's dimensions, weights, capacity, performance, and engine details in one place.</p>
-            <div class="aircraft-grid">
-              ${renderSpecGroup("Dimensions", specs.dimensions)}
-              ${renderSpecGroup("Powerplant", specs.powerplant)}
-              ${renderSpecGroup("Performance", specs.performance)}
-              ${renderSpecGroup("Weights", specs.weights)}
-              ${renderSpecGroup("Capacity", specs.capacity)}
-            </div>
-          </section>
 
           <section class="detail-panel reveal">
             <h3>Variants And Family Notes</h3>

@@ -333,6 +333,76 @@ window.AviationData = (() => {
     "lockheed-c130j": { dimensions: { Length: "29.8 m", Wingspan: "40.4 m", Height: "11.9 m" }, performance: { "Cruise speed": "Approx. 670 km/h", Range: "Approx. 3,300 km with useful payload", "Service ceiling": "28,000 ft+" }, weights: { MTOW: "Approx. 74,400 kg" }, capacity: { Crew: "Usually 2 to 5 depending on mission", Payload: "Approx. 20 t class" } }
   };
 
+  const dimensionOverrides = {
+    "airbus-a300": { Length: "54.1 m (A300B4)", Wingspan: "44.8 m", Height: "16.5 m" },
+    "airbus-a310": { Length: "46.7 m", Wingspan: "43.9 m", Height: "15.8 m" },
+    "airbus-a319": { Length: "33.8 m", Wingspan: "34.1 m (35.8 m with sharklets)", Height: "11.8 m" },
+    "airbus-a340-600": { Length: "75.4 m", Wingspan: "63.5 m", Height: "17.3 m" },
+    "airbus-belugaxl": { Length: "63.1 m", Wingspan: "60.3 m", Height: "18.9 m" },
+    "boeing-707": { Length: "46.6 m (707-320B)", Wingspan: "44.4 m", Height: "12.9 m" },
+    "boeing-727": { Length: "46.7 m (727-200)", Wingspan: "32.9 m", Height: "10.4 m" },
+    "boeing-p8": { Length: "39.5 m", Wingspan: "37.6 m", Height: "12.8 m" },
+    "embraer-bandeirante": { Length: "15.1 m", Wingspan: "15.3 m", Height: "4.9 m" },
+    "embraer-erj145": { Length: "29.9 m", Wingspan: "20.0 m", Height: "6.8 m" },
+    "embraer-e170": { Length: "29.9 m", Wingspan: "26.0 m", Height: "9.9 m" },
+    "embraer-e190": { Length: "36.2 m", Wingspan: "28.7 m", Height: "10.6 m" },
+    "embraer-super-tucano": { Length: "11.4 m", Wingspan: "11.1 m", Height: "4.0 m" },
+    "bombardier-crj200": { Length: "26.8 m", Wingspan: "21.2 m", Height: "6.2 m" },
+    "bombardier-challenger-3500": { Length: "20.9 m", Wingspan: "21.0 m", Height: "6.1 m" },
+    "cessna-152": { Length: "7.3 m", Wingspan: "10.2 m", Height: "2.6 m" },
+    "cessna-182": { Length: "8.8 m", Wingspan: "11.1 m", Height: "2.8 m" },
+    "cessna-cj4-gen2": { Length: "16.3 m", Wingspan: "15.5 m", Height: "4.7 m" },
+    "cessna-latitude": { Length: "19.0 m", Wingspan: "22.1 m", Height: "6.4 m" },
+    "beechcraft-bonanza": { Length: "8.4 m", Wingspan: "10.2 m", Height: "2.6 m" },
+    "beechcraft-baron": { Length: "9.1 m", Wingspan: "11.5 m", Height: "3.0 m" },
+    "beechcraft-king-air-260": { Length: "13.4 m", Wingspan: "17.7 m", Height: "4.5 m" },
+    "beechcraft-king-air-360": { Length: "14.2 m", Wingspan: "17.7 m", Height: "4.4 m" },
+    "beechcraft-t6c": { Length: "10.2 m", Wingspan: "10.2 m", Height: "3.3 m" },
+    "piper-j3": { Length: "6.8 m", Wingspan: "10.7 m", Height: "2.0 m" },
+    "piper-archer-lx": { Length: "7.3 m", Wingspan: "10.8 m", Height: "2.2 m" },
+    "piper-seminole": { Length: "8.4 m", Wingspan: "11.8 m", Height: "2.6 m" },
+    "piper-m350": { Length: "8.8 m", Wingspan: "13.1 m", Height: "3.5 m" },
+    "piper-m600-sls": { Length: "9.2 m", Wingspan: "13.1 m", Height: "3.5 m" },
+    "piper-m700-fury": { Length: "9.2 m", Wingspan: "13.1 m", Height: "3.5 m" },
+    "gulfstream-g280": { Length: "20.4 m", Wingspan: "19.2 m", Height: "6.5 m" },
+    "gulfstream-g500": { Length: "27.8 m", Wingspan: "26.3 m", Height: "7.8 m" },
+    "gulfstream-g800": { Length: "30.4 m", Wingspan: "31.4 m", Height: "7.8 m" },
+    "atr-42-600": { Length: "22.7 m", Wingspan: "24.6 m", Height: "7.6 m" },
+    "atr-72-600": { Length: "27.2 m", Wingspan: "27.1 m", Height: "7.7 m" },
+    "atr-evo": { Length: "Approx. 27.2 m (planned ATR 72-class airframe)", Wingspan: "Approx. 27.1 m", Height: "Approx. 7.7 m" },
+    "comac-c909": { Length: "33.5 m", Wingspan: "27.3 m", Height: "8.4 m" },
+    "comac-c919": { Length: "38.9 m", Wingspan: "35.8 m", Height: "12.0 m" },
+    "comac-c929": { Length: "Approx. 63.3 m (planned)", Wingspan: "Approx. 61.0 m (planned)", Height: "Approx. 17.9 m (planned)" },
+    "lockheed-f35b": { Length: "15.6 m", Wingspan: "10.7 m", Height: "4.4 m" },
+    "lockheed-f35c": { Length: "15.7 m", Wingspan: "13.1 m", Height: "4.5 m" },
+    "northrop-b2": { Length: "21.0 m", Wingspan: "52.4 m", Height: "5.2 m" },
+    "northrop-b21": { Length: "Not publicly disclosed", Wingspan: "Not publicly disclosed", Height: "Not publicly disclosed" },
+    "northrop-e2d": { Length: "17.6 m", Wingspan: "24.6 m", Height: "5.6 m" },
+    "northrop-mq4c": { Length: "14.5 m", Wingspan: "39.9 m", Height: "4.7 m" },
+    "dassault-mirage2000": { Length: "14.4 m", Wingspan: "9.1 m", Height: "5.2 m" },
+    "dassault-rafale-f4": { Length: "15.3 m", Wingspan: "10.9 m", Height: "5.3 m" },
+    "dassault-falcon-8x": { Length: "24.5 m", Wingspan: "26.3 m", Height: "7.9 m" },
+    "dassault-falcon-10x": { Length: "33.4 m (planned)", Wingspan: "33.6 m (planned)", Height: "8.4 m (planned)" },
+    "saab-gripen-e": { Length: "15.2 m", Wingspan: "8.6 m", Height: "4.5 m" },
+    "saab-globaleye": { Length: "30.3 m", Wingspan: "28.7 m", Height: "7.8 m" },
+    "saab-340-aew": { Length: "20.6 m", Wingspan: "21.4 m", Height: "7.0 m" },
+    "sukhoi-superjet100": { Length: "29.9 m", Wingspan: "27.8 m", Height: "10.3 m" },
+    "sukhoi-su27": { Length: "21.9 m", Wingspan: "14.7 m", Height: "5.9 m" },
+    "sukhoi-su30sm2": { Length: "21.9 m", Wingspan: "14.7 m", Height: "6.4 m" },
+    "sukhoi-su35s": { Length: "21.9 m", Wingspan: "15.3 m", Height: "5.9 m" },
+    "sukhoi-su57": { Length: "20.1 m", Wingspan: "14.1 m", Height: "4.6 m" },
+    "antonov-an124": { Length: "69.1 m", Wingspan: "73.3 m", Height: "21.1 m" },
+    "antonov-an148": { Length: "29.1 m", Wingspan: "28.9 m", Height: "8.2 m" },
+    "antonov-an225": { Length: "84.0 m", Wingspan: "88.4 m", Height: "18.1 m" },
+    "mdd-dc10": { Length: "55.6 m (DC-10-30)", Wingspan: "50.4 m", Height: "17.7 m" },
+    "mdd-md11": { Length: "61.2 m", Wingspan: "51.7 m", Height: "17.6 m" },
+    "mdd-md80": { Length: "45.1 m (MD-82/83/88)", Wingspan: "32.8 m", Height: "9.0 m" },
+    "mdd-md95": { Length: "37.8 m (Boeing 717-200)", Wingspan: "28.4 m", Height: "8.9 m" },
+    "dhc-twin-otter": { Length: "15.8 m (Series 400)", Wingspan: "19.8 m", Height: "5.9 m" },
+    "dhc-dash-8-400": { Length: "32.8 m", Wingspan: "28.4 m", Height: "8.4 m" },
+    "dhc-515": { Length: "Approx. 19.8 m", Wingspan: "Approx. 28.6 m", Height: "Approx. 9.0 m" }
+  };
+
   const detailNotes = {
     "airbus-a220": "It is especially important because it gives airlines a genuinely modern aircraft below traditional narrowbody sizes, with noticeably strong comfort and efficiency for its seating bracket.",
     "airbus-a380": "Its scale, cabin volume, and four-engine architecture make it one of the clearest examples of the hub-and-spoke superjumbo strategy.",
@@ -701,7 +771,14 @@ window.AviationData = (() => {
   function buildFallbackDetail(aircraft, manufacturer) {
     const engine = buildPowerplantSummary(aircraft);
     const classProfile = technicalProfilesByClass[aircraft.class] || technicalProfilesByClass.Experimental;
-    const specOverride = specOverrides[aircraft.id] || {};
+    const storedOverride = specOverrides[aircraft.id] || {};
+    const specOverride = {
+      ...storedOverride,
+      dimensions: {
+        ...(dimensionOverrides[aircraft.id] || {}),
+        ...(storedOverride.dimensions || {})
+      }
+    };
     const powerplantLine = `${engine["Engine manufacturer"]} ${engine["Engine model"]} (${engine["Engine type"]})`;
     const extraNote = detailNotes[aircraft.id] ? ` ${detailNotes[aircraft.id]}` : "";
 
