@@ -115,6 +115,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderFamily(family) {
+    if (family.aircraft.length === 1) {
+      const aircraft = family.aircraft[0];
+      return `
+        <article class="aircraft-family family-direct-card reveal" id="family-${family.id}">
+          <a class="family-direct-link" href="aircraft.html?id=${aircraft.id}" aria-label="View ${aircraft.name} specifications">
+            <span class="family-summary-copy">
+              <span class="family-kicker">Aircraft</span>
+              <strong>${aircraft.name}</strong>
+              <span>${aircraft.type}</span>
+            </span>
+            <dl class="direct-quick-specs" aria-label="${aircraft.name} dimensions">
+              <div><dt>Length</dt><dd>${quickSpec(aircraft, "Length")}</dd></div>
+              <div><dt>Wingspan</dt><dd>${quickSpec(aircraft, "Wingspan")}</dd></div>
+              <div><dt>Height</dt><dd>${quickSpec(aircraft, "Height")}</dd></div>
+            </dl>
+            <span class="family-direct-action">View aircraft <span aria-hidden="true">→</span></span>
+          </a>
+        </article>
+      `;
+    }
+
     const modelLabel = `${family.aircraft.length} model${family.aircraft.length === 1 ? "" : "s"}`;
     return `
       <details class="aircraft-family reveal" id="family-${family.id}">
@@ -163,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="manufacturer-stat-card" aria-label="Catalogue size">
             <strong>${families.length}</strong>
-            <span>aircraft families</span>
+            <span>aircraft groups</span>
             <small>${manufacturer.aircraft.length} individual model${manufacturer.aircraft.length === 1 ? "" : "s"}</small>
           </div>
         </div>
@@ -186,10 +207,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <div>
           <p class="eyebrow">All Aircraft In One Place</p>
           <h2>${manufacturer.name} aircraft families and models</h2>
-          <p>Select a family, then choose the exact aircraft you want. Dimensions are shown in each model card before you open the full technical page.</p>
+          <p>Open a multi-model family to choose a variant, or select a single aircraft directly. Dimensions are visible before you open the full technical page.</p>
         </div>
         <nav class="family-jump-list" aria-label="Jump to an aircraft family">
-          ${families.map((family) => `<a href="#family-${family.id}">${family.name}</a>`).join("")}
+          ${families.map((family) => `<a href="#family-${family.id}">${family.aircraft.length === 1 ? family.aircraft[0].name : family.name}</a>`).join("")}
         </nav>
       </div>
 

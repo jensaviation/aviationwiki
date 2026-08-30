@@ -755,6 +755,106 @@ window.AviationData = (() => {
     }
   ];
 
+  function catalogVariant({
+    id,
+    name,
+    familyName,
+    familySort,
+    firstFlight,
+    dimensions,
+    overview,
+    engine,
+    type = "Airliner variant",
+    className = "Commercial Jet",
+    timeline = "Digital Age",
+    programState = "Production variant"
+  }) {
+    return {
+      id,
+      name,
+      familyName,
+      familySort,
+      firstFlight,
+      timeline,
+      type,
+      class: className,
+      programState,
+      overview,
+      dimensions: { Length: dimensions[0], Wingspan: dimensions[1], Height: dimensions[2] },
+      engine
+    };
+  }
+
+  const supplementalAircraftByManufacturer = {
+    boeing: [
+      catalogVariant({ id: "boeing-737-100", name: "737-100", familyName: "737 Family", familySort: 1, firstFlight: "1967", timeline: "Jet Age", dimensions: ["28.7 m", "28.4 m", "11.3 m"], engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "JT8D", "Engine type": "Low-bypass turbofan" }, overview: "The original short-fuselage 737 introduced Boeing's twinjet narrowbody family." }),
+      catalogVariant({ id: "boeing-737-200", name: "737-200", familyName: "737 Family", familySort: 2, firstFlight: "1967", timeline: "Jet Age", dimensions: ["30.5 m", "28.4 m", "11.3 m"], engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "JT8D", "Engine type": "Low-bypass turbofan" }, overview: "The stretched 737-200 became the successful early-production version of the family." }),
+      catalogVariant({ id: "boeing-737-300", name: "737-300", familyName: "737 Family", familySort: 3, firstFlight: "1984", timeline: "Jet Age", dimensions: ["33.4 m", "28.9 m", "11.1 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-3", "Engine type": "High-bypass turbofan" }, overview: "The 737-300 launched the Classic generation with a longer fuselage and CFM56 engines." }),
+      catalogVariant({ id: "boeing-737-400", name: "737-400", familyName: "737 Family", familySort: 4, firstFlight: "1988", timeline: "Jet Age", dimensions: ["36.5 m", "28.9 m", "11.1 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-3", "Engine type": "High-bypass turbofan" }, overview: "The 737-400 stretched the Classic generation for higher passenger capacity." }),
+      catalogVariant({ id: "boeing-737-500", name: "737-500", familyName: "737 Family", familySort: 5, firstFlight: "1989", timeline: "Jet Age", dimensions: ["31.0 m", "28.9 m", "11.1 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-3", "Engine type": "High-bypass turbofan" }, overview: "The 737-500 paired the Classic-generation systems and engines with a shorter fuselage." }),
+      catalogVariant({ id: "boeing-737-600", name: "737-600", familyName: "737 Family", familySort: 6, firstFlight: "1998", dimensions: ["31.2 m", "34.3 m", "12.6 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-7B", "Engine type": "High-bypass turbofan" }, overview: "The 737-600 was the smallest member of the Next Generation lineup." }),
+      catalogVariant({ id: "boeing-737-700", name: "737-700", familyName: "737 Family", familySort: 7, firstFlight: "1997", dimensions: ["33.6 m", "35.8 m with winglets", "12.6 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-7B", "Engine type": "High-bypass turbofan" }, overview: "The 737-700 became the shorter core member of the Next Generation family." }),
+      catalogVariant({ id: "boeing-737-900er", name: "737-900ER", familyName: "737 Family", familySort: 9, firstFlight: "2006", dimensions: ["42.1 m", "35.8 m with winglets", "12.5 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "CFM56-7B", "Engine type": "High-bypass turbofan" }, overview: "The 737-900ER is the longest and highest-capacity production member of the Next Generation series." }),
+      catalogVariant({ id: "boeing-737-max-7", name: "737 MAX 7", familyName: "737 Family", familySort: 17, firstFlight: "2018", dimensions: ["35.6 m", "35.9 m", "12.3 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "LEAP-1B", "Engine type": "High-bypass turbofan" }, overview: "The MAX 7 is the shortest member of the re-engined 737 MAX generation." }),
+      catalogVariant({ id: "boeing-737-max-9", name: "737 MAX 9", familyName: "737 Family", familySort: 19, firstFlight: "2017", dimensions: ["42.2 m", "35.9 m", "12.3 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "LEAP-1B", "Engine type": "High-bypass turbofan" }, overview: "The MAX 9 stretches the MAX 8 for additional passenger capacity." }),
+      catalogVariant({ id: "boeing-737-max-10", name: "737 MAX 10", familyName: "737 Family", familySort: 20, firstFlight: "2021", dimensions: ["43.8 m", "35.9 m", "12.3 m"], engine: { Engines: "2", "Engine manufacturer": "CFM International", "Engine model": "LEAP-1B", "Engine type": "High-bypass turbofan" }, overview: "The MAX 10 is the largest 737 variant and targets the high-capacity single-aisle market.", programState: "Advanced development" }),
+      catalogVariant({ id: "boeing-747-100", name: "747-100", familyName: "747 Family", familySort: 1, firstFlight: "1969", timeline: "Jet Age", dimensions: ["70.7 m", "59.6 m", "19.3 m"], engine: { Engines: "4", "Engine manufacturer": "Pratt & Whitney", "Engine model": "JT9D", "Engine type": "High-bypass turbofan" }, overview: "The original 747-100 introduced the widebody jumbo jet and its iconic upper-deck hump." }),
+      catalogVariant({ id: "boeing-747-200", name: "747-200", familyName: "747 Family", familySort: 2, firstFlight: "1970", timeline: "Jet Age", dimensions: ["70.7 m", "59.6 m", "19.3 m"], engine: { Engines: "4", "Engine manufacturer": "Pratt & Whitney / General Electric / Rolls-Royce", "Engine model": "JT9D / CF6 / RB211", "Engine type": "High-bypass turbofan" }, overview: "The 747-200 added more power, range, and payload capability to the early jumbo family." }),
+      catalogVariant({ id: "boeing-747-300", name: "747-300", familyName: "747 Family", familySort: 3, firstFlight: "1982", timeline: "Jet Age", dimensions: ["70.7 m", "59.6 m", "19.3 m"], engine: { Engines: "4", "Engine manufacturer": "Pratt & Whitney / General Electric / Rolls-Royce", "Engine model": "JT9D / CF6 / RB211", "Engine type": "High-bypass turbofan" }, overview: "The 747-300 introduced a stretched upper deck before the more extensively modernized 747-400." }),
+      catalogVariant({ id: "boeing-747-8i", name: "747-8 Intercontinental", familyName: "747 Family", familySort: 6, firstFlight: "2011", dimensions: ["76.3 m", "68.4 m", "19.4 m"], engine: { Engines: "4", "Engine manufacturer": "General Electric", "Engine model": "GEnx-2B67", "Engine type": "High-bypass turbofan" }, overview: "The passenger 747-8 Intercontinental combined the largest 747 fuselage with a new wing and GEnx engines." }),
+      catalogVariant({ id: "boeing-777-200", name: "777-200", familyName: "777 Family", familySort: 1, firstFlight: "1994", dimensions: ["63.7 m", "60.9 m", "18.5 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric / Pratt & Whitney / Rolls-Royce", "Engine model": "GE90 / PW4000 / Trent 800", "Engine type": "High-bypass turbofan" }, overview: "The 777-200 launched Boeing's large twin-engine widebody family." }),
+      catalogVariant({ id: "boeing-777-200er", name: "777-200ER", familyName: "777 Family", familySort: 2, firstFlight: "1996", dimensions: ["63.7 m", "60.9 m", "18.5 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric / Pratt & Whitney / Rolls-Royce", "Engine model": "GE90 / PW4000 / Trent 800", "Engine type": "High-bypass turbofan" }, overview: "The 777-200ER added the fuel capacity and weight needed for longer intercontinental routes." }),
+      catalogVariant({ id: "boeing-777-200lr", name: "777-200LR", familyName: "777 Family", familySort: 3, firstFlight: "2005", dimensions: ["63.7 m", "64.8 m", "18.8 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "GE90-110B1L / GE90-115B", "Engine type": "High-bypass turbofan" }, overview: "The 777-200LR is the ultra-long-range member of the original 777 generation." }),
+      catalogVariant({ id: "boeing-777-300", name: "777-300", familyName: "777 Family", familySort: 4, firstFlight: "1997", dimensions: ["73.9 m", "60.9 m", "18.5 m"], engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney / Rolls-Royce", "Engine model": "PW4000 / Trent 800", "Engine type": "High-bypass turbofan" }, overview: "The original 777-300 stretched the family for greater passenger capacity." }),
+      catalogVariant({ id: "boeing-777-8", name: "777-8", familyName: "777 Family", familySort: 6, firstFlight: "In development", timeline: "Next Horizon", dimensions: ["70.9 m", "71.8 m unfolded", "19.5 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "GE9X", "Engine type": "High-bypass turbofan" }, overview: "The 777-8 is the shorter, longer-range member of the 777X family.", programState: "Advanced development" })
+    ],
+    embraer: [
+      catalogVariant({ id: "embraer-e195", name: "E195", familyName: "E-Jet Family", familySort: 4, firstFlight: "2004", dimensions: ["38.7 m", "28.7 m", "10.6 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-10E", "Engine type": "Turbofan" }, overview: "The first-generation E195 stretched the original E-Jet platform for higher capacity." }),
+      catalogVariant({ id: "embraer-e175-e2", name: "E175-E2", familyName: "E-Jet Family", familySort: 5, firstFlight: "2019", dimensions: ["32.4 m", "31.0 m", "10.0 m"], engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "PW1700G", "Engine type": "Geared turbofan" }, overview: "The E175-E2 applies the E2 wing, engines, and systems to the smaller E-Jet size.", programState: "Program paused" }),
+      catalogVariant({ id: "embraer-e190-e2", name: "E190-E2", familyName: "E-Jet Family", familySort: 6, firstFlight: "2016", dimensions: ["36.2 m", "33.7 m", "10.7 m"], engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney", "Engine model": "PW1900G", "Engine type": "Geared turbofan" }, overview: "The E190-E2 modernizes the E190 size with a new wing, geared turbofans, and updated systems." })
+    ],
+    bombardier: [
+      catalogVariant({ id: "bombardier-crj100", name: "CRJ100", familyName: "CRJ Family", familySort: 1, firstFlight: "1991", dimensions: ["26.8 m", "21.2 m", "6.2 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-3A1", "Engine type": "Turbofan" }, overview: "The CRJ100 launched the Canadair Regional Jet family in the 50-seat market." }),
+      catalogVariant({ id: "bombardier-crj700", name: "CRJ700", familyName: "CRJ Family", familySort: 3, firstFlight: "1999", dimensions: ["32.5 m", "23.2 m", "7.6 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-8C", "Engine type": "Turbofan" }, overview: "The CRJ700 introduced a larger wing and fuselage for the 70-seat regional market." }),
+      catalogVariant({ id: "bombardier-crj1000", name: "CRJ1000", familyName: "CRJ Family", familySort: 5, firstFlight: "2008", dimensions: ["39.1 m", "26.2 m", "7.1 m"], engine: { Engines: "2", "Engine manufacturer": "General Electric", "Engine model": "CF34-8C5A1", "Engine type": "Turbofan" }, overview: "The CRJ1000 is the longest and highest-capacity member of the CRJ family." })
+    ],
+    cessna: [
+      catalogVariant({ id: "cessna-citation-m2-gen2", name: "Citation M2 Gen2", familyName: "Citation Family", familySort: 1, firstFlight: "2021 generation", dimensions: ["13.0 m", "14.4 m", "4.2 m"], type: "Light business jet", className: "Business Jet", engine: { Engines: "2", "Engine manufacturer": "Williams International", "Engine model": "FJ44-1AP-21", "Engine type": "Turbofan" }, overview: "The Citation M2 Gen2 is the compact entry point to Cessna's current business-jet range." }),
+      catalogVariant({ id: "cessna-citation-cj3-gen2", name: "Citation CJ3 Gen2", familyName: "Citation Family", familySort: 2, firstFlight: "2023 generation", dimensions: ["15.6 m", "16.3 m", "4.6 m"], type: "Light business jet", className: "Business Jet", engine: { Engines: "2", "Engine manufacturer": "Williams International", "Engine model": "FJ44-3A", "Engine type": "Turbofan" }, overview: "The Citation CJ3 Gen2 updates the proven light-jet platform with a modernized flight deck and cabin." })
+    ],
+    beechcraft: [
+      catalogVariant({ id: "beechcraft-king-air-c90gtx", name: "King Air C90GTx", familyName: "King Air Family", familySort: 1, firstFlight: "2009", dimensions: ["10.9 m", "15.3 m", "4.4 m"], type: "Twin turboprop", className: "General Aviation", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-135A", "Engine type": "Turboprop" }, overview: "The C90GTx is the compact, accessible end of the modern King Air range." }),
+      catalogVariant({ id: "beechcraft-king-air-200", name: "King Air 200", familyName: "King Air Family", familySort: 2, firstFlight: "1972", timeline: "Jet Age", dimensions: ["13.3 m", "16.6 m", "4.6 m"], type: "Twin turboprop", className: "General Aviation", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-41", "Engine type": "Turboprop" }, overview: "The King Air 200 established the highly successful mid-size Super King Air platform." }),
+      catalogVariant({ id: "beechcraft-king-air-250", name: "King Air 250", familyName: "King Air Family", familySort: 3, firstFlight: "2010 generation", dimensions: ["13.3 m", "17.7 m", "4.5 m"], type: "Twin turboprop", className: "General Aviation", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-52", "Engine type": "Turboprop" }, overview: "The King Air 250 improved runway performance and payload capability within the 200-series airframe." }),
+      catalogVariant({ id: "beechcraft-king-air-300", name: "King Air 300", familyName: "King Air Family", familySort: 5, firstFlight: "1983", timeline: "Jet Age", dimensions: ["14.0 m", "16.6 m", "4.4 m"], type: "Twin turboprop", className: "General Aviation", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-60A", "Engine type": "Turboprop" }, overview: "The King Air 300 introduced more powerful engines to the larger Super King Air airframe." }),
+      catalogVariant({ id: "beechcraft-king-air-350", name: "King Air 350", familyName: "King Air Family", familySort: 6, firstFlight: "1988", timeline: "Jet Age", dimensions: ["14.2 m", "17.7 m", "4.4 m"], type: "Twin turboprop", className: "General Aviation", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-60A", "Engine type": "Turboprop" }, overview: "The King Air 350 stretched the cabin and became a widely used corporate and special-mission turboprop." })
+    ],
+    piper: [
+      catalogVariant({ id: "piper-m500", name: "M500", familyName: "M-Class Family", familySort: 2, firstFlight: "2015 generation", dimensions: ["9.0 m", "13.1 m", "3.4 m"], type: "Pressurized single-engine turboprop", className: "General Aviation", engine: { Engines: "1", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PT6A-42A", "Engine type": "Turboprop" }, overview: "The M500 is Piper's entry-level pressurized turboprop in the modern M-Class lineup." })
+    ],
+    gulfstream: [
+      catalogVariant({ id: "gulfstream-g400", name: "G400", familyName: "Large-Cabin Gulfstream Family", familySort: 1, firstFlight: "2024", timeline: "Next Horizon", dimensions: ["26.3 m", "26.3 m", "7.8 m"], type: "Large-cabin business jet", className: "Business Jet", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW812GA", "Engine type": "Turbofan" }, overview: "The G400 brings the newer Gulfstream wing and flight deck to a shorter large-cabin platform." }),
+      catalogVariant({ id: "gulfstream-g600", name: "G600", familyName: "Large-Cabin Gulfstream Family", familySort: 3, firstFlight: "2016", dimensions: ["29.4 m", "29.0 m", "7.7 m"], type: "Long-range business jet", className: "Business Jet", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW815GA", "Engine type": "Turbofan" }, overview: "The G600 adds cabin length and range above the G500 while retaining the same flight-deck generation." }),
+      catalogVariant({ id: "gulfstream-g650", name: "G650", familyName: "Large-Cabin Gulfstream Family", familySort: 4, firstFlight: "2009", dimensions: ["30.4 m", "30.4 m", "7.8 m"], type: "Ultra-long-range business jet", className: "Business Jet", engine: { Engines: "2", "Engine manufacturer": "Rolls-Royce", "Engine model": "BR725", "Engine type": "Turbofan" }, overview: "The G650 introduced Gulfstream's landmark high-speed, ultra-long-range flagship platform." })
+    ],
+    atr: [
+      catalogVariant({ id: "atr-42-300", name: "ATR 42-300", familyName: "ATR Turboprop Family", familySort: 1, firstFlight: "1984", timeline: "Jet Age", dimensions: ["22.7 m", "24.6 m", "7.6 m"], type: "Regional turboprop", className: "Regional Turboprop", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW120 series", "Engine type": "Turboprop" }, overview: "The ATR 42-300 was the original production version of ATR's smaller regional turboprop." }),
+      catalogVariant({ id: "atr-42-500", name: "ATR 42-500", familyName: "ATR Turboprop Family", familySort: 2, firstFlight: "1994", dimensions: ["22.7 m", "24.6 m", "7.6 m"], type: "Regional turboprop", className: "Regional Turboprop", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW127E", "Engine type": "Turboprop" }, overview: "The ATR 42-500 added more powerful engines, updated propellers, and cabin improvements." }),
+      catalogVariant({ id: "atr-72-200", name: "ATR 72-200", familyName: "ATR Turboprop Family", familySort: 4, firstFlight: "1988", timeline: "Jet Age", dimensions: ["27.2 m", "27.1 m", "7.7 m"], type: "Regional turboprop", className: "Regional Turboprop", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW124B", "Engine type": "Turboprop" }, overview: "The ATR 72-200 introduced the stretched 70-seat branch of the ATR family." }),
+      catalogVariant({ id: "atr-72-500", name: "ATR 72-500", familyName: "ATR Turboprop Family", familySort: 5, firstFlight: "1997", dimensions: ["27.2 m", "27.1 m", "7.7 m"], type: "Regional turboprop", className: "Regional Turboprop", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW127F/M", "Engine type": "Turboprop" }, overview: "The ATR 72-500 improved propulsion, cabin comfort, and hot-and-high performance." })
+    ],
+    dassault: [
+      catalogVariant({ id: "dassault-falcon-900lx", name: "Falcon 900LX", familyName: "Falcon Family", familySort: 1, firstFlight: "2010 generation", dimensions: ["20.2 m", "19.3 m", "7.6 m"], type: "Long-range business jet", className: "Business Jet", engine: { Engines: "3", "Engine manufacturer": "Honeywell", "Engine model": "TFE731-60", "Engine type": "Turbofan" }, overview: "The Falcon 900LX is the refined long-range version of Dassault's three-engine 900 series." }),
+      catalogVariant({ id: "dassault-falcon-2000lxs", name: "Falcon 2000LXS", familyName: "Falcon Family", familySort: 2, firstFlight: "2012 generation", dimensions: ["20.2 m", "21.4 m", "7.1 m"], type: "Large-cabin business jet", className: "Business Jet", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW308C", "Engine type": "Turbofan" }, overview: "The Falcon 2000LXS balances a large cabin, strong runway performance, and transcontinental range." }),
+      catalogVariant({ id: "dassault-falcon-7x", name: "Falcon 7X", familyName: "Falcon Family", familySort: 3, firstFlight: "2005", dimensions: ["23.4 m", "26.2 m", "7.8 m"], type: "Long-range business jet", className: "Business Jet", engine: { Engines: "3", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW307A", "Engine type": "Turbofan" }, overview: "The Falcon 7X introduced digital fly-by-wire controls to Dassault's long-range business-jet family." }),
+      catalogVariant({ id: "dassault-falcon-6x", name: "Falcon 6X", familyName: "Falcon Family", familySort: 5, firstFlight: "2021", dimensions: ["25.7 m", "25.9 m", "7.5 m"], type: "Long-range business jet", className: "Business Jet", engine: { Engines: "2", "Engine manufacturer": "Pratt & Whitney Canada", "Engine model": "PW812D", "Engine type": "Turbofan" }, overview: "The Falcon 6X adds a notably wide cabin and modern long-range performance to the Falcon lineup." })
+    ],
+    sukhoi: [
+      catalogVariant({ id: "sukhoi-su33", name: "Su-33", familyName: "Flanker Family", familySort: 2, firstFlight: "1987", timeline: "Jet Age", dimensions: ["21.9 m", "14.7 m unfolded", "5.9 m"], type: "Carrier-based fighter", className: "Fighter", engine: { Engines: "2", "Engine manufacturer": "Saturn", "Engine model": "AL-31F3", "Engine type": "Afterburning turbofan" }, overview: "The Su-33 navalized the Flanker design with folding wings, strengthened landing gear, and carrier equipment." }),
+      catalogVariant({ id: "sukhoi-su34", name: "Su-34", familyName: "Flanker Family", familySort: 4, firstFlight: "1990", dimensions: ["23.3 m", "14.7 m", "6.1 m"], type: "Strike fighter", className: "Fighter", engine: { Engines: "2", "Engine manufacturer": "Saturn", "Engine model": "AL-31FM1", "Engine type": "Afterburning turbofan" }, overview: "The Su-34 adapts the Flanker lineage into a side-by-side two-seat strike aircraft." })
+    ]
+  };
+
   function mergeSpecs(baseSpecs, overrideSpecs, powerplantSpecs) {
     const merged = {};
     ["dimensions", "powerplant", "performance", "weights", "capacity"].forEach((group) => {
@@ -774,7 +874,7 @@ window.AviationData = (() => {
   }
 
   function buildPowerplantSummary(aircraft) {
-    const engine = engineProfiles[aircraft.id];
+    const engine = engineProfiles[aircraft.id] || aircraft.engine;
     if (!engine) {
       return {
         Engines: "Program dependent",
@@ -794,7 +894,8 @@ window.AviationData = (() => {
       ...storedOverride,
       dimensions: {
         ...(dimensionOverrides[aircraft.id] || {}),
-        ...(storedOverride.dimensions || {})
+        ...(storedOverride.dimensions || {}),
+        ...(aircraft.dimensions || {})
       }
     };
     const powerplantLine = `${engine["Engine manufacturer"]} ${engine["Engine model"]} (${engine["Engine type"]})`;
@@ -822,7 +923,7 @@ window.AviationData = (() => {
   const manufacturers = rawManufacturers.map((manufacturer) => ({
     ...manufacturer,
     source: manufacturerSources[manufacturer.id] || null,
-    aircraft: manufacturer.aircraft.map((aircraft) => ({
+    aircraft: [...manufacturer.aircraft, ...(supplementalAircraftByManufacturer[manufacturer.id] || [])].map((aircraft) => ({
       ...aircraft,
       source: manufacturerSources[manufacturer.id] || null,
       detail: buildFallbackDetail(aircraft, manufacturer)
@@ -919,17 +1020,46 @@ window.AviationData = (() => {
     "lockheed-f35a": "F-35 Lightning II Family",
     "lockheed-f35b": "F-35 Lightning II Family",
     "lockheed-f35c": "F-35 Lightning II Family",
-    "northrop-b2": "Stealth Bomber Family",
-    "northrop-b21": "Stealth Bomber Family",
     "dassault-falcon-8x": "Falcon Family",
     "dassault-falcon-10x": "Falcon Family",
     "sukhoi-su27": "Flanker Family",
     "sukhoi-su30sm2": "Flanker Family",
-    "sukhoi-su35s": "Flanker Family",
-    "mdd-dc10": "Widebody Trijet Family",
-    "mdd-md11": "Widebody Trijet Family",
-    "mdd-md80": "MD Narrowbody Family",
-    "mdd-md95": "MD Narrowbody Family"
+    "sukhoi-su35s": "Flanker Family"
+  };
+
+  const aircraftFamilySort = {
+    "boeing-737-800": 8,
+    "boeing-737-max": 18,
+    "boeing-747-400": 4,
+    "boeing-747-8f": 5,
+    "boeing-777-300er": 5,
+    "boeing-777-9": 7,
+    "embraer-e170": 1,
+    "embraer-e175": 2,
+    "embraer-e190": 3,
+    "embraer-e195-e2": 7,
+    "bombardier-crj200": 2,
+    "bombardier-crj900": 4,
+    "cessna-cj4-gen2": 3,
+    "cessna-latitude": 4,
+    "cessna-longitude": 5,
+    "beechcraft-king-air-260": 4,
+    "beechcraft-king-air-360": 7,
+    "piper-m350": 1,
+    "piper-m600-sls": 3,
+    "piper-m700-fury": 4,
+    "gulfstream-g500": 2,
+    "gulfstream-g650er": 5,
+    "gulfstream-g700": 6,
+    "gulfstream-g800": 7,
+    "atr-42-600": 3,
+    "atr-72-600": 6,
+    "atr-evo": 7,
+    "dassault-falcon-8x": 4,
+    "dassault-falcon-10x": 6,
+    "sukhoi-su27": 1,
+    "sukhoi-su30sm2": 3,
+    "sukhoi-su35s": 5
   };
 
   function familyId(name) {
@@ -945,7 +1075,7 @@ window.AviationData = (() => {
 
     const families = new Map();
     manufacturer.aircraft.forEach((aircraft) => {
-      const name = aircraftFamilyLabels[aircraft.id] || aircraft.name;
+      const name = aircraft.familyName || aircraftFamilyLabels[aircraft.id] || aircraft.name;
       if (!families.has(name)) {
         families.set(name, { id: familyId(name), name, aircraft: [] });
       }
@@ -954,6 +1084,10 @@ window.AviationData = (() => {
 
     return [...families.values()].map((family) => ({
       ...family,
+      aircraft: family.aircraft.sort((left, right) =>
+        (left.familySort ?? aircraftFamilySort[left.id] ?? 999) -
+        (right.familySort ?? aircraftFamilySort[right.id] ?? 999)
+      ),
       classes: [...new Set(family.aircraft.map((aircraft) => aircraft.class))],
       description: family.aircraft.length > 1
         ? `Choose the exact ${family.name.replace(/ Family$/, "")} model you want to explore.`
