@@ -29,6 +29,33 @@ window.AviationData = (() => {
     Experimental: "Concept aircraft, future programs, or technology demonstrators aimed at the next era."
   };
 
+  const manufacturerSources = {
+    airbus: { name: "Airbus aircraft catalogue", url: "https://www.aircraft.airbus.com/en/aircraft" },
+    boeing: { name: "Boeing commercial aircraft", url: "https://www.boeing.com/commercial" },
+    embraer: { name: "Embraer Commercial Aviation", url: "https://www.embraercommercialaviation.com/" },
+    bombardier: { name: "Bombardier aircraft", url: "https://bombardier.com/en/aircraft" },
+    cessna: { name: "Cessna by Textron Aviation", url: "https://cessna.txtav.com/" },
+    beechcraft: { name: "Beechcraft by Textron Aviation", url: "https://beechcraft.txtav.com/" },
+    piper: { name: "Piper Aircraft", url: "https://www.piper.com/" },
+    gulfstream: { name: "Gulfstream aircraft", url: "https://www.gulfstream.com/en/aircraft/" },
+    atr: { name: "ATR aircraft family", url: "https://www.atr-aircraft.com/aircraft-services/aircraft-family/" },
+    comac: { name: "COMAC products", url: "https://english.comac.cc/products/" },
+    "lockheed-martin": { name: "Lockheed Martin aeronautics", url: "https://www.lockheedmartin.com/en-us/who-we-are/business-areas/aeronautics.html" },
+    "northrop-grumman": { name: "Northrop Grumman air systems", url: "https://www.northropgrumman.com/what-we-do/air" },
+    dassault: { name: "Dassault Aviation aircraft", url: "https://www.dassault-aviation.com/en/" },
+    saab: { name: "Saab air products", url: "https://www.saab.com/products/air" },
+    sukhoi: { name: "United Aircraft Corporation aircraft", url: "https://uacrussia.ru/en/aircraft/lineup/" },
+    antonov: { name: "Antonov aircraft", url: "https://www.antonov.com/en/aircraft" },
+    "mcdonnell-douglas": { name: "Boeing historical products", url: "https://www.boeing.com/history/products/" },
+    "dehavilland-canada": { name: "De Havilland Canada aircraft", url: "https://dehavilland.com/en" }
+  };
+
+  const referenceSources = [
+    { name: "FAA aircraft resources", url: "https://www.faa.gov/aircraft" },
+    { name: "ICAO safety and aviation resources", url: "https://www.icao.int/safety/Pages/default.aspx" },
+    { name: "Smithsonian National Air and Space Museum", url: "https://airandspace.si.edu/" }
+  ];
+
   const technicalProfilesByClass = {
     "Commercial Jet": {
       dimensions: { Length: "Program-dependent mainline airliner dimensions", Wingspan: "Program-dependent", Height: "Program-dependent" },
@@ -699,8 +726,10 @@ window.AviationData = (() => {
 
   const manufacturers = rawManufacturers.map((manufacturer) => ({
     ...manufacturer,
+    source: manufacturerSources[manufacturer.id] || null,
     aircraft: manufacturer.aircraft.map((aircraft) => ({
       ...aircraft,
+      source: manufacturerSources[manufacturer.id] || null,
       detail: buildFallbackDetail(aircraft, manufacturer)
     }))
   }));
@@ -776,6 +805,8 @@ window.AviationData = (() => {
     timelineDescriptions,
     categoryDescriptions,
     classDescriptions,
+    manufacturerSources,
+    referenceSources,
     getManufacturerById,
     getAircraftById,
     getUniqueCategories,

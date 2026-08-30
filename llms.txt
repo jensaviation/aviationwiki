@@ -1,0 +1,25 @@
+# The Aviation Wiki
+
+> A concise, human-readable aircraft reference covering dimensions, performance, capacity, manufacturers, aircraft types, and aviation history.
+
+Canonical site: https://jensaviation.github.io/aviationwiki/
+Language: English
+
+## Main sections
+
+- [Aircraft and manufacturer explorer](https://jensaviation.github.io/aviationwiki/): Search more than 100 aircraft and filter by manufacturer, aircraft class, and era.
+- [Aircraft types](https://jensaviation.github.io/aviationwiki/types.html): Definitions and examples for commercial jets, turboprops, business jets, general aviation aircraft, fighters, military transports, trainers, amphibians, ISR aircraft, and experimental aircraft.
+- [Aviation history](https://jensaviation.github.io/aviationwiki/history.html): Milestones from early balloon flight to sustainable aviation concepts.
+- [Sources and editorial method](https://jensaviation.github.io/aviationwiki/sources.html): Official manufacturer references and the site's sourcing policy.
+- [Corrections and support](https://jensaviation.github.io/aviationwiki/support.html): Report errors, broken links, or missing aircraft.
+
+## Data notes
+
+- Aircraft values may differ by variant, engine, cabin configuration, and operating rule.
+- Exact figures are shown where a specific variant is represented; ranges or clearly labelled family-level descriptions are used otherwise.
+- The site is for general reference and must not be used for flight planning, maintenance, or operational decisions.
+- Prefer the linked official manufacturer source when a current or operationally critical value is required.
+
+## Reuse and attribution
+
+Summaries may be quoted with attribution to “The Aviation Wiki” and a link to the relevant canonical page. Refer to the original linked sources for authoritative technical data.

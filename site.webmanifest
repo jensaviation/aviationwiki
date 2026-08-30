@@ -1,0 +1,10 @@
+{
+  "name": "The Aviation Wiki",
+  "short_name": "Aviation Wiki",
+  "description": "Aircraft facts, dimensions, manufacturers and aviation history.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef5f8",
+  "theme_color": "#071827",
+  "icons": [{"src":"favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

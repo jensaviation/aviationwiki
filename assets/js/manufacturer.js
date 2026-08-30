@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.AviationData;
+  const site = window.AviationSite;
   const root = document.getElementById("manufacturer-detail-root");
   const params = new URLSearchParams(window.location.search);
   const manufacturer = data.getManufacturerById(params.get("id"));
@@ -24,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderNotFound() {
+    if (site) {
+      site.setMetadata({ title: "Manufacturer Not Found", description: "This aircraft manufacturer profile could not be found.", path: "manufacturer.html", noIndex: true });
+    }
     root.innerHTML = `
       <section class="message-card reveal">
         <p class="eyebrow">Manufacturer Missing</p>
@@ -40,7 +44,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  document.title = `${manufacturer.name} | The Aviation Wiki`;
+  const pagePath = `manufacturer.html?id=${encodeURIComponent(manufacturer.id)}`;
+  const pageDescription = `${manufacturer.name} aircraft guide with company history, country, aircraft families, first-flight timeline, technical profiles, and official sources.`;
+  if (site) {
+    site.setMetadata({ title: `${manufacturer.name} Aircraft: Models & History`, description: pageDescription, path: pagePath });
+    site.setStructuredData("manufacturer-schema", {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: `${manufacturer.name} aircraft`,
+      description: pageDescription,
+      url: site.absoluteUrl(pagePath),
+      breadcrumb: site.breadcrumbSchema([{ name: "Home", path: "index.html" }, { name: manufacturer.name, path: pagePath }]),
+      mainEntity: { "@type": "Organization", name: manufacturer.name, foundingDate: manufacturer.founded, areaServed: manufacturer.country, url: manufacturer.source ? manufacturer.source.url : undefined }
+    });
+  }
 
   const timelineGroups = data.groupAircraftByTimeline(manufacturer.aircraft);
   const relatedManufacturers = data.manufacturers
@@ -51,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   root.innerHTML = `
     <section class="detail-hero">
+      ${site ? site.breadcrumbMarkup([{ name: "Home", path: "index.html" }, { name: manufacturer.name, path: pagePath }]) : ""}
       <div class="detail-hero-panel reveal">
         <p class="eyebrow">Manufacturer Dossier</p>
         <div class="detail-header">
@@ -106,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <article class="detail-panel reveal">
             <h3>Profile</h3>
             <p>${data.categoryDescriptions[manufacturer.category]}</p>
+            ${manufacturer.source ? `<a class="detail-link source-link" href="${manufacturer.source.url}" target="_blank" rel="noopener noreferrer">Official ${manufacturer.name} source <span aria-hidden="true">↗</span></a>` : ""}
           </article>
 
           <article class="detail-panel reveal">
@@ -168,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <h3>${aircraft.name}</h3>
                             <div class="meta-row">
                               <span class="meta-chip">${aircraft.type}</span>
-                              <span class="meta-chip">${aircraft.class}</span>
+                              <a class="meta-chip" href="type.html?id=${encodeURIComponent(aircraft.class)}">${aircraft.class}</a>
                             </div>
                             <p>${aircraft.overview}</p>
                             <div class="card-actions">

@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.AviationData;
+  const site = window.AviationSite;
   const root = document.getElementById("aircraft-detail-root");
 
   if (!root || !data) {
@@ -57,7 +58,19 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  function specValue(specs, group, key, fallback = "Varies by model") {
+    return specs && specs[group] && specs[group][key] ? specs[group][key] : fallback;
+  }
+
   function renderNotFound() {
+    if (site) {
+      site.setMetadata({
+        title: "Aircraft Not Found",
+        description: "This aircraft entry could not be found. Browse the aircraft explorer to choose a valid profile.",
+        path: "aircraft.html",
+        noIndex: true
+      });
+    }
     root.innerHTML = `
       <section class="message-card reveal">
         <p class="eyebrow">Aircraft Missing</p>
@@ -82,10 +95,38 @@ document.addEventListener("DOMContentLoaded", () => {
     ? manufacturer.aircraft.filter((item) => item.id !== aircraft.id).slice(0, 3)
     : [];
 
-  document.title = `${aircraft.name} | The Aviation Wiki`;
+  const pagePath = `aircraft.html?id=${encodeURIComponent(aircraft.id)}`;
+  const pageDescription = `${aircraft.name} dimensions, wingspan, range, capacity, engines, first flight, variants, history, and official ${manufacturer ? manufacturer.name : "manufacturer"} sources.`;
+
+  if (site) {
+    site.setMetadata({ title: `${aircraft.name}: Dimensions, Range & Facts`, description: pageDescription, path: pagePath, type: "article" });
+    site.setStructuredData("aircraft-schema", {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: `${aircraft.name} aircraft profile`,
+      description: pageDescription,
+      mainEntityOfPage: site.absoluteUrl(pagePath),
+      about: {
+        "@type": "Thing",
+        name: aircraft.name,
+        description: aircraft.overview,
+        manufacturer: manufacturer ? { "@type": "Organization", name: manufacturer.name } : undefined
+      },
+      breadcrumb: site.breadcrumbSchema([
+        { name: "Home", path: "index.html" },
+        { name: manufacturer ? manufacturer.name : "Manufacturer", path: manufacturer ? `manufacturer.html?id=${manufacturer.id}` : "index.html" },
+        { name: aircraft.name, path: pagePath }
+      ])
+    });
+  }
 
   root.innerHTML = `
     <section class="detail-hero">
+      ${site ? site.breadcrumbMarkup([
+        { name: "Home", path: "index.html" },
+        { name: manufacturer ? manufacturer.name : "Manufacturer", path: manufacturer ? `manufacturer.html?id=${manufacturer.id}` : "index.html" },
+        { name: aircraft.name, path: pagePath }
+      ]) : ""}
       <div class="detail-hero-panel reveal">
         <p class="eyebrow">Aircraft Dossier</p>
         <div class="detail-header">
@@ -93,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="meta-row">
               <span class="timeline-chip ${timelineClassName(aircraft.timeline)}">${aircraft.timeline}</span>
               <span class="program-state">${aircraft.programState}</span>
-              <span class="meta-chip">${aircraft.class}</span>
+              <a class="meta-chip" href="type.html?id=${encodeURIComponent(aircraft.class)}">${aircraft.class}</a>
             </div>
             <h1>${aircraft.name}</h1>
             <p>${detail.overview || aircraft.overview}</p>
@@ -104,6 +145,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="meta-chip">${aircraft.type}</span>
           </div>
         </div>
+
+        <dl class="quick-spec-grid" aria-label="${aircraft.name} quick specifications">
+          <div><dt>Length</dt><dd>${specValue(specs, "dimensions", "Length")}</dd></div>
+          <div><dt>Wingspan</dt><dd>${specValue(specs, "dimensions", "Wingspan")}</dd></div>
+          <div><dt>Height</dt><dd>${specValue(specs, "dimensions", "Height")}</dd></div>
+          <div><dt>Range</dt><dd>${specValue(specs, "performance", "Range", "Mission dependent")}</dd></div>
+          <div><dt>Capacity / payload</dt><dd>${specValue(specs, "capacity", "Passengers", specValue(specs, "capacity", "Payload", "Mission dependent"))}</dd></div>
+          <div><dt>Maximum takeoff weight</dt><dd>${specValue(specs, "weights", "MTOW", "Varies by model")}</dd></div>
+        </dl>
 
         <div class="detail-grid">
           <article class="detail-panel">
@@ -165,6 +215,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <article class="detail-panel reveal">
             <h3>Operators / Usage</h3>
             ${renderBulletList(detail.notableOperators, "detail-list")}
+          </article>
+
+          <article class="detail-panel reveal source-note">
+            <h3>Primary Source</h3>
+            <p>Specifications may vary by variant and configuration. Check the current manufacturer material for exact planning data.</p>
+            ${aircraft.source ? `<a class="detail-link" href="${aircraft.source.url}" target="_blank" rel="noopener noreferrer">${aircraft.source.name} <span aria-hidden="true">↗</span></a>` : ""}
+            <a class="mini-link" href="sources.html">How this wiki uses sources</a>
           </article>
         </aside>
 

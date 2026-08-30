@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const data = window.AviationData;
+  const data = window.AviationHistoryData;
   const overviewGrid = document.getElementById("history-overview-grid");
   const historyEvents = document.getElementById("history-events");
   const futureGrid = document.getElementById("future-grid");
