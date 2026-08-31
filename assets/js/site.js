@@ -104,6 +104,122 @@
       const linkPage = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
       if (linkPage === currentPage) link.setAttribute("aria-current", "page");
     });
+
+    const topbar = document.querySelector(".topbar");
+    const topnav = document.querySelector(".topnav");
+
+    if (topbar && topnav) {
+      topbar.classList.add("topbar-redesign");
+
+      const searchLink = document.createElement("a");
+      searchLink.className = "topbar-search";
+      searchLink.href = "index.html#explorer";
+      searchLink.setAttribute("aria-label", "Search aircraft, manufacturers, aircraft types, and pages");
+      searchLink.setAttribute("aria-keyshortcuts", "/");
+      searchLink.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-4-4"></path>
+        </svg>
+        <span>Search</span>
+        <kbd>/</kbd>
+      `;
+      topnav.appendChild(searchLink);
+
+      let lastScrollPosition = window.scrollY;
+      let accumulatedScroll = 0;
+      let pointerNearTop = false;
+      let scrollFrame = null;
+
+      function showTopbar() {
+        topbar.classList.remove("topbar-is-hidden");
+      }
+
+      function hideTopbar() {
+        if (!topbar.contains(document.activeElement)) {
+          topbar.classList.add("topbar-is-hidden");
+        }
+      }
+
+      function openSearch(event) {
+        const searchInput = document.getElementById("search-input");
+        const explorer = document.getElementById("explorer");
+
+        if (!searchInput || !explorer) return;
+
+        if (event) event.preventDefault();
+        showTopbar();
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        explorer.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+        window.setTimeout(() => searchInput.focus({ preventScroll: true }), reduceMotion ? 0 : 420);
+      }
+
+      searchLink.addEventListener("click", openSearch);
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (scrollFrame) return;
+          scrollFrame = window.requestAnimationFrame(() => {
+            const currentScrollPosition = Math.max(window.scrollY, 0);
+            const distance = currentScrollPosition - lastScrollPosition;
+
+            if ((distance > 0 && accumulatedScroll < 0) || (distance < 0 && accumulatedScroll > 0)) {
+              accumulatedScroll = 0;
+            }
+            accumulatedScroll += distance;
+
+            if (currentScrollPosition < 72 || pointerNearTop) {
+              showTopbar();
+              accumulatedScroll = 0;
+            } else if (accumulatedScroll > 18) {
+              hideTopbar();
+              accumulatedScroll = 0;
+            } else if (accumulatedScroll < -10) {
+              showTopbar();
+              accumulatedScroll = 0;
+            }
+
+            lastScrollPosition = currentScrollPosition;
+            scrollFrame = null;
+          });
+        },
+        { passive: true }
+      );
+
+      document.addEventListener(
+        "pointermove",
+        (event) => {
+          pointerNearTop = event.clientY <= 26;
+          if (pointerNearTop) {
+            showTopbar();
+          }
+        },
+        { passive: true }
+      );
+
+      topbar.addEventListener("focusin", showTopbar);
+      topbar.addEventListener("pointerenter", showTopbar);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Tab") showTopbar();
+
+        const target = event.target;
+        const isTyping = target instanceof HTMLElement && (
+          target.matches("input, textarea, select") || target.isContentEditable
+        );
+
+        if (event.key === "/" && !event.ctrlKey && !event.metaKey && !event.altKey && !isTyping) {
+          const searchInput = document.getElementById("search-input");
+          if (searchInput) {
+            openSearch(event);
+          } else {
+            event.preventDefault();
+            window.location.href = "index.html#explorer";
+          }
+        }
+      });
+    }
   });
 
   window.AviationSite = {

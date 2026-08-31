@@ -11,6 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search-input");
   const activeFilters = document.getElementById("active-filters");
   const resultsCount = document.getElementById("results-count");
+  const searchExperience = document.getElementById("search-experience");
+  const searchResultsTitle = document.getElementById("search-results-title");
+  const searchResultsSummary = document.getElementById("search-results-summary");
+  const searchResultsGrid = document.getElementById("search-results-grid");
+  const searchCloseButton = document.getElementById("search-close-button");
+  const explorer = document.getElementById("explorer");
+  const homeHero = document.querySelector(".hero-home");
+
+  if (explorer && homeHero) {
+    homeHero.insertAdjacentElement("afterend", explorer);
+  }
 
   const state = {
     query: "",
@@ -20,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let revealObserver = null;
+
+  searchInput.setAttribute("aria-controls", "search-experience");
+  searchInput.setAttribute("aria-expanded", "false");
 
   function timelineClassName(timeline) {
     return `timeline-${timeline.toLowerCase().replace(/\s+/g, "-")}`;
@@ -245,78 +259,203 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  function manufacturerMatchesQuery(manufacturer, query) {
-    const haystack = [
-      manufacturer.name,
-      manufacturer.country,
-      manufacturer.summary,
-      manufacturer.category,
-      manufacturer.aircraftFocus.join(" ")
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    return haystack.includes(query);
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 
-  function aircraftMatchesQuery(aircraft, query) {
-    return [aircraft.name, aircraft.type, aircraft.class, aircraft.overview]
-      .join(" ")
+  function normalizeSearch(value) {
+    return String(value)
       .toLowerCase()
-      .includes(query);
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
   }
 
-  function getDisplayedAircraft(manufacturer, query) {
-    const baseAircraft = manufacturer.aircraft.filter((aircraft) => {
+  function matchScore(primaryText, secondaryText, query) {
+    const primary = normalizeSearch(primaryText);
+    const secondary = normalizeSearch(secondaryText);
+
+    if (primary === query) return 0;
+    if (primary.startsWith(query)) return 1;
+    if (primary.includes(query)) return 2;
+    if (secondary.startsWith(query)) return 3;
+    if (secondary.includes(query)) return 4;
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const searchablePages = [
+    { name: "Manufacturer Explorer", href: "index.html#manufacturer-overview", summary: "Browse every aircraft manufacturer and its model catalogue.", keywords: "manufacturers makers brands atlas explorer" },
+    { name: "Aircraft Types", href: "types.html", summary: "Explore commercial jets, fighters, trainers, turboprops, and more.", keywords: "aircraft types classes categories" },
+    { name: "Aviation History", href: "history.html", summary: "Follow aviation from early flight to future aircraft concepts.", keywords: "history timeline eras milestones" },
+    { name: "Sources", href: "sources.html", summary: "Review official sources and the research approach behind the wiki.", keywords: "sources references citations research" },
+    { name: "Support", href: "support.html", summary: "Report a correction, broken link, or missing aircraft.", keywords: "support contact correction report missing aircraft" }
+  ];
+
+  function getSearchResults(query) {
+    const normalizedQuery = normalizeSearch(query);
+    if (!normalizedQuery) return [];
+
+    const aircraftResults = data.allAircraft
+      .map((aircraft) => ({
+        kind: "aircraft",
+        item: aircraft,
+        score: matchScore(
+          aircraft.name,
+          `${aircraft.manufacturerName} ${aircraft.type} ${aircraft.class} ${aircraft.overview}`,
+          normalizedQuery
+        )
+      }))
+      .filter((result) => Number.isFinite(result.score));
+
+    const manufacturerResults = data.manufacturers
+      .map((manufacturer) => ({
+        kind: "manufacturer",
+        item: manufacturer,
+        score: matchScore(
+          manufacturer.name,
+          `${manufacturer.country} ${manufacturer.category} ${manufacturer.aircraftFocus.join(" ")}`,
+          normalizedQuery
+        ) + 0.5
+      }))
+      .filter((result) => Number.isFinite(result.score));
+
+    const typeResults = data.getUniqueAircraftClasses()
+      .map((aircraftClass) => ({
+        kind: "type",
+        item: {
+          name: aircraftClass,
+          href: `type.html?id=${encodeURIComponent(aircraftClass)}`,
+          summary: data.classDescriptions[aircraftClass] || "Explore aircraft in this category.",
+          count: data.allAircraft.filter((aircraft) => aircraft.class === aircraftClass).length
+        },
+        score: matchScore(
+          aircraftClass,
+          data.classDescriptions[aircraftClass] || "",
+          normalizedQuery
+        ) + 0.25
+      }))
+      .filter((result) => Number.isFinite(result.score));
+
+    const pageResults = searchablePages
+      .map((page) => ({
+        kind: "page",
+        item: page,
+        score: matchScore(page.name, `${page.summary} ${page.keywords}`, normalizedQuery) + 0.35
+      }))
+      .filter((result) => Number.isFinite(result.score));
+
+    return [...aircraftResults, ...typeResults, ...pageResults, ...manufacturerResults]
+      .sort((left, right) => left.score - right.score || left.item.name.localeCompare(right.item.name))
+      .slice(0, 8);
+  }
+
+  function aircraftDimension(aircraft, label) {
+    return aircraft.detail?.specs?.dimensions?.[label] || "Not listed";
+  }
+
+  function renderSearchResult(result, index) {
+    if (result.kind === "page" || result.kind === "type") {
+      const item = result.item;
+      const isType = result.kind === "type";
+      return `
+        <a class="search-result-card search-result-navigation" href="${item.href}" style="--result-index: ${index}">
+          <span class="search-result-number">${String(index + 1).padStart(2, "0")}</span>
+          <span class="search-result-kind">${isType ? "Aircraft type" : "Website page"}</span>
+          <strong>${item.name}</strong>
+          <span class="search-result-maker">${item.summary}${isType ? ` · ${item.count} aircraft` : ""}</span>
+          <span class="search-result-action">Open ${isType ? "aircraft type" : "page"} <span aria-hidden="true">→</span></span>
+        </a>
+      `;
+    }
+
+    if (result.kind === "manufacturer") {
+      const manufacturer = result.item;
+      return `
+        <a class="search-result-card search-result-manufacturer" href="manufacturer.html?id=${manufacturer.id}" style="--result-index: ${index}">
+          <span class="search-result-number">${String(index + 1).padStart(2, "0")}</span>
+          <span class="search-result-kind">Manufacturer</span>
+          <strong>${manufacturer.name}</strong>
+          <span class="search-result-maker">${manufacturer.country} · ${manufacturer.aircraft.length} aircraft</span>
+          <span class="search-result-action">Open manufacturer <span aria-hidden="true">→</span></span>
+        </a>
+      `;
+    }
+
+    const aircraft = result.item;
+    return `
+      <a class="search-result-card" href="aircraft.html?id=${aircraft.id}" style="--result-index: ${index}">
+        <span class="search-result-number">${String(index + 1).padStart(2, "0")}</span>
+        <span class="search-result-kind">${aircraft.class}</span>
+        <strong>${aircraft.name}</strong>
+        <span class="search-result-maker">${aircraft.manufacturerName} · ${aircraft.type}</span>
+        <span class="search-result-dimensions">
+          <span><small>Length</small>${aircraftDimension(aircraft, "Length")}</span>
+          <span><small>Wingspan</small>${aircraftDimension(aircraft, "Wingspan")}</span>
+        </span>
+        <span class="search-result-action">Open aircraft <span aria-hidden="true">→</span></span>
+      </a>
+    `;
+  }
+
+  function renderSearchExperience() {
+    const query = state.query.trim();
+    const hasQuery = query.length > 0;
+
+    searchExperience.hidden = !hasQuery;
+    searchInput.setAttribute("aria-expanded", hasQuery ? "true" : "false");
+    searchExperience.classList.toggle("is-active", hasQuery);
+
+    if (!hasQuery) {
+      searchResultsGrid.innerHTML = "";
+      return;
+    }
+
+    const matches = getSearchResults(query);
+    const safeQuery = escapeHtml(query);
+    searchResultsTitle.innerHTML = matches.length
+      ? `Flight matches for <span>“${safeQuery}”</span>`
+      : `No flight match for <span>“${safeQuery}”</span>`;
+    searchResultsSummary.textContent = matches.length
+      ? `${matches.length} direct result${matches.length === 1 ? "" : "s"} found. Select one to open its page.`
+      : "Try a model number, aircraft family, manufacturer, or aircraft type.";
+
+    searchExperience.classList.toggle("has-no-results", matches.length === 0);
+    searchResultsGrid.innerHTML = matches.length
+      ? matches.map(renderSearchResult).join("")
+      : `
+        <div class="search-empty-state">
+          <span class="search-empty-code">NO SIGNAL</span>
+          <strong>Nothing is matching that flight path yet.</strong>
+          <p>Try “737”, “A340-600”, “fighter”, “Airbus”, or “regional jet”.</p>
+        </div>
+      `;
+  }
+
+  function getDisplayedAircraft(manufacturer) {
+    return manufacturer.aircraft.filter((aircraft) => {
       const timelineMatch = !state.timeline || aircraft.timeline === state.timeline;
       const classMatch = !state.aircraftClass || aircraft.class === state.aircraftClass;
       return timelineMatch && classMatch;
     });
-
-    if (!query) {
-      return baseAircraft;
-    }
-
-    const matchesManufacturer = manufacturerMatchesQuery(manufacturer, query);
-
-    if (matchesManufacturer) {
-      return baseAircraft;
-    }
-
-    return baseAircraft.filter((aircraft) => aircraftMatchesQuery(aircraft, query));
   }
 
   function getFilteredManufacturers() {
-    const query = state.query.trim().toLowerCase();
-
     return data.manufacturers.filter((manufacturer) => {
       const categoryMatch = !state.category || manufacturer.category === state.category;
       if (!categoryMatch) {
         return false;
       }
 
-      const displayedAircraft = getDisplayedAircraft(manufacturer, query);
-      if (displayedAircraft.length === 0) {
-        return false;
-      }
-
-      if (!query) {
-        return true;
-      }
-
-      return (
-        manufacturerMatchesQuery(manufacturer, query) ||
-        displayedAircraft.some((aircraft) => aircraftMatchesQuery(aircraft, query))
-      );
+      return getDisplayedAircraft(manufacturer).length > 0;
     });
   }
 
   function renderActiveFilters() {
     const pills = [];
-
-    if (state.query) {
-      pills.push(`<span class="tag">Search: ${state.query}</span>`);
-    }
 
     if (state.category) {
       pills.push(`<span class="tag">Manufacturer type: ${state.category}</span>`);
@@ -362,7 +501,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderManufacturers() {
-    const query = state.query.trim().toLowerCase();
     const filteredManufacturers = getFilteredManufacturers();
     resultsCount.textContent = filteredManufacturers.length.toLocaleString();
 
@@ -379,7 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     manufacturerGrid.innerHTML = filteredManufacturers
       .map((manufacturer) => {
-        const displayedAircraft = getDisplayedAircraft(manufacturer, query);
+        const displayedAircraft = getDisplayedAircraft(manufacturer);
         const timelineGroups = data.groupAircraftByTimeline(displayedAircraft)
           .map(
             (group) => `
@@ -448,6 +586,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function render() {
     syncUrlWithState();
+    renderSearchExperience();
     renderActiveFilters();
     updateTimelineButtons();
     renderManufacturers();
@@ -473,7 +612,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchInput.addEventListener("input", (event) => {
     state.query = event.target.value.trim();
-    render();
+    syncUrlWithState();
+    renderSearchExperience();
+  });
+
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && state.query) {
+      state.query = "";
+      searchInput.value = "";
+      syncUrlWithState();
+      renderSearchExperience();
+    }
+  });
+
+  searchCloseButton.addEventListener("click", () => {
+    state.query = "";
+    searchInput.value = "";
+    syncUrlWithState();
+    renderSearchExperience();
+    searchInput.focus();
   });
 
   timelineFilterButtons.addEventListener("click", (event) => {

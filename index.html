@@ -21,10 +21,10 @@
   <meta property="og:image:alt" content="The Aviation Wiki — aircraft facts, dimensions and history">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Aviation Wiki","url":"https://jensaviation.github.io/aviationwiki/","description":"Aircraft facts, dimensions, manufacturers and aviation history.","potentialAction":{"@type":"SearchAction","target":"https://jensaviation.github.io/aviationwiki/index.html?query={search_term_string}#explorer","query-input":"required name=search_term_string"}}</script>
-  <link rel="stylesheet" href="assets/css/styles.css?v=7">
-  <script defer src="assets/js/site.js?v=7"></script>
-  <script defer src="assets/js/data.js?v=7"></script>
-  <script defer src="assets/js/main.js?v=7"></script>
+  <link rel="stylesheet" href="assets/css/styles.css?v=9">
+  <script defer src="assets/js/site.js?v=9"></script>
+  <script defer src="assets/js/data.js?v=9"></script>
+  <script defer src="assets/js/main.js?v=9"></script>
 </head>
 <body class="page page-home">
   <div class="sky-layer sky-layer-one"></div>
@@ -143,6 +143,31 @@
           </select>
         </label>
       </div>
+
+      <section class="search-experience" id="search-experience" aria-live="polite" aria-label="Aircraft search results" hidden>
+        <div class="search-radar" aria-hidden="true">
+          <span class="radar-ring radar-ring-one"></span>
+          <span class="radar-ring radar-ring-two"></span>
+          <span class="radar-ring radar-ring-three"></span>
+          <span class="radar-sweep"></span>
+          <span class="radar-flight-path"></span>
+          <span class="radar-aircraft">✈</span>
+          <span class="radar-blip radar-blip-one"></span>
+          <span class="radar-blip radar-blip-two"></span>
+          <span class="radar-blip radar-blip-three"></span>
+        </div>
+        <div class="search-results-panel">
+          <div class="search-results-heading">
+            <div>
+              <p class="eyebrow">Live Aircraft Radar</p>
+              <h3 id="search-results-title">Searching the catalogue</h3>
+              <p id="search-results-summary">Matching aircraft will appear here.</p>
+            </div>
+            <button class="search-close-button" id="search-close-button" type="button" aria-label="Clear search">Clear search</button>
+          </div>
+          <div class="search-results-grid" id="search-results-grid"></div>
+        </div>
+      </section>
 
       <div class="timeline-filter-bar">
         <span class="timeline-filter-title">Timeline</span>
