@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const referenceRoot = document.getElementById("reference-sources");
 
   function sourceCard(source, label) {
-    return `<article class="source-card"><span class="source-label">${label}</span><h3>${source.name}</h3><p>Use this primary reference for current product information and published aircraft characteristics.</p><a class="detail-link" href="${source.url}" target="_blank" rel="noopener noreferrer">Open official source <span aria-hidden="true">↗</span></a></article>`;
+    return `<article class="source-card"><span class="source-label">${label}</span><h3>${source.name}</h3><p>Use this authoritative reference for type identification, programme history, or published aircraft characteristics.</p><a class="detail-link" href="${source.url}" target="_blank" rel="noopener noreferrer">Open official source <span aria-hidden="true">↗</span></a></article>`;
   }
 
   if (manufacturerRoot) {

@@ -7,7 +7,7 @@ Language: English
 
 ## Main sections
 
-- [Aircraft and manufacturer explorer](https://jensaviation.github.io/aviationwiki/): Search more than 100 aircraft and filter by manufacturer, aircraft class, and era.
+- [Aircraft and manufacturer explorer](https://jensaviation.github.io/aviationwiki/): Search more than 2,500 aircraft and recognised variants across 170+ manufacturers, with filters for manufacturer, aircraft class, and era.
 - [Aircraft types](https://jensaviation.github.io/aviationwiki/types.html): Definitions and examples for commercial jets, turboprops, business jets, general aviation aircraft, fighters, military transports, trainers, amphibians, ISR aircraft, and experimental aircraft.
 - [Aviation history](https://jensaviation.github.io/aviationwiki/history.html): Milestones from early balloon flight to sustainable aviation concepts.
 - [Sources and editorial method](https://jensaviation.github.io/aviationwiki/sources.html): Official manufacturer references and the site's sourcing policy.

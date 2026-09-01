@@ -13,7 +13,10 @@ window.AviationData = (() => {
     "Regional & Utility": "Manufacturers serving short-haul routes, STOL utility roles, and specialized transport missions.",
     "Business & General Aviation": "Builders of personal, training, business, and light utility aircraft families.",
     "Military & Defense": "Manufacturers centered on fighters, surveillance, bombers, transports, and mission aircraft.",
-    "Special Mission & Amphibious": "Aircraft makers focused on unique roles such as water operations, patrol, and rescue."
+    "Special Mission & Amphibious": "Aircraft makers focused on unique roles such as water operations, patrol, and rescue.",
+    Rotorcraft: "Manufacturers of civil and military helicopters, compound rotorcraft, and tiltrotors.",
+    "Sailplanes & Sport Aviation": "Builders of gliders, sailplanes, motor gliders, aerobatic, and sport aircraft.",
+    "Historic Aircraft": "Defunct and pioneering manufacturers whose aircraft remain important to aviation history."
   };
 
   const classDescriptions = {
@@ -26,6 +29,13 @@ window.AviationData = (() => {
     Trainer: "Aircraft specialized for pilot instruction, lead-in fighter training, or ab initio flying.",
     Amphibian: "Aircraft designed to operate from land and water for firefighting, rescue, or utility roles.",
     ISR: "Intelligence, surveillance, reconnaissance, and airborne early warning platforms.",
+    Bomber: "Aircraft designed to deliver strategic or tactical ordnance over long distances.",
+    Attack: "Aircraft optimized for battlefield strike, close air support, or interdiction missions.",
+    Tanker: "Aircraft configured primarily for aerial refueling and strategic support operations.",
+    Helicopter: "Rotary-wing aircraft spanning civil, utility, rescue, transport, naval, and combat missions.",
+    Tiltrotor: "Aircraft combining vertical-lift rotors with airplane-like cruise performance.",
+    Glider: "Unpowered and self-launching sailplanes designed for training, touring, and competition.",
+    Agricultural: "Purpose-built crop-spraying, agricultural, and aerial firefighting aircraft.",
     Experimental: "Concept aircraft, future programs, or technology demonstrators aimed at the next era."
   };
 
@@ -51,8 +61,9 @@ window.AviationData = (() => {
   };
 
   const referenceSources = [
-    { name: "FAA aircraft resources", url: "https://www.faa.gov/aircraft" },
-    { name: "ICAO safety and aviation resources", url: "https://www.icao.int/safety/Pages/default.aspx" },
+    { name: "ICAO Aircraft Type Designators (Doc 8643)", url: "https://www.icao.int/operational-safety/doc-8643-aircraft-type-designators/search" },
+    { name: "FAA Releasable Aircraft Database", url: "https://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download" },
+    { name: "EASA Type Certificate Data Sheets", url: "https://www.easa.europa.eu/en/document-library/type-certificates" },
     { name: "Smithsonian National Air and Space Museum", url: "https://airandspace.si.edu/" }
   ];
 
@@ -111,6 +122,48 @@ window.AviationData = (() => {
       weights: { MTOW: "Program dependent" },
       capacity: { Crew: "Mission dependent" }
     },
+    Bomber: {
+      dimensions: { Length: "Model-specific bomber dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
+      performance: { "Max speed": "Generation and mission dependent", Range: "Strategic or tactical mission dependent", "Service ceiling": "Model-specific" },
+      weights: { MTOW: "Model-specific bomber weight class" },
+      capacity: { Crew: "Model and generation dependent", Payload: "Mission-specific weapons load" }
+    },
+    Attack: {
+      dimensions: { Length: "Model-specific attack-aircraft dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
+      performance: { "Max speed": "Mission dependent", Range: "Combat-radius dependent", "Service ceiling": "Model-specific" },
+      weights: { MTOW: "Model-specific tactical aircraft weight class" },
+      capacity: { Crew: "Usually 1 or 2", Payload: "Mission-specific weapons load" }
+    },
+    Tanker: {
+      dimensions: { Length: "Model-specific tanker dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
+      performance: { "Cruise speed": "Donor-airframe dependent", Range: "Fuel offload and mission dependent", "Service ceiling": "Model-specific" },
+      weights: { MTOW: "Model-specific transport weight class" },
+      capacity: { Crew: "Flight crew plus refueling operators", Payload: "Fuel offload varies by mission" }
+    },
+    Helicopter: {
+      dimensions: { Length: "Model-specific fuselage or rotorcraft length", "Rotor diameter": "Model-specific", Height: "Model-specific" },
+      performance: { "Cruise speed": "Rotorcraft class dependent", Range: "Mission and fuel dependent", "Service ceiling": "Model-specific" },
+      weights: { MTOW: "Model-specific rotorcraft weight class" },
+      capacity: { Crew: "Usually 1 to 4", Payload: "Passenger, cargo, sensor, or weapons fit dependent" }
+    },
+    Tiltrotor: {
+      dimensions: { Length: "Model-specific tiltrotor dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
+      performance: { "Cruise speed": "Typically faster than conventional helicopters", Range: "Mission dependent", "Service ceiling": "Model-specific" },
+      weights: { MTOW: "Model-specific tiltrotor weight class" },
+      capacity: { Crew: "Model dependent", Payload: "Passenger or mission payload dependent" }
+    },
+    Glider: {
+      dimensions: { Length: "Model-specific sailplane length", Wingspan: "Class and model specific", Height: "Model-specific" },
+      performance: { "Best glide": "Model and wing-loading dependent", Range: "Weather and soaring-condition dependent", "Never-exceed speed": "Model-specific" },
+      weights: { MTOW: "Model-specific sailplane weight class" },
+      capacity: { Crew: "1 or 2" }
+    },
+    Agricultural: {
+      dimensions: { Length: "Model-specific agricultural-aircraft dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
+      performance: { "Cruise speed": "Work configuration dependent", Range: "Payload and ferry configuration dependent", "Working speed": "Application mission dependent" },
+      weights: { MTOW: "Model-specific working weight" },
+      capacity: { Crew: "Usually 1", Payload: "Hopper, retardant, or mission load dependent" }
+    },
     Experimental: {
       dimensions: { Length: "Program dependent", Wingspan: "Program dependent", Height: "Program dependent" },
       performance: { "Cruise speed": "Program dependent", Range: "Program dependent", "Service ceiling": "Program dependent" },
@@ -129,6 +182,13 @@ window.AviationData = (() => {
     Trainer: "predictable handling, systems learning, and pilot progression",
     ISR: "sensor endurance, mission-system integration, and persistent situational awareness",
     Amphibian: "multi-surface access, utility flexibility, and specialized rescue or firefighting roles",
+    Bomber: "range, payload, survivability, and strategic or tactical strike capability",
+    Attack: "battlefield survivability, precise weapons delivery, and responsive close support",
+    Tanker: "fuel offload, endurance, receiver compatibility, and global support reach",
+    Helicopter: "vertical lift, hover performance, access to confined areas, and mission flexibility",
+    Tiltrotor: "vertical access combined with airplane-like speed and range",
+    Glider: "aerodynamic efficiency, handling, soaring performance, and pilot development",
+    Agricultural: "low-level handling, payload delivery, ruggedness, and rapid turnaround",
     Experimental: "new technology, future mission concepts, and developmental learning"
   };
 
@@ -142,6 +202,13 @@ window.AviationData = (() => {
     Trainer: "ab initio, advanced, or lead-in pilot training",
     ISR: "maritime patrol, airborne early warning, surveillance, or reconnaissance tasks",
     Amphibian: "water operations, firefighting, search and rescue, and public-service missions",
+    Bomber: "strategic deterrence, conventional strike, maritime attack, or tactical bombing",
+    Attack: "close air support, battlefield interdiction, anti-armor, or naval strike missions",
+    Tanker: "aerial refueling, strategic mobility support, and long-range deployment missions",
+    Helicopter: "passenger transport, rescue, utility lift, offshore work, attack, or naval operations",
+    Tiltrotor: "expeditionary transport, special operations, and high-speed vertical lift",
+    Glider: "club training, cross-country soaring, aerobatics, or competition",
+    Agricultural: "crop application, seeding, firefighting, and low-level utility work",
     Experimental: "testing, technology demonstration, and future program development"
   };
 
@@ -155,6 +222,13 @@ window.AviationData = (() => {
     Trainer: ["Typical operators include military flying schools, civilian flight academies, and training organizations."],
     ISR: ["Typical operators include military surveillance units, maritime patrol organizations, and government special mission fleets."],
     Amphibian: ["Typical operators include firefighting services, public agencies, rescue organizations, and niche utility operators."],
+    Bomber: ["Typical operators are national air forces with strategic or tactical strike responsibilities."],
+    Attack: ["Typical operators are military aviation units focused on close air support, interdiction, or naval strike."],
+    Tanker: ["Typical operators are air forces and joint mobility commands supporting receiver aircraft over long distances."],
+    Helicopter: ["Typical operators include private owners, emergency services, offshore companies, militaries, police, and utility fleets."],
+    Tiltrotor: ["Typical operators are military or experimental organizations requiring vertical lift with greater cruise speed and reach."],
+    Glider: ["Typical operators include soaring clubs, private pilots, training organizations, and competition teams."],
+    Agricultural: ["Typical operators include crop-application companies, farm services, firefighting contractors, and public agencies."],
     Experimental: ["Operator coverage is often limited because the program is developmental, low-volume, or still evolving."]
   };
 
@@ -168,6 +242,13 @@ window.AviationData = (() => {
     Trainer: ["Variant differences often reflect cockpit modernization, military mission kits, or updated propulsion standards."],
     ISR: ["Variant differences often come from sensor suites, antenna arrangements, and mission-system integration."],
     Amphibian: ["Variant differences often involve mission equipment, tanking capability, or land/water role optimization."],
+    Bomber: ["Variant differences often involve engines, defensive systems, sensors, weapons integration, or strategic mission equipment."],
+    Attack: ["Variant differences often involve weapons, sensors, armor, engines, and single-seat or dual-seat configuration."],
+    Tanker: ["Variant differences often involve donor airframes, boom or hose systems, cargo capability, and defensive equipment."],
+    Helicopter: ["Variant differences often involve engines, rotor systems, cabin layout, mission equipment, and civil or military certification."],
+    Tiltrotor: ["Variant differences often reflect service-specific mission systems, folding mechanisms, and transport configuration."],
+    Glider: ["Variant differences often involve wingspan, winglets, self-launch or sustainer engines, controls, and competition class."],
+    Agricultural: ["Variant differences often involve hopper volume, engine power, landing gear, and firefighting or spray equipment."],
     Experimental: ["Variant and block-level coverage may change significantly as the program evolves."]
   };
 
@@ -855,6 +936,77 @@ window.AviationData = (() => {
     ]
   };
 
+  const worldCatalog = Array.isArray(window.AviationWorldCatalog) ? window.AviationWorldCatalog : [];
+
+  const worldCatalogAliases = {
+    "airbus-a220-300": "airbus-a220",
+    "airbus-a300-600": "airbus-a300",
+    "airbus-a310-300": "airbus-a310",
+    "airbus-a318-100": "airbus-a318",
+    "airbus-a319-100": "airbus-a319",
+    "airbus-a320-200": "airbus-a320",
+    "airbus-a321-200": "airbus-a321",
+    "airbus-a330-800neo": "airbus-a330-800",
+    "airbus-a330-900neo": "airbus-a330neo",
+    "airbus-a380-800": "airbus-a380",
+    "embraer-emb-110-bandeirante": "embraer-bandeirante",
+    "embraer-erj-145": "embraer-erj145",
+    "embraer-e170": "embraer-e170",
+    "embraer-e175": "embraer-e175",
+    "embraer-e190": "embraer-e190",
+    "embraer-e195-e2": "embraer-e195-e2",
+    "embraer-kc-390-millennium": "embraer-kc390",
+    "bombardier-challenger-3500": "bombardier-challenger-3500",
+    "bombardier-global-7500": "bombardier-global-7500",
+    "cessna-cessna-152": "cessna-152",
+    "cessna-cessna-172s-skyhawk": "cessna-172",
+    "cessna-cessna-182t-skylane": "cessna-182",
+    "cessna-cessna-208b-grand-caravan-ex": "cessna-caravan",
+    "cessna-citation-cj4-gen2": "cessna-cj4-gen2",
+    "cessna-citation-latitude": "cessna-latitude",
+    "cessna-citation-longitude": "cessna-longitude",
+    "beechcraft-g36-bonanza": "beechcraft-bonanza",
+    "beechcraft-g58-baron": "beechcraft-baron",
+    "piper-j-3-cub": "piper-j3",
+    "piper-pa-44-180-seminole": "piper-seminole",
+    "atr-atr-42-300": "atr-42-300",
+    "atr-atr-42-500": "atr-42-500",
+    "atr-atr-42-600": "atr-42-600",
+    "atr-atr-72-200": "atr-72-200",
+    "atr-atr-72-500": "atr-72-500",
+    "atr-atr-72-600": "atr-72-600",
+    "comac-c909": "comac-c909",
+    "comac-c919": "comac-c919",
+    "comac-c929": "comac-c929",
+    "lockheed-martin-f-16v-viper": "lockheed-f16v",
+    "lockheed-martin-f-22a-raptor": "lockheed-f22",
+    "lockheed-martin-c-130j-super-hercules": "lockheed-c130j",
+    "northrop-grumman-b-2a-spirit": "northrop-b2",
+    "northrop-grumman-b-21-raider": "northrop-b21",
+    "northrop-grumman-e-2d-advanced-hawkeye": "northrop-e2d",
+    "northrop-grumman-mq-4c-triton": "northrop-mq4c",
+    "dassault-rafale-c": "dassault-rafale",
+    "saab-jas-39e-gripen": "saab-gripen-e",
+    "saab-saab-340-aew-c": "saab-340-aew",
+    "sukhoi-su-27s": "sukhoi-su27",
+    "sukhoi-su-30sm2": "sukhoi-su30sm2",
+    "sukhoi-su-35s": "sukhoi-su35s",
+    "sukhoi-su-33": "sukhoi-su33",
+    "sukhoi-su-34": "sukhoi-su34",
+    "sukhoi-su-57": "sukhoi-su57",
+    "antonov-an-124-100-ruslan": "antonov-an124",
+    "antonov-an-225-mriya": "antonov-an225",
+    "antonov-an-178": "antonov-an178",
+    "antonov-an-148": "antonov-an148",
+    "mcdonnell-douglas-md-81": "mdd-md80",
+    "mcdonnell-douglas-md-11f": "mdd-md11",
+    "mcdonnell-douglas-dc-9-50": "mdd-dc9",
+    "mcdonnell-douglas-dc-10-30": "mdd-dc10",
+    "dehavilland-canada-dhc-6-series-400-twin-otter": "dhc-twin-otter",
+    "dehavilland-canada-dhc-8-400": "dhc-dash-8-400",
+    "dehavilland-canada-dhc-515-firefighter": "dhc-515"
+  };
+
   function mergeSpecs(baseSpecs, overrideSpecs, powerplantSpecs) {
     const merged = {};
     ["dimensions", "powerplant", "performance", "weights", "capacity"].forEach((group) => {
@@ -877,10 +1029,10 @@ window.AviationData = (() => {
     const engine = engineProfiles[aircraft.id] || aircraft.engine;
     if (!engine) {
       return {
-        Engines: "Program dependent",
-        "Engine manufacturer": "Program dependent",
-        "Engine model": "Program dependent",
-        "Engine type": "Program dependent"
+        Engines: "Not yet verified for this exact variant",
+        "Engine manufacturer": "Not yet verified",
+        "Engine model": "See the cited manufacturer or type reference",
+        "Engine type": "Variant-specific"
       };
     }
     return engine;
@@ -890,15 +1042,25 @@ window.AviationData = (() => {
     const engine = buildPowerplantSummary(aircraft);
     const classProfile = technicalProfilesByClass[aircraft.class] || technicalProfilesByClass.Experimental;
     const storedOverride = specOverrides[aircraft.id] || {};
+    const verifiedDimensions = {
+      ...(dimensionOverrides[aircraft.id] || {}),
+      ...(storedOverride.dimensions || {}),
+      ...(aircraft.dimensions || {})
+    };
     const specOverride = {
       ...storedOverride,
-      dimensions: {
-        ...(dimensionOverrides[aircraft.id] || {}),
-        ...(storedOverride.dimensions || {}),
-        ...(aircraft.dimensions || {})
-      }
+      dimensions: Object.keys(verifiedDimensions).length > 0
+        ? verifiedDimensions
+        : {
+            Length: "Not yet verified for this exact variant",
+            Wingspan: aircraft.class === "Helicopter" ? "See rotor diameter in the cited type reference" : "Not yet verified for this exact variant",
+            Height: "Not yet verified for this exact variant"
+          }
     };
-    const powerplantLine = `${engine["Engine manufacturer"]} ${engine["Engine model"]} (${engine["Engine type"]})`;
+    const hasVerifiedEngine = engine["Engine manufacturer"] !== "Not yet verified";
+    const powerplantLine = hasVerifiedEngine
+      ? `${engine["Engine manufacturer"]} ${engine["Engine model"]} (${engine["Engine type"]})`
+      : "a variant-specific powerplant that still needs a verified technical record in this catalogue";
     const extraNote = detailNotes[aircraft.id] ? ` ${detailNotes[aircraft.id]}` : "";
 
     return {
@@ -920,15 +1082,78 @@ window.AviationData = (() => {
     };
   }
 
-  const manufacturers = rawManufacturers.map((manufacturer) => ({
-    ...manufacturer,
-    source: manufacturerSources[manufacturer.id] || null,
-    aircraft: [...manufacturer.aircraft, ...(supplementalAircraftByManufacturer[manufacturer.id] || [])].map((aircraft) => ({
-      ...aircraft,
-      source: manufacturerSources[manufacturer.id] || null,
-      detail: buildFallbackDetail(aircraft, manufacturer)
-    }))
-  }));
+  function mergeAircraftCatalog(existingAircraft, incomingAircraft) {
+    const aircraftById = new Map();
+
+    existingAircraft.forEach((aircraft) => aircraftById.set(aircraft.id, aircraft));
+    incomingAircraft.forEach((incoming) => {
+      const aliasId = worldCatalogAliases[incoming.id] || incoming.id;
+      const normalizedIncoming = {
+        ...incoming,
+        id: aliasId,
+        catalogPreferredName: Boolean(worldCatalogAliases[incoming.id])
+      };
+      const existing = aircraftById.get(aliasId);
+
+      if (!existing) {
+        aircraftById.set(aliasId, normalizedIncoming);
+        return;
+      }
+
+      aircraftById.set(aliasId, {
+        ...normalizedIncoming,
+        ...existing,
+        name: normalizedIncoming.catalogPreferredName ? normalizedIncoming.name : existing.name,
+        familyName: normalizedIncoming.catalogPreferredName
+          ? normalizedIncoming.familyName
+          : existing.familyName || normalizedIncoming.familyName,
+        familySort: existing.familySort ?? normalizedIncoming.familySort,
+        dimensions: existing.dimensions || normalizedIncoming.dimensions,
+        engine: existing.engine || normalizedIncoming.engine,
+        source: existing.source || normalizedIncoming.source
+      });
+    });
+
+    return [...aircraftById.values()].map(({ catalogPreferredName, ...aircraft }) => aircraft);
+  }
+
+  const manufacturerDefinitions = new Map();
+
+  rawManufacturers.forEach((manufacturer) => {
+    manufacturerDefinitions.set(manufacturer.id, {
+      ...manufacturer,
+      aircraft: [...manufacturer.aircraft, ...(supplementalAircraftByManufacturer[manufacturer.id] || [])]
+    });
+  });
+
+  worldCatalog.forEach((incomingManufacturer) => {
+    const existing = manufacturerDefinitions.get(incomingManufacturer.id);
+    if (!existing) {
+      manufacturerDefinitions.set(incomingManufacturer.id, incomingManufacturer);
+      return;
+    }
+
+    manufacturerDefinitions.set(incomingManufacturer.id, {
+      ...incomingManufacturer,
+      ...existing,
+      source: existing.source || incomingManufacturer.source,
+      aircraftFocus: [...new Set([...(existing.aircraftFocus || []), ...(incomingManufacturer.aircraftFocus || [])])],
+      aircraft: mergeAircraftCatalog(existing.aircraft, incomingManufacturer.aircraft)
+    });
+  });
+
+  const manufacturers = [...manufacturerDefinitions.values()].map((manufacturer) => {
+    const source = manufacturer.source || manufacturerSources[manufacturer.id] || null;
+    const normalizedManufacturer = { ...manufacturer, source };
+    return {
+      ...normalizedManufacturer,
+      aircraft: manufacturer.aircraft.map((aircraft) => ({
+        ...aircraft,
+        source: aircraft.source || source,
+        detail: buildFallbackDetail(aircraft, normalizedManufacturer)
+      }))
+    };
+  });
 
   const historyMilestones = [
     { id: "montgolfier-balloon", year: "1783", era: "Lighter-Than-Air Dawn", visual: "balloon", title: "Montgolfier Balloon Flight", summary: "Human aviation begins with the first crewed hot-air balloon ascents over France.", highlight: "The dream of flight becomes visible for the first time." },

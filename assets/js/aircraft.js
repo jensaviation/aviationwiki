@@ -91,24 +91,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const manufacturer = data.getManufacturerById(aircraft.manufacturerId);
   const detail = aircraft.detail || {};
   const specs = detail.specs || {};
+  const manufacturerLabel = manufacturer ? manufacturer.name.split(" / ")[0] : aircraft.manufacturerName || "";
+  const fullAircraftName = manufacturerLabel && !aircraft.name.toLowerCase().startsWith(manufacturerLabel.toLowerCase())
+    ? `${manufacturerLabel} ${aircraft.name}`
+    : aircraft.name;
   const relatedAircraft = manufacturer
-    ? manufacturer.aircraft.filter((item) => item.id !== aircraft.id).slice(0, 3)
+    ? manufacturer.aircraft
+        .filter((item) => item.id !== aircraft.id)
+        .sort((left, right) => {
+          const leftSameFamily = left.familyName && left.familyName === aircraft.familyName ? 0 : 1;
+          const rightSameFamily = right.familyName && right.familyName === aircraft.familyName ? 0 : 1;
+          return leftSameFamily - rightSameFamily;
+        })
+        .slice(0, 3)
     : [];
 
   const pagePath = `aircraft.html?id=${encodeURIComponent(aircraft.id)}`;
-  const pageDescription = `${aircraft.name} dimensions, wingspan, range, capacity, engines, first flight, variants, history, and official ${manufacturer ? manufacturer.name : "manufacturer"} sources.`;
+  const pageDescription = `${fullAircraftName} dimensions, wingspan, role, engines, first flight, related variants, history, and authoritative source references.`;
 
   if (site) {
-    site.setMetadata({ title: `${aircraft.name}: Dimensions, Range & Facts`, description: pageDescription, path: pagePath, type: "article" });
+    site.setMetadata({ title: `${fullAircraftName}: Dimensions & Facts`, description: pageDescription, path: pagePath, type: "article" });
     site.setStructuredData("aircraft-schema", {
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: `${aircraft.name} aircraft profile`,
+      headline: `${fullAircraftName} aircraft profile`,
       description: pageDescription,
       mainEntityOfPage: site.absoluteUrl(pagePath),
+      citation: aircraft.source ? aircraft.source.url : undefined,
       about: {
         "@type": "Thing",
-        name: aircraft.name,
+        name: fullAircraftName,
         description: aircraft.overview,
         manufacturer: manufacturer ? { "@type": "Organization", name: manufacturer.name } : undefined
       },
@@ -136,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <span class="program-state">${aircraft.programState}</span>
               <a class="meta-chip" href="type.html?id=${encodeURIComponent(aircraft.class)}">${aircraft.class}</a>
             </div>
-            <h1>${aircraft.name}</h1>
+            <h1>${fullAircraftName}</h1>
             <p>${detail.overview || aircraft.overview}</p>
           </div>
 

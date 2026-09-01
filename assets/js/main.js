@@ -518,31 +518,37 @@ document.addEventListener("DOMContentLoaded", () => {
     manufacturerGrid.innerHTML = filteredManufacturers
       .map((manufacturer) => {
         const displayedAircraft = getDisplayedAircraft(manufacturer);
-        const timelineGroups = data.groupAircraftByTimeline(displayedAircraft)
-          .map(
-            (group) => `
-              <section class="timeline-cluster">
-                <div class="timeline-heading">
-                  <h4>${group.timeline}</h4>
-                  <span class="timeline-chip ${timelineClassName(group.timeline)}">${group.aircraft.length} program${group.aircraft.length === 1 ? "" : "s"}</span>
-                </div>
-                <p class="card-copy">${group.description}</p>
-                <div class="aircraft-links">
-                  ${group.aircraft
-                    .map(
-                      (aircraft) => `
-                        <a class="aircraft-pill" href="aircraft.html?id=${aircraft.id}">
-                          ${aircraft.name}
-                          <span>${aircraft.firstFlight}</span>
-                        </a>
-                      `
-                    )
-                    .join("")}
-                </div>
-              </section>
-            `
-          )
-          .join("");
+        const displayedIds = new Set(displayedAircraft.map((aircraft) => aircraft.id));
+        const families = data.getAircraftFamilies(manufacturer)
+          .map((family) => ({
+            ...family,
+            aircraft: family.aircraft.filter((aircraft) => displayedIds.has(aircraft.id))
+          }))
+          .filter((family) => family.aircraft.length > 0);
+        const visibleFamilies = families.slice(0, 12);
+        const hiddenFamilyCount = Math.max(families.length - visibleFamilies.length, 0);
+        const familyList = `
+          <section class="timeline-cluster family-overview-cluster">
+            <div class="timeline-heading">
+              <h4>Aircraft families</h4>
+              <span class="timeline-chip">${families.length} famil${families.length === 1 ? "y" : "ies"}</span>
+            </div>
+            <p class="card-copy">Choose a family to compare its individual aircraft and meaningful variants.</p>
+            <div class="aircraft-links family-overview-links">
+              ${visibleFamilies
+                .map(
+                  (family) => `
+                    <a class="aircraft-pill" href="manufacturer.html?id=${manufacturer.id}#family-${family.id}">
+                      ${family.name.replace(/ Family$/, "")}
+                      <span>${family.aircraft.length} model${family.aircraft.length === 1 ? "" : "s"}</span>
+                    </a>
+                  `
+                )
+                .join("")}
+              ${hiddenFamilyCount > 0 ? `<a class="aircraft-pill aircraft-pill-more" href="manufacturer.html?id=${manufacturer.id}">+ ${hiddenFamilyCount} more families<span>Open full catalogue</span></a>` : ""}
+            </div>
+          </section>
+        `;
 
         return `
           <article class="manufacturer-card reveal" id="manufacturer-${manufacturer.id}">
@@ -568,7 +574,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="timeline-clusters">
-              ${timelineGroups}
+              ${familyList}
             </div>
 
             <div class="card-actions">

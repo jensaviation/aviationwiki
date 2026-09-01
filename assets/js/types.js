@@ -102,6 +102,48 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
     <section class="detail-section">
       <div class="section-heading"><p class="eyebrow">Quick comparison</p><h2>Browse every ${type.toLowerCase()} profile</h2><p>Key figures appear directly on each card. Open a profile for engines, weight, variants, history, and sources.</p></div>
-      <div class="aircraft-results-grid">${aircraft.map(aircraftCard).join("")}</div>
+      <div class="type-catalog-tools">
+        <label class="type-catalog-search"><span>Filter this aircraft type</span><input id="type-catalog-search" type="search" placeholder="Aircraft, variant, or manufacturer" autocomplete="off"></label>
+        <label class="type-catalog-maker"><span>Manufacturer</span><select id="type-catalog-maker"><option value="">All manufacturers</option>${[...new Set(aircraft.map((item) => item.manufacturerName))].sort().map((name) => `<option value="${name}">${name}</option>`).join("")}</select></label>
+        <p id="type-catalog-count" class="type-catalog-count" aria-live="polite"></p>
+      </div>
+      <div class="aircraft-results-grid" id="type-aircraft-results"></div>
+      <div class="catalog-load-more"><button class="button button-secondary" id="type-load-more" type="button">Show more aircraft</button></div>
     </section>`;
+
+  const typeSearch = document.getElementById("type-catalog-search");
+  const makerFilter = document.getElementById("type-catalog-maker");
+  const resultGrid = document.getElementById("type-aircraft-results");
+  const resultCount = document.getElementById("type-catalog-count");
+  const loadMore = document.getElementById("type-load-more");
+  let visibleLimit = 72;
+
+  function renderTypeCatalogue() {
+    const query = (typeSearch.value || "").trim().toLowerCase();
+    const manufacturerName = makerFilter.value;
+    const matches = aircraft.filter((item) => {
+      const queryMatch = !query || `${item.name} ${item.manufacturerName} ${item.familyName || ""} ${item.type}`.toLowerCase().includes(query);
+      const makerMatch = !manufacturerName || item.manufacturerName === manufacturerName;
+      return queryMatch && makerMatch;
+    });
+    const visible = matches.slice(0, visibleLimit);
+
+    resultCount.textContent = `Showing ${visible.length.toLocaleString()} of ${matches.length.toLocaleString()} matching aircraft`;
+    resultGrid.innerHTML = visible.length
+      ? visible.map(aircraftCard).join("")
+      : `<article class="message-card"><h3>No matching aircraft</h3><p>Try a broader model name or clear the manufacturer filter.</p></article>`;
+    loadMore.hidden = visible.length >= matches.length;
+  }
+
+  [typeSearch, makerFilter].forEach((control) => {
+    control.addEventListener(control === typeSearch ? "input" : "change", () => {
+      visibleLimit = 72;
+      renderTypeCatalogue();
+    });
+  });
+  loadMore.addEventListener("click", () => {
+    visibleLimit += 72;
+    renderTypeCatalogue();
+  });
+  renderTypeCatalogue();
 });
