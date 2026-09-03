@@ -17,11 +17,16 @@
   <meta property="og:image" content="https://jensaviation.github.io/aviationwiki/assets/images/aviation-wiki-social.png">
   <meta property="og:image:alt" content="The Aviation Wiki — aircraft facts, dimensions and history">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="assets/css/styles.css?v=10">
-  <script defer src="assets/js/site.js?v=10"></script>
-  <script defer src="assets/js/world-catalog.js?v=10"></script>
-  <script defer src="assets/js/data.js?v=10"></script>
-  <script defer src="assets/js/sources.js?v=10"></script>
+  <link rel="stylesheet" href="assets/css/styles.css?v=12">
+  <script defer src="assets/js/site.js?v=12"></script>
+  <script defer src="assets/js/world-catalog.js?v=14"></script>
+  <script defer src="assets/js/spec-enrichment.js?v=12"></script>
+  <script defer src="assets/js/aircraft-database-specs.js?v=12"></script>
+  <script defer src="assets/js/open-dataset-specs.js?v=12"></script>
+  <script defer src="assets/js/wikipedia-specs.js?v=12"></script>
+  <script defer src="assets/js/verified-specs.js?v=14"></script>
+  <script defer src="assets/js/data.js?v=14"></script>
+  <script defer src="assets/js/sources.js?v=12"></script>
 </head>
 <body class="page page-sources">
   <header class="topbar">
@@ -34,7 +39,7 @@
       <p class="eyebrow">Transparent references</p><h1>Where the aircraft facts come from.</h1>
       <p class="hero-text">Specifications can vary by model, engine, configuration, and operating rule. The wiki prioritizes official manufacturer material and clearly labels approximate or family-level values.</p>
     </section>
-    <section class="detail-panel source-method"><h2>Editorial method</h2><div class="method-grid"><div><strong>1. Primary first</strong><p>Current manufacturer product pages and planning documents are preferred for dimensions and performance.</p></div><div><strong>2. Variant-aware</strong><p>A range is shown when one page covers several variants. Exact values are identified as model-specific.</p></div><div><strong>3. Useful, not operational</strong><p>Figures are for general reference only—not flight planning, maintenance, or operational decisions.</p></div></div></section>
+    <section class="detail-panel source-method"><h2>Editorial method</h2><div class="method-grid"><div><strong>1. Primary first</strong><p>Manufacturer manuals, government fact sheets, type certificates, and flight manuals override secondary records.</p></div><div><strong>2. Exact matches only</strong><p>Imported data requires an exact manufacturer and model match. Family-page redirects are rejected for variant records.</p></div><div><strong>3. Missing stays hidden</strong><p>Unconfirmed fields are omitted rather than estimated. Figures remain general reference—not operational data.</p></div></div></section>
     <section class="detail-section"><div class="section-heading"><p class="eyebrow">Primary references</p><h2>Official manufacturer sources</h2></div><div class="source-grid" id="manufacturer-sources"></div></section>
     <section class="detail-section"><div class="section-heading"><p class="eyebrow">Context and history</p><h2>Independent reference organizations</h2></div><div class="source-grid" id="reference-sources"></div></section>
   </main>

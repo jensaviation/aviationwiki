@@ -81,7 +81,7 @@
           type,
           class: className,
           programState: model.programState,
-          overview: `${model.name} is a documented ${type.toLowerCase()} in the ${aircraftFamily.name} from ${name}. It is listed separately because it represents a recognised production version, military designation, or historically significant variant.`,
+          overview: "",
           dimensions: model.dimensions,
           source: modelSource
         };

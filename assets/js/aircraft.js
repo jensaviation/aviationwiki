@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderSpecGroup(title, specObject) {
-    if (!specObject || Object.keys(specObject).length === 0) {
+    const entries = Object.entries(specObject || {}).filter(([, value]) => isAvailableSpec(value));
+    if (entries.length === 0) {
       return "";
     }
 
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <article class="aircraft-card">
         <h3>${title}</h3>
         <ul class="detail-list">
-          ${Object.entries(specObject)
+          ${entries
             .map(([label, value]) => `<li><strong>${label}:</strong> ${value}</li>`)
             .join("")}
         </ul>
@@ -58,8 +59,44 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  function specValue(specs, group, key, fallback = "Varies by model") {
-    return specs && specs[group] && specs[group][key] ? specs[group][key] : fallback;
+  function isAvailableSpec(value) {
+    if (value === null || value === undefined || value === "") return false;
+    return !/not yet verified|not verified|varies by|program[- ]dependent|model[- ]specific|mission[- ]dependent|see .*reference|not listed|unknown|placeholder|todo/i.test(String(value));
+  }
+
+  function specValue(specs, group, key) {
+    const value = specs && specs[group] && specs[group][key];
+    return isAvailableSpec(value) ? value : "";
+  }
+
+  function firstSpec(specs, candidates) {
+    for (const [group, key] of candidates) {
+      const value = specValue(specs, group, key);
+      if (value) return { label: key, value };
+    }
+    return null;
+  }
+
+  function renderQuickSpecs(aircraft, specs) {
+    const dimensionCandidates = aircraft.class === "Helicopter"
+      ? [["dimensions", "Length"], ["dimensions", "Main rotor diameter"], ["dimensions", "Rotor diameter"], ["dimensions", "Height"]]
+      : [["dimensions", "Length"], ["dimensions", "Wingspan"], ["dimensions", "Height"]];
+    const missionCandidates = aircraft.class === "Glider"
+      ? [["performance", "Best glide"], ["performance", "Minimum sink"], ["performance", "Never-exceed speed"]]
+      : [["performance", "Cruise speed"], ["performance", "Max speed"], ["performance", "Range"], ["performance", "Combat radius"]];
+    const capacity = firstSpec(specs, [["capacity", "Passengers"], ["capacity", "Troops"], ["capacity", "Payload"], ["capacity", "Crew"]]);
+    const weight = firstSpec(specs, [["weights", "MTOW"], ["weights", "Maximum takeoff weight"]]);
+    const values = [
+      ...dimensionCandidates.map((candidate) => firstSpec(specs, [candidate])),
+      firstSpec(specs, missionCandidates),
+      capacity,
+      weight
+    ].filter(Boolean).slice(0, 6);
+
+    if (values.length === 0) return "";
+    return `<dl class="quick-spec-grid quick-spec-count-${values.length}" aria-label="${aircraft.name} quick specifications">
+      ${values.map((item) => `<div><dt>${item.label}</dt><dd>${item.value}</dd></div>`).join("")}
+    </dl>`;
   }
 
   function renderNotFound() {
@@ -91,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const manufacturer = data.getManufacturerById(aircraft.manufacturerId);
   const detail = aircraft.detail || {};
   const specs = detail.specs || {};
+  const hasAnySpecs = Object.values(specs).some((group) => Object.values(group || {}).some((value) => isAvailableSpec(value)));
   const manufacturerLabel = manufacturer ? manufacturer.name.split(" / ")[0] : aircraft.manufacturerName || "";
   const fullAircraftName = manufacturerLabel && !aircraft.name.toLowerCase().startsWith(manufacturerLabel.toLowerCase())
     ? `${manufacturerLabel} ${aircraft.name}`
@@ -117,7 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
       headline: `${fullAircraftName} aircraft profile`,
       description: pageDescription,
       mainEntityOfPage: site.absoluteUrl(pagePath),
-      citation: aircraft.source ? aircraft.source.url : undefined,
+      citation: detail.sources && detail.sources.length
+        ? detail.sources.map((source) => source.url)
+        : aircraft.source
+          ? aircraft.source.url
+          : undefined,
       about: {
         "@type": "Thing",
         name: fullAircraftName,
@@ -158,21 +200,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
 
-        <section class="technical-specifications-prominent" aria-labelledby="technical-specifications-heading">
+        ${hasAnySpecs ? `<section class="technical-specifications-prominent" aria-labelledby="technical-specifications-heading">
           <div class="spec-section-heading">
             <p class="eyebrow">At a glance</p>
             <h2 id="technical-specifications-heading">Technical Specifications</h2>
-            <p>Dimensions are specific to this aircraft or the named representative variant. Family and concept values are labelled clearly.</p>
+            <p>Only sourced values attached to this exact aircraft record are shown. Configuration-sensitive figures are labelled.</p>
           </div>
 
-          <dl class="quick-spec-grid" aria-label="${aircraft.name} quick specifications">
-            <div><dt>Length</dt><dd>${specValue(specs, "dimensions", "Length")}</dd></div>
-            <div><dt>Wingspan</dt><dd>${specValue(specs, "dimensions", "Wingspan")}</dd></div>
-            <div><dt>Height</dt><dd>${specValue(specs, "dimensions", "Height")}</dd></div>
-            <div><dt>Range</dt><dd>${specValue(specs, "performance", "Range", "Mission dependent")}</dd></div>
-            <div><dt>Capacity / payload</dt><dd>${specValue(specs, "capacity", "Passengers", specValue(specs, "capacity", "Payload", "Mission dependent"))}</dd></div>
-            <div><dt>Maximum takeoff weight</dt><dd>${specValue(specs, "weights", "MTOW", "Varies by model")}</dd></div>
-          </dl>
+          ${renderQuickSpecs(aircraft, specs)}
 
           <div class="aircraft-grid full-specification-grid">
             ${renderSpecGroup("Dimensions", specs.dimensions)}
@@ -180,8 +215,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ${renderSpecGroup("Performance", specs.performance)}
             ${renderSpecGroup("Weights", specs.weights)}
             ${renderSpecGroup("Capacity", specs.capacity)}
+            ${renderSpecGroup("Identification", specs.identification)}
           </div>
-        </section>
+        </section>` : ""}
 
         <div class="detail-grid">
           <article class="detail-panel">
@@ -247,8 +283,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           <article class="detail-panel reveal source-note">
             <h3>Primary Source</h3>
-            <p>Specifications may vary by variant and configuration. Check the current manufacturer material for exact planning data.</p>
-            ${aircraft.source ? `<a class="detail-link" href="${aircraft.source.url}" target="_blank" rel="noopener noreferrer">${aircraft.source.name} <span aria-hidden="true">↗</span></a>` : ""}
+            <p>Figures on this page are attached to this exact record. Configuration-sensitive values remain labelled, and unavailable fields are omitted.</p>
+            ${(detail.sources || (aircraft.source ? [aircraft.source] : [])).map((source) => `<a class="detail-link" href="${source.url}" target="_blank" rel="noopener noreferrer">${source.name} <span aria-hidden="true">↗</span></a>`).join("")}
             <a class="mini-link" href="sources.html">How this wiki uses sources</a>
           </article>
         </aside>

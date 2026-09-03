@@ -9,24 +9,30 @@ document.addEventListener("DOMContentLoaded", () => {
     return `type.html?id=${encodeURIComponent(type)}`;
   }
 
-  function metric(specs, group, key, fallback) {
-    return specs && specs[group] && specs[group][key] ? specs[group][key] : fallback;
+  function metric(specs, group, key) {
+    const value = specs && specs[group] && specs[group][key];
+    return value && !/not yet verified|varies by|program[- ]dependent|model[- ]specific|mission[- ]dependent|not listed|unknown/i.test(String(value)) ? value : "";
+  }
+
+  function miniSpecs(aircraft, specs) {
+    const fields = aircraft.class === "Helicopter"
+      ? [["dimensions", "Length"], ["dimensions", "Main rotor diameter"], ["dimensions", "Rotor diameter"], ["performance", "Range"]]
+      : [["dimensions", "Length"], ["dimensions", "Wingspan"], ["performance", "Range"], ["capacity", "Passengers"], ["capacity", "Payload"]];
+    const seen = new Set();
+    const values = fields.map(([group, key]) => ({ label: key, value: metric(specs, group, key) }))
+      .filter((item) => item.value && !seen.has(item.label) && seen.add(item.label))
+      .slice(0, 4);
+    return values.length ? `<dl class="mini-specs">${values.map((item) => `<div><dt>${item.label}</dt><dd>${item.value}</dd></div>`).join("")}</dl>` : "";
   }
 
   function aircraftCard(aircraft) {
     const specs = aircraft.detail && aircraft.detail.specs ? aircraft.detail.specs : {};
-    const capacity = metric(specs, "capacity", "Passengers", metric(specs, "capacity", "Payload", "Mission dependent"));
     return `
       <article class="aircraft-card aircraft-result-card">
         <div class="aircraft-card-top"><span class="program-state">${aircraft.programState}</span><span class="meta-chip">${aircraft.firstFlight}</span></div>
         <h3><a href="aircraft.html?id=${aircraft.id}">${aircraft.name}</a></h3>
         <p class="aircraft-maker">${aircraft.manufacturerName} · ${aircraft.type}</p>
-        <dl class="mini-specs">
-          <div><dt>Length</dt><dd>${metric(specs, "dimensions", "Length", "Varies by model")}</dd></div>
-          <div><dt>Wingspan</dt><dd>${metric(specs, "dimensions", "Wingspan", "Varies by model")}</dd></div>
-          <div><dt>Range</dt><dd>${metric(specs, "performance", "Range", "Mission dependent")}</dd></div>
-          <div><dt>Capacity</dt><dd>${capacity}</dd></div>
-        </dl>
+        ${miniSpecs(aircraft, specs)}
         <a class="detail-link" href="aircraft.html?id=${aircraft.id}">Open full specifications <span aria-hidden="true">→</span></a>
       </article>`;
   }

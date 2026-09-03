@@ -84,9 +84,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function quickSpec(aircraft, label) {
-    return aircraft.detail && aircraft.detail.specs && aircraft.detail.specs.dimensions
-      ? aircraft.detail.specs.dimensions[label] || "Not listed"
-      : "Not listed";
+    const value = aircraft.detail?.specs?.dimensions?.[label];
+    return value && !/not yet verified|varies by|program[- ]dependent|model[- ]specific|not listed|unknown/i.test(String(value)) ? value : "";
+  }
+
+  function renderDimensionSpecs(aircraft, className) {
+    const labels = aircraft.class === "Helicopter"
+      ? ["Length", "Main rotor diameter", "Rotor diameter", "Height"]
+      : ["Length", "Wingspan", "Height"];
+    const values = labels.map((label) => ({ label, value: quickSpec(aircraft, label) })).filter((item) => item.value);
+    return values.length
+      ? `<dl class="${className}" aria-label="${aircraft.name} dimensions">${values.map((item) => `<div><dt>${item.label}</dt><dd>${item.value}</dd></div>`).join("")}</dl>`
+      : "";
   }
 
   function renderVariantCard(aircraft) {
@@ -100,11 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="meta-chip">First flight ${aircraft.firstFlight}</span>
         </div>
         <p class="variant-type">${aircraft.type}</p>
-        <dl class="variant-quick-specs" aria-label="${aircraft.name} dimensions">
-          <div><dt>Length</dt><dd>${quickSpec(aircraft, "Length")}</dd></div>
-          <div><dt>Wingspan</dt><dd>${quickSpec(aircraft, "Wingspan")}</dd></div>
-          <div><dt>Height</dt><dd>${quickSpec(aircraft, "Height")}</dd></div>
-        </dl>
+        ${renderDimensionSpecs(aircraft, "variant-quick-specs")}
         <p>${aircraft.overview}</p>
         <div class="card-actions">
           <a class="button button-primary button-compact" href="aircraft.html?id=${aircraft.id}">View ${aircraft.name} specifications</a>
@@ -125,11 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <strong>${aircraft.name}</strong>
               <span>${aircraft.type}</span>
             </span>
-            <dl class="direct-quick-specs" aria-label="${aircraft.name} dimensions">
-              <div><dt>Length</dt><dd>${quickSpec(aircraft, "Length")}</dd></div>
-              <div><dt>Wingspan</dt><dd>${quickSpec(aircraft, "Wingspan")}</dd></div>
-              <div><dt>Height</dt><dd>${quickSpec(aircraft, "Height")}</dd></div>
-            </dl>
+            ${renderDimensionSpecs(aircraft, "direct-quick-specs")}
             <span class="family-direct-action">View aircraft <span aria-hidden="true">→</span></span>
           </a>
         </article>

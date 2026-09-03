@@ -64,114 +64,15 @@ window.AviationData = (() => {
     { name: "ICAO Aircraft Type Designators (Doc 8643)", url: "https://www.icao.int/operational-safety/doc-8643-aircraft-type-designators/search" },
     { name: "FAA Releasable Aircraft Database", url: "https://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download" },
     { name: "EASA Type Certificate Data Sheets", url: "https://www.easa.europa.eu/en/document-library/type-certificates" },
-    { name: "Smithsonian National Air and Space Museum", url: "https://airandspace.si.edu/" }
+    { name: "Smithsonian National Air and Space Museum", url: "https://airandspace.si.edu/" },
+    { name: "Wikidata aircraft records", url: "https://www.wikidata.org/" },
+    { name: "OpenAircraftType", url: "https://github.com/atoff/OpenAircraftType" },
+    { name: "CFR Aircraft Engines Database", url: "https://github.com/The-CFR-Project/AircraftEnginesDatabase" },
+    { name: "Aircraft Database exact-title reference set", url: "https://thwhitfield.github.io/Aircraft-Database/database.html" }
   ];
 
-  const technicalProfilesByClass = {
-    "Commercial Jet": {
-      dimensions: { Length: "Program-dependent mainline airliner dimensions", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Typically Mach 0.74 to Mach 0.86", Range: "Program-dependent short, medium, or long-haul range", "Service ceiling": "Usually around 35,000 to 43,000 ft" },
-      weights: { MTOW: "Program-dependent commercial airliner weight class" },
-      capacity: { Crew: "Normally 2 flight crew", Passengers: "Program-dependent passenger or cargo capacity" }
-    },
-    "Regional Turboprop": {
-      dimensions: { Length: "Regional turboprop size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Typically 450 to 650 km/h", Range: "Program-dependent regional range", "Service ceiling": "Usually 20,000 to 30,000 ft" },
-      weights: { MTOW: "Program-dependent regional transport weight class" },
-      capacity: { Crew: "Usually 2", Passengers: "Program-dependent regional seating" }
-    },
-    "Business Jet": {
-      dimensions: { Length: "Business jet size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Typically Mach 0.75 to Mach 0.93", Range: "Program-dependent business aviation range", "Service ceiling": "Usually 41,000 to 51,000 ft" },
-      weights: { MTOW: "Program-dependent business jet weight class" },
-      capacity: { Crew: "Usually 2", Passengers: "Program-dependent executive cabin capacity" }
-    },
-    "General Aviation": {
-      dimensions: { Length: "General aviation size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Mission-dependent", Range: "Program-dependent", "Service ceiling": "Program-dependent" },
-      weights: { MTOW: "Program-dependent light aircraft weight class" },
-      capacity: { Crew: "Usually 1 or 2", Passengers: "Program-dependent light-aircraft occupancy" }
-    },
-    Fighter: {
-      dimensions: { Length: "Fighter-class dimensions", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Max speed": "Mission and generation dependent", Range: "Mission-dependent ferry and combat radius", "Service ceiling": "Typically high-performance combat ceiling" },
-      weights: { MTOW: "Program-dependent fighter weight class" },
-      capacity: { Crew: "Usually 1 or 2" }
-    },
-    "Military Transport": {
-      dimensions: { Length: "Transport aircraft size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Mission-dependent", Range: "Program-dependent transport range", "Service ceiling": "Program-dependent" },
-      weights: { MTOW: "Program-dependent transport weight class" },
-      capacity: { Crew: "Mission dependent", Payload: "Program-dependent payload" }
-    },
-    Trainer: {
-      dimensions: { Length: "Trainer aircraft size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Training mission dependent", Range: "Program-dependent", "Service ceiling": "Program-dependent" },
-      weights: { MTOW: "Training role dependent" },
-      capacity: { Crew: "Usually 2" }
-    },
-    ISR: {
-      dimensions: { Length: "Mission-platform dependent", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Mission-dependent", Range: "Long-endurance mission dependent", "Service ceiling": "Program dependent" },
-      weights: { MTOW: "Mission dependent" },
-      capacity: { Crew: "Flight crew plus mission operators" }
-    },
-    Amphibian: {
-      dimensions: { Length: "Amphibious aircraft size class", Wingspan: "Program-dependent", Height: "Program-dependent" },
-      performance: { "Cruise speed": "Mission-dependent", Range: "Program-dependent" },
-      weights: { MTOW: "Program dependent" },
-      capacity: { Crew: "Mission dependent" }
-    },
-    Bomber: {
-      dimensions: { Length: "Model-specific bomber dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
-      performance: { "Max speed": "Generation and mission dependent", Range: "Strategic or tactical mission dependent", "Service ceiling": "Model-specific" },
-      weights: { MTOW: "Model-specific bomber weight class" },
-      capacity: { Crew: "Model and generation dependent", Payload: "Mission-specific weapons load" }
-    },
-    Attack: {
-      dimensions: { Length: "Model-specific attack-aircraft dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
-      performance: { "Max speed": "Mission dependent", Range: "Combat-radius dependent", "Service ceiling": "Model-specific" },
-      weights: { MTOW: "Model-specific tactical aircraft weight class" },
-      capacity: { Crew: "Usually 1 or 2", Payload: "Mission-specific weapons load" }
-    },
-    Tanker: {
-      dimensions: { Length: "Model-specific tanker dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
-      performance: { "Cruise speed": "Donor-airframe dependent", Range: "Fuel offload and mission dependent", "Service ceiling": "Model-specific" },
-      weights: { MTOW: "Model-specific transport weight class" },
-      capacity: { Crew: "Flight crew plus refueling operators", Payload: "Fuel offload varies by mission" }
-    },
-    Helicopter: {
-      dimensions: { Length: "Model-specific fuselage or rotorcraft length", "Rotor diameter": "Model-specific", Height: "Model-specific" },
-      performance: { "Cruise speed": "Rotorcraft class dependent", Range: "Mission and fuel dependent", "Service ceiling": "Model-specific" },
-      weights: { MTOW: "Model-specific rotorcraft weight class" },
-      capacity: { Crew: "Usually 1 to 4", Payload: "Passenger, cargo, sensor, or weapons fit dependent" }
-    },
-    Tiltrotor: {
-      dimensions: { Length: "Model-specific tiltrotor dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
-      performance: { "Cruise speed": "Typically faster than conventional helicopters", Range: "Mission dependent", "Service ceiling": "Model-specific" },
-      weights: { MTOW: "Model-specific tiltrotor weight class" },
-      capacity: { Crew: "Model dependent", Payload: "Passenger or mission payload dependent" }
-    },
-    Glider: {
-      dimensions: { Length: "Model-specific sailplane length", Wingspan: "Class and model specific", Height: "Model-specific" },
-      performance: { "Best glide": "Model and wing-loading dependent", Range: "Weather and soaring-condition dependent", "Never-exceed speed": "Model-specific" },
-      weights: { MTOW: "Model-specific sailplane weight class" },
-      capacity: { Crew: "1 or 2" }
-    },
-    Agricultural: {
-      dimensions: { Length: "Model-specific agricultural-aircraft dimensions", Wingspan: "Model-specific", Height: "Model-specific" },
-      performance: { "Cruise speed": "Work configuration dependent", Range: "Payload and ferry configuration dependent", "Working speed": "Application mission dependent" },
-      weights: { MTOW: "Model-specific working weight" },
-      capacity: { Crew: "Usually 1", Payload: "Hopper, retardant, or mission load dependent" }
-    },
-    Experimental: {
-      dimensions: { Length: "Program dependent", Wingspan: "Program dependent", Height: "Program dependent" },
-      performance: { "Cruise speed": "Program dependent", Range: "Program dependent", "Service ceiling": "Program dependent" },
-      weights: { MTOW: "Program dependent" },
-      capacity: { Crew: "Program dependent" }
-    }
-  };
-
+  // Generic class-wide figures are intentionally not used as aircraft specifications.
+  // Only exact, sourced record fields are merged into a variant page.
   const classDesignFocus = {
     "Commercial Jet": "airline economics, passenger or cargo efficiency, and reliable high-cycle operations",
     "Regional Turboprop": "short-haul efficiency, field performance, and operating cost control",
@@ -1007,16 +908,25 @@ window.AviationData = (() => {
     "dehavilland-canada-dhc-515-firefighter": "dhc-515"
   };
 
-  function mergeSpecs(baseSpecs, overrideSpecs, powerplantSpecs) {
+  const unavailableSpecPattern = /not yet verified|not verified|varies by|program[- ]dependent|model[- ]specific|mission[- ]dependent|class dependent|see .*reference|not listed|unknown|placeholder|todo/i;
+
+  function cleanSpecGroup(specGroup) {
+    return Object.fromEntries(
+      Object.entries(specGroup || {}).filter(([, value]) => {
+        if (value === null || value === undefined || value === "") return false;
+        return !unavailableSpecPattern.test(String(value));
+      })
+    );
+  }
+
+  function mergeSpecs(overrideSpecs, powerplantSpecs, enrichmentSpecs) {
     const merged = {};
-    ["dimensions", "powerplant", "performance", "weights", "capacity"].forEach((group) => {
-      const value =
-        group === "powerplant"
-          ? powerplantSpecs
-          : {
-              ...(baseSpecs[group] || {}),
-              ...((overrideSpecs && overrideSpecs[group]) || {})
-            };
+    ["dimensions", "powerplant", "performance", "weights", "capacity", "identification"].forEach((group) => {
+      const value = cleanSpecGroup({
+        ...((overrideSpecs && overrideSpecs[group]) || {}),
+        ...(group === "powerplant" ? powerplantSpecs : {}),
+        ...((enrichmentSpecs && enrichmentSpecs[group]) || {})
+      });
 
       if (value && Object.keys(value).length > 0) {
         merged[group] = value;
@@ -1027,56 +937,116 @@ window.AviationData = (() => {
 
   function buildPowerplantSummary(aircraft) {
     const engine = engineProfiles[aircraft.id] || aircraft.engine;
-    if (!engine) {
-      return {
-        Engines: "Not yet verified for this exact variant",
-        "Engine manufacturer": "Not yet verified",
-        "Engine model": "See the cited manufacturer or type reference",
-        "Engine type": "Variant-specific"
-      };
+    return cleanSpecGroup(engine || {});
+  }
+
+  function factualFallbackOverview(aircraft, manufacturer) {
+    if (aircraft.overview && !/is a documented .*it is listed separately because/i.test(aircraft.overview)) return aircraft.overview;
+    const family = aircraft.familyName || `${aircraft.name} family`;
+    const year = String(aircraft.firstFlight || "").match(/\b(18|19|20)\d{2}\b/)?.[0];
+    const status = String(aircraft.programState || "").toLowerCase();
+    const role = String(aircraft.type || aircraft.class).toLowerCase();
+    const choices = [
+      `${aircraft.name} is a ${role} developed by ${manufacturer.name} as part of the ${family}.${year ? ` The variant first flew in ${year}.` : ""}`,
+      `${manufacturer.name}'s ${aircraft.name} belongs to the ${family} and was configured for ${role} duties.${year ? ` Its first flight took place in ${year}.` : ""}`,
+      `Developed by ${manufacturer.name}, the ${aircraft.name} is the ${family} version identified for ${role} work.${year ? ` It dates from a ${year} first flight.` : ""}`,
+      `The ${aircraft.name} is ${manufacturer.name}'s ${role} member of the ${family}.${year ? ` The aircraft first flew in ${year}` : ""}${status ? `${year ? " and is" : " It is"} recorded as ${status}.` : "."}`,
+      `${aircraft.name} identifies a distinct ${family} variant from ${manufacturer.name}, developed for ${role} operations.${year ? ` Its first-flight year is ${year}.` : ""}`,
+      `Within the ${family}, ${manufacturer.name} developed the ${aircraft.name} for ${role} missions.${year ? ` The design first flew in ${year}.` : ""}`
+    ];
+    const selector = [...aircraft.id].reduce((total, character) => total + character.charCodeAt(0), 0) % choices.length;
+    return choices[selector];
+  }
+
+  function validateVariantSpecs(specs, technical) {
+    const validated = Object.fromEntries(Object.entries(specs || {}).map(([group, values]) => [group, { ...values }]));
+    const performance = technical?.performance || {};
+    if (performance.cruiseSpeed?.value && performance.maxSpeed?.value && performance.cruiseSpeed.value > performance.maxSpeed.value) {
+      delete validated.performance?.["Maximum speed"];
+      delete validated.performance?.["Max speed"];
     }
-    return engine;
+    const weights = technical?.weights || {};
+    if (weights.emptyWeight?.value && weights.mtow?.value && weights.emptyWeight.value > weights.mtow.value) {
+      delete validated.weights?.["Empty weight"];
+      delete validated.weights?.["Empty mass"];
+    }
+    Object.keys(validated).forEach((group) => {
+      if (!Object.keys(validated[group] || {}).length) delete validated[group];
+    });
+    return validated;
+  }
+
+  function validateTechnicalData(technical) {
+    const validated = {
+      ...(technical || {}),
+      dimensions: { ...((technical && technical.dimensions) || {}) },
+      weights: { ...((technical && technical.weights) || {}) },
+      performance: { ...((technical && technical.performance) || {}) }
+    };
+    if (validated.performance.cruiseSpeed?.value && validated.performance.maxSpeed?.value
+      && validated.performance.cruiseSpeed.value > validated.performance.maxSpeed.value) {
+      delete validated.performance.maxSpeed;
+    }
+    if (validated.weights.emptyWeight?.value && validated.weights.mtow?.value
+      && validated.weights.emptyWeight.value > validated.weights.mtow.value) {
+      delete validated.weights.emptyWeight;
+    }
+    return validated;
   }
 
   function buildFallbackDetail(aircraft, manufacturer) {
-    const engine = buildPowerplantSummary(aircraft);
-    const classProfile = technicalProfilesByClass[aircraft.class] || technicalProfilesByClass.Experimental;
+    const enrichment = window.AviationSpecEnrichment?.records?.[aircraft.id] || {};
+    const engine = cleanSpecGroup(enrichment.reviewed
+      ? ((enrichment.specs && enrichment.specs.powerplant) || {})
+      : {
+          ...buildPowerplantSummary(aircraft),
+          ...((enrichment.specs && enrichment.specs.powerplant) || {})
+        });
     const storedOverride = specOverrides[aircraft.id] || {};
-    const verifiedDimensions = {
+    const verifiedDimensions = enrichment.reviewed ? {
+      ...((enrichment.specs && enrichment.specs.dimensions) || {})
+    } : {
       ...(dimensionOverrides[aircraft.id] || {}),
       ...(storedOverride.dimensions || {}),
-      ...(aircraft.dimensions || {})
+      ...(aircraft.dimensions || {}),
+      ...((enrichment.specs && enrichment.specs.dimensions) || {})
     };
     const specOverride = {
       ...storedOverride,
-      dimensions: Object.keys(verifiedDimensions).length > 0
-        ? verifiedDimensions
-        : {
-            Length: "Not yet verified for this exact variant",
-            Wingspan: aircraft.class === "Helicopter" ? "See rotor diameter in the cited type reference" : "Not yet verified for this exact variant",
-            Height: "Not yet verified for this exact variant"
-          }
+      dimensions: cleanSpecGroup(verifiedDimensions)
     };
-    const hasVerifiedEngine = engine["Engine manufacturer"] !== "Not yet verified";
-    const powerplantLine = hasVerifiedEngine
-      ? `${engine["Engine manufacturer"]} ${engine["Engine model"]} (${engine["Engine type"]})`
-      : "a variant-specific powerplant that still needs a verified technical record in this catalogue";
     const extraNote = detailNotes[aircraft.id] ? ` ${detailNotes[aircraft.id]}` : "";
+    const overview = enrichment.description || `${factualFallbackOverview(aircraft, manufacturer)}${extraNote}`;
+    const basicFacts = {
+      Manufacturer: manufacturer.name,
+      "Country or region": enrichment.basic?.country || manufacturer.country,
+      "First flight": enrichment.basic?.firstFlight || aircraft.firstFlight,
+      Introduction: enrichment.basic?.introduction,
+      Production: enrichment.basic?.production,
+      "Number built": enrichment.basic?.numberBuilt,
+      "Aircraft class": aircraft.class,
+      Role: enrichment.basic?.role || aircraft.type,
+      "Program state": enrichment.basic?.status || aircraft.programState,
+      "Engine manufacturer": engine["Engine manufacturer"],
+      "Engine model": engine["Engine model"]
+    };
+
+    const mergedSpecs = enrichment.reviewed
+      ? mergeSpecs({}, {}, enrichment.specs)
+      : mergeSpecs(specOverride, buildPowerplantSummary(aircraft), enrichment.specs);
+
+    const validatedTechnical = validateTechnicalData(enrichment.technical);
 
     return {
-      overview: `${aircraft.overview} The ${aircraft.name} is a ${aircraft.type.toLowerCase()} developed by ${manufacturer.name} and placed in the ${aircraft.class.toLowerCase()} category of the wiki. It first flew in ${aircraft.firstFlight} and is grouped in the ${aircraft.timeline.toLowerCase()} because it fits into ${timelineDescriptions[aircraft.timeline]}.${extraNote}`,
-      design: `From a technical point of view, ${aircraft.name} is powered by ${powerplantLine}. That powerplant choice supports ${classDesignFocus[aircraft.class] || "its intended mission profile"}. In manufacturer terms, the program also reflects ${manufacturer.name}'s wider focus on ${manufacturer.aircraftFocus.join(", ")} and shows how the company approached this part of the market or mission set.`,
-      service: `${aircraft.name} is listed here as a ${aircraft.programState.toLowerCase()}. In operational terms, aircraft in this category are normally associated with ${classServiceFocus[aircraft.class] || "specialized aviation work"}. Within ${manufacturer.name}'s catalog, it stands out as a ${aircraft.type.toLowerCase()} that helps explain the manufacturer's role inside ${manufacturer.category.toLowerCase()}.`,
-      specs: mergeSpecs(classProfile, specOverride, buildPowerplantSummary(aircraft)),
-      facts: [
-        `Manufacturer: ${manufacturer.name}`,
-        `Country or region: ${manufacturer.country}`,
-        `First flight: ${aircraft.firstFlight}`,
-        `Aircraft class: ${aircraft.class}`,
-        `Program state: ${aircraft.programState}`,
-        `Engine manufacturer: ${engine["Engine manufacturer"]}`,
-        `Engine model: ${engine["Engine model"]}`
-      ],
+      overview,
+      design: enrichment.design || overview,
+      service: enrichment.service || `${aircraft.name} is recorded as ${String(enrichment.basic?.status || aircraft.programState).toLowerCase()} and served in ${aircraft.type.toLowerCase()} roles.`,
+      specs: validateVariantSpecs(mergedSpecs, enrichment.technical),
+      technical: validatedTechnical,
+      sources: enrichment.sources || (aircraft.source ? [aircraft.source] : []),
+      facts: Object.entries(basicFacts)
+        .filter(([, value]) => value !== null && value !== undefined && value !== "" && !unavailableSpecPattern.test(String(value)))
+        .map(([label, value]) => `${label}: ${value}`),
       variants: defaultVariantNotesByClass[aircraft.class] || ["Variant coverage can be expanded as the wiki grows."],
       notableOperators: defaultOperatorNotesByClass[aircraft.class] || ["Operator examples can be added program-by-program."]
     };
@@ -1147,11 +1117,15 @@ window.AviationData = (() => {
     const normalizedManufacturer = { ...manufacturer, source };
     return {
       ...normalizedManufacturer,
-      aircraft: manufacturer.aircraft.map((aircraft) => ({
-        ...aircraft,
-        source: aircraft.source || source,
-        detail: buildFallbackDetail(aircraft, normalizedManufacturer)
-      }))
+      aircraft: manufacturer.aircraft.map((aircraft) => {
+        const detail = buildFallbackDetail(aircraft, normalizedManufacturer);
+        return {
+          ...aircraft,
+          overview: detail.overview,
+          source: aircraft.source || source,
+          detail
+        };
+      })
     };
   });
 

@@ -354,7 +354,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function aircraftDimension(aircraft, label) {
-    return aircraft.detail?.specs?.dimensions?.[label] || "Not listed";
+    const value = aircraft.detail?.specs?.dimensions?.[label];
+    return value && !/not yet verified|varies by|program[- ]dependent|model[- ]specific|not listed|unknown/i.test(String(value)) ? value : "";
+  }
+
+  function searchDimensions(aircraft) {
+    const labels = aircraft.class === "Helicopter" ? ["Length", "Main rotor diameter", "Rotor diameter"] : ["Length", "Wingspan"];
+    const seen = new Set();
+    const values = labels.map((label) => ({ label, value: aircraftDimension(aircraft, label) }))
+      .filter((item) => item.value && !seen.has(item.label) && seen.add(item.label))
+      .slice(0, 2);
+    return values.length
+      ? `<span class="search-result-dimensions">${values.map((item) => `<span><small>${item.label}</small>${item.value}</span>`).join("")}</span>`
+      : "";
   }
 
   function renderSearchResult(result, index) {
@@ -392,10 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="search-result-kind">${aircraft.class}</span>
         <strong>${aircraft.name}</strong>
         <span class="search-result-maker">${aircraft.manufacturerName} · ${aircraft.type}</span>
-        <span class="search-result-dimensions">
-          <span><small>Length</small>${aircraftDimension(aircraft, "Length")}</span>
-          <span><small>Wingspan</small>${aircraftDimension(aircraft, "Wingspan")}</span>
-        </span>
+        ${searchDimensions(aircraft)}
         <span class="search-result-action">Open aircraft <span aria-hidden="true">→</span></span>
       </a>
     `;
